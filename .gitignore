@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ignore binary class files
 *.class
 
@@ -7,4 +8,6 @@
 
 # Ignore Eclipse project settings
 .settings/
+=======
+>>>>>>> 6aff811968242e8da429b2c9a4cadb3c7ff956b8
 /bin/
