@@ -1,3 +1,12 @@
+/*
+ 
+Class: BoardTestsExp
+Description: JUnit tests for adjacency and target calculation for the clue board
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
