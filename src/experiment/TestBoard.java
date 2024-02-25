@@ -13,8 +13,8 @@ public class TestBoard {
     }
 
     public TestBoardCell getCell(int row, int col) {
-        TestBoardCell cell = new TestBoardCell();
-        return cell;
+
+        return null;
     }
 
     public Set<TestBoardCell> getTargets() {

@@ -8,34 +8,34 @@ public class TestBoardCell {
 		
 	}
 	
-	void addAdjacency(TestBoardCell cell) {
+	public void addAdjacency(TestBoardCell cell) {
 		
 	}
 	
-	Set<TestBoardCell> getAdjList() {
+	public Set<TestBoardCell> getAdjList() {
 		
 		return null;
 		
 	}
 	
-	void setRoom(boolean isRoom) {
+	public void setRoom(boolean isRoom) {
 		
 		
 	}
 	
-	boolean isRoom() {
+	public boolean isRoom() {
 	
 		return (Boolean) null;
 		
 	}
 	
-	void setOccupied() {
+	public void setOccupied() {
 		
 		
 		
 	}
 	
-	boolean getOccupied() {
+	public boolean getOccupied() {
 		
 		return (Boolean) null;
 		
