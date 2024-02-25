@@ -109,7 +109,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 		
 		TestBoardCell cell1 = board.getCell(0, 3);
-		board.calcTargets(cell1, 3);
+		board.calcTargets(cell1, 2);
 		Set<TestBoardCell> targets1 = board.getTargets();
 		Assert.assertEquals(6, targets1.size());
 		Assert.assertTrue(targets1.contains(board.getCell(1, 3)));
@@ -120,7 +120,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets1.contains(board.getCell(1, 1)));
 		
 		TestBoardCell cell2 = board.getCell(3, 2);
-		board.calcTargets(cell2, 3);
+		board.calcTargets(cell2, 1);
 		Set<TestBoardCell> targets2 = board.getTargets();
 		Assert.assertEquals(6, targets2.size());
 		Assert.assertTrue(targets2.contains(board.getCell(3, 2)));
@@ -131,7 +131,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets2.contains(board.getCell(1, 2)));
 		
 		TestBoardCell cell3 = board.getCell(2, 3);
-		board.calcTargets(cell3, 3);
+		board.calcTargets(cell3, 4);
 		Set<TestBoardCell> targets3 = board.getTargets();
 		Assert.assertEquals(6, targets3.size());
 		Assert.assertTrue(targets3.contains(board.getCell(1, 3)));
@@ -142,7 +142,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets3.contains(board.getCell(3, 3)));
 		
 		TestBoardCell cell4 = board.getCell(3, 3);
-		board.calcTargets(cell4, 3);
+		board.calcTargets(cell4, 5);
 		Set<TestBoardCell> targets4 = board.getTargets();
 		Assert.assertEquals(6, targets4.size());
 		Assert.assertTrue(targets4.contains(board.getCell(3, 0)));
@@ -153,7 +153,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets4.contains(board.getCell(1, 0)));
 		
 		TestBoardCell cell5 = board.getCell(3, 0);
-		board.calcTargets(cell5, 3);
+		board.calcTargets(cell5, 6);
 		Set<TestBoardCell> targets5 = board.getTargets();
 		Assert.assertEquals(6, targets5.size());
 		Assert.assertTrue(targets5.contains(board.getCell(0, 1)));
@@ -164,7 +164,7 @@ class BoardTestsExp {
 		Assert.assertTrue(targets5.contains(board.getCell(3, 1)));
 		
 		TestBoardCell cell6 = board.getCell(4, 9);
-		board.calcTargets(cell6, 3);
+		board.calcTargets(cell6, 4);
 		Set<TestBoardCell> targets6 = board.getTargets();
 		Assert.assertEquals(6, targets6.size());
 		Assert.assertTrue(targets6.contains(board.getCell(2, 2)));
