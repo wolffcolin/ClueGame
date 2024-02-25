@@ -51,6 +51,46 @@ class BoardTestsExp {
 		Assert.assertTrue(testList4.contains(board.getCell(13, 10)));
 		Assert.assertTrue(testList4.contains(board.getCell(14, 11)));
 	}
+	
+	@Test
+	void TestTargetsRoom() {
+		
+		TestBoardCell cell = board.getCell(1, 7);
+		Set<TestBoardCell> testList = cell.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(1, 5)));
+		Assert.assertTrue(testList.contains(board.getCell(3, 7)));
+		
+		TestBoardCell cell1 = board.getCell(13, 7);
+		Set<TestBoardCell> testList1 = cell1.getAdjList();
+		Assert.assertTrue(testList1.contains(board.getCell(11, 7)));
+		Assert.assertTrue(testList1.contains(board.getCell(12, 9)));
+		
+	}
+	
+	@Test
+	void TestTargetsOccupied() {
+		
+		TestBoardCell cell = board.getCell(6, 10);
+		board.getCell(5, 10).setOccupied();
+		Set<TestBoardCell> testList = cell.getAdjList();
+		Assert.assertTrue(!testList.contains(board.getCell(5, 10)));
+		Assert.assertTrue(testList.contains(board.getCell(7, 10)));
+		
+		TestBoardCell cell1 = board.getCell(9, 4);
+		board.getCell(9, 5).setOccupied();
+		Set<TestBoardCell> testList1 = cell1.getAdjList();
+		Assert.assertTrue(!testList1.contains(board.getCell(9, 5)));
+		Assert.assertTrue(!testList.contains(board.getCell(5, 10)));
+		Assert.assertTrue(testList.contains(board.getCell(10, 4)));
+		
+	}
+	
+	@Test
+	void TestTargetsMixed() {
+		
+		
+		
+	}
 
 	
 }
