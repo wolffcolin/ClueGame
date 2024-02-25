@@ -1,10 +1,13 @@
 package experiment;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoardCell {
 
 	public TestBoardCell(int setRow, int setColumn) {
+		
+		
 		
 	}
 	
@@ -14,7 +17,8 @@ public class TestBoardCell {
 	
 	public Set<TestBoardCell> getAdjList() {
 		
-		return null;
+		Set<TestBoardCell> list = new HashSet<TestBoardCell>();
+		return list;
 		
 	}
 	

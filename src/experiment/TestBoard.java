@@ -14,7 +14,8 @@ public class TestBoard {
 
     public TestBoardCell getCell(int row, int col) {
 
-        return null;
+    	TestBoardCell cell = new TestBoardCell(row, col);
+        return cell;
     }
 
     public Set<TestBoardCell> getTargets() {
