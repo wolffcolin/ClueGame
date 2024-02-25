@@ -33,7 +33,7 @@ public class TestBoardCell {
 		
 	}
 	
-	public void setOccupied() {
+	public void setOccupied(boolean bool) {
 		
 		
 		
