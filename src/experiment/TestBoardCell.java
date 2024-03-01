@@ -32,6 +32,8 @@ public class TestBoardCell {
 		this.isRoom = false;
 		this.isOccupied = false;
 		
+		this.adjList = new HashSet<TestBoardCell>();
+		
 	}
 	
 	//adds cell to adjacency list

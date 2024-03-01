@@ -23,15 +23,45 @@ public class TestBoard {
     public TestBoard() {
         super();
         
+        this.targets = new HashSet();
+        this.visited = new HashSet();
+        this.grid = new TestBoardCell[ROWS][COLS];
+        
         for (int i = 0; i < ROWS ; i++) {
-        	for (int j = 0; i < COLS; j++) {
-        		grid[i][j] = new TestBoardCell(i,j);
+        	for (int j = 0; j < COLS; j++) {
+        		this.grid[i][j] = new TestBoardCell(i,j);
         	}
         }
     }
 
     //calculates the targets for a starting cell
     public void calcTargets(TestBoardCell startCell, int pathLength) {
+    	
+    	if (startCell.isRoom()) {
+    		targets.add(startCell);
+    		return;
+    	}
+    	
+    	Set<TestBoardCell> adjCells = startCell.getAdjList();
+    	for (TestBoardCell adj : adjCells) {
+    		
+    		if (!visited.contains(adj) && !adj.getOccupied()) {
+    			
+    			visited.add(adj);
+    			if (pathLength == 1) {
+    				
+    				targets.add(adj);
+    				
+    			} else {
+    				
+    				calcTargets(adj, pathLength - 1);
+    				
+    			}
+    			visited.remove(adj);
+    		}
+    		
+    	}
+    	
     }
 
     //returns the cell at given point
