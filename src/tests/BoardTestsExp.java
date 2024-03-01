@@ -20,23 +20,20 @@ import experiment.TestBoard;
 import experiment.TestBoardCell;
 import junit.framework.Assert;
 
-public class BoardTestsExp {
+class BoardTestsExp {
 	
 	TestBoard board;
 	
 	@BeforeEach
-	public void setup() {
+	void setup() {
 		
 		board = new TestBoard();
 		
 	}
-	
-	/**
-	 * Tests for adjacencies between cells
-	 */
+
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testAdjacency() {
+	void testAdjacency() {
 		
 		TestBoardCell cell = board.getCell(0, 0);
 		Set<TestBoardCell> testList = cell.getAdjList();
@@ -65,11 +62,8 @@ public class BoardTestsExp {
 		Assert.assertTrue(testList4.contains(board.getCell(14, 11)));
 	}
 	
-	/**
-	 * Tests for targets when a room involved
-	 */
 	@Test
-	public void TestTargetsRoom() {
+	void TestTargetsRoom() {
 		
 		board.getCell(0, 1).setRoom(true);
 		TestBoardCell cell = board.getCell(1, 3);
@@ -91,11 +85,8 @@ public class BoardTestsExp {
 		
 	}
 	
-	/**
-	 * Tests for targets when interfering occupied space is involved
-	 */
 	@Test
-	public void TestTargetsOccupied() {
+	void TestTargetsOccupied() {
 		
 		TestBoardCell cell = board.getCell(0, 0);
 		board.getCell(3, 3).setOccupied(true);
@@ -120,11 +111,8 @@ public class BoardTestsExp {
 		
 	}
 	
-	/**
-	 * tests targets that includes rooms and multiple cells.
-	 */
 	@Test
-	public void TestTargetsMixed() {
+	void TestTargetsMixed() {
 		
 		board.getCell(0, 2).setOccupied(true);
 		board.getCell(1, 2).setRoom(true);
@@ -152,12 +140,10 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets1.contains(board.getCell(2, 2)));
 	}
 
-	/**
-	 * test for targets on empty boards
-	 */
+	
 	@SuppressWarnings("deprecation")
 	@Test
-	public void testTargetsNormal() {
+	void testTargetsNormal() {
 		TestBoardCell cell = board.getCell(0, 0);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
