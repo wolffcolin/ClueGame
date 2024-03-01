@@ -13,51 +13,66 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TestBoardCell {
+	
+	private int row;
+	private int col;
+	
+	private Boolean isRoom;
+	private Boolean isOccupied;
+	
+	Set<TestBoardCell> adjList;
 
 	//constructor
 	public TestBoardCell(int setRow, int setColumn) {
 		
+		this.row = setRow;
 		
+		this.col = setColumn;
+		
+		this.isRoom = false;
+		this.isOccupied = false;
 		
 	}
 	
 	//adds cell to adjacency list
 	public void addAdjacency(TestBoardCell cell) {
 		
+		adjList.add(cell);
+		
 	}
 	
 	//returns list of adjacent cells
 	public Set<TestBoardCell> getAdjList() {
 		
-		Set<TestBoardCell> list = new HashSet<TestBoardCell>();
-		return list;
+		return adjList;
 		
 	}
 	
 	//sets cell to room
-	public void setRoom(boolean isRoom) {
+	public void setRoom(boolean isRoomBool) {
 		
+		this.isRoom = isRoomBool;
 		
 	}
 	
 	//returns if cell is a room
 	public boolean isRoom() {
 	
-		return (Boolean) null;
+		return isRoom;
 		
 	}
 	
 	//sets room to occupied
-	public void setOccupied(boolean bool) {
+	public void setOccupied(boolean isOccupBool) {
 		
-		
+		this.isOccupied = isOccupBool;
 		
 	}
 	
 	//gets of a room is occupied
 	public boolean getOccupied() {
 		
-		return (Boolean) null;
+		return this.isOccupied;
 		
 	}
 	
