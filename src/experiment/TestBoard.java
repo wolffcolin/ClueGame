@@ -22,6 +22,12 @@ public class TestBoard {
     //constructor
     public TestBoard() {
         super();
+        
+        for (int i = 0; i < COLS ; i++) {
+        	for (int j = 0; i < ROWS; j++) {
+        		grid[i][j] = new TestBoardCell(i,j);
+        	}
+        }
     }
 
     //calculates the targets for a starting cell
