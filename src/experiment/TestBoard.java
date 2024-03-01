@@ -23,8 +23,8 @@ public class TestBoard {
     public TestBoard() {
         super();
         
-        for (int i = 0; i < COLS ; i++) {
-        	for (int j = 0; i < ROWS; j++) {
+        for (int i = 0; i < ROWS ; i++) {
+        	for (int j = 0; i < COLS; j++) {
         		grid[i][j] = new TestBoardCell(i,j);
         	}
         }
@@ -36,14 +36,11 @@ public class TestBoard {
 
     //returns the cell at given point
     public TestBoardCell getCell(int row, int col) {
-
-    	TestBoardCell cell = new TestBoardCell(row, col);
-        return cell;
+        return grid[row][col];
     }
 
     //returns target list
     public Set<TestBoardCell> getTargets() {
-        Set<TestBoardCell> set = new HashSet<TestBoardCell>();
-        return set;
+        return targets;
     }   
 }
