@@ -32,6 +32,32 @@ public class TestBoard {
         		this.grid[i][j] = new TestBoardCell(i,j);
         	}
         }
+        
+        for (int i = 0; i < ROWS; i++) {
+        	for (int j = 0; j < COLS; j++) {
+        		TestBoardCell cell = this.grid[i][j];
+        		if (i+1 < ROWS) {
+        			if (!grid[i+1][j].isRoom()) {
+        				cell.addAdjacency(grid[i+1][j]);
+        			}
+        		}
+        		if (i -1 > 0) {
+        			if (!grid[i-1][j].isRoom()) {
+        				cell.addAdjacency(grid[i-1][j]);
+        			}
+        		}
+        		if (j + 1 < COLS) {
+        			if (!grid[i][j+1].isRoom()) {
+        				cell.addAdjacency(grid[i][j+1]);
+        			}
+        		}
+        		if (j - 1 > 0) {
+        			if (!grid[i][j-1].isRoom()) {
+        				cell.addAdjacency(grid[i][j-1]);
+        			}
+        		}
+        	}
+        }
     }
 
     //calculates the targets for a starting cell
