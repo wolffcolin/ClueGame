@@ -12,7 +12,12 @@ package experiment;
 import java.util.*;
 
 public class TestBoard {
-    private ArrayList targets;
+    private Set<TestBoardCell> targets;
+    private TestBoardCell[][] grid;
+    private Set<TestBoardCell> visited;
+    
+    final static int COLS = 4;
+    final static int ROWS = 4;
 
     //constructor
     public TestBoard() {
@@ -34,5 +39,5 @@ public class TestBoard {
     public Set<TestBoardCell> getTargets() {
         Set<TestBoardCell> set = new HashSet<TestBoardCell>();
         return set;
-    }
+    }   
 }
