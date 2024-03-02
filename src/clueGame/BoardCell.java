@@ -45,31 +45,34 @@ public class BoardCell {
         return false;
     }
 
-	//returns list of adjacent cells
-	public Set<BoardCell> getAdjList() {
-		
-		return this.adjList;
-		
-	}
-	
-	
-	public int getRow() {
-		return this.row;
-	}
-	
-	public int getCol() {
-		return this.col;
-	}
+    // returns list of adjacent cells
+    public Set<BoardCell> getAdjList() {
 
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        return this.adjList;
 
-	public boolean getOccupied() {
-		// TODO Auto-generated method stub
-		return occupied;
-	}
+    }
+
+    public int getRow() {
+        return this.row;
+    }
+
+    public int getCol() {
+        return this.col;
+    }
+
+    public String getName() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public boolean getOccupied() {
+        // TODO Auto-generated method stub
+        return occupied;
+    }
+
+    public char getRoomChar() {
+        return this.initial;
+    }
 
 	public Object getDoorDirection() {
 		// TODO Auto-generated method stub

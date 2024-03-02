@@ -21,37 +21,37 @@ class FileInitTests {
 
 	public static final int NUM_ROWS = 15;
 	public static final int NUM_COLUMNS = 15;
-	
+
 	private static Board board;
-	
+
 	@BeforeAll
 	public static void setUp() {
-		
+
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");
 
 		board.initialize();
-		
+
 	}
-	
+
 	@Test
 	public void testRoomLabels() {
-		assertEquals("Dinosaur Exhibit", board.getRoom('D').getName() );
-		assertEquals("Bathroom", board.getRoom('B').getName() );
-		assertEquals("Mummy Exhibit", board.getRoom('M').getName() );
-		assertEquals("Rock Exhibit", board.getRoom('R').getName() );
-		assertEquals("Greek Exhibit", board.getRoom('Q').getName() );
-		assertEquals("Entrance", board.getRoom('E').getName() );
-		assertEquals("Food Court", board.getRoom('C').getName() );
-		assertEquals("Gift Shop", board.getRoom('G').getName() );
+		assertEquals("Dinosaur Exhibit", board.getRoom('D').getName());
+		assertEquals("Bathroom", board.getRoom('B').getName());
+		assertEquals("Mummy Exhibit", board.getRoom('M').getName());
+		assertEquals("Rock Exhibit", board.getRoom('R').getName());
+		assertEquals("Greek Exhibit", board.getRoom('Q').getName());
+		assertEquals("Entrance", board.getRoom('E').getName());
+		assertEquals("Food Court", board.getRoom('C').getName());
+		assertEquals("Gift Shop", board.getRoom('G').getName());
 	}
-	
+
 	@Test
 	public void testBoardDimensions() {
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());
 	}
-	
+
 	@Test
 	public void FourDoorDirections() {
 		BoardCell cell = board.getCell(6, 4);
@@ -70,7 +70,7 @@ class FileInitTests {
 		cell = board.getCell(3, 4);
 		assertFalse(cell.isDoorway());
 	}
-	
+
 	@Test
 	public void testNumberDoorways() {
 		int numDoors = 0;
@@ -82,10 +82,12 @@ class FileInitTests {
 			}
 		Assert.assertEquals(1, numDoors);
 	}
-	
+
 	@Test
 	public void testRooms() {
-		
+		BoardCell cell = board.getCell(3, 4);
+		char roomChar = cell.getRoomChar();
+		Room room = board.getRoom(roomChar);
 	}
 
 }
