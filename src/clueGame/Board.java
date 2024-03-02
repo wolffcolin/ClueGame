@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import experiment.BoardCell;
 
 public class Board {
     private Set<BoardCell> targets;
@@ -32,7 +31,7 @@ public class Board {
         // populate with cells
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
-                this.grid[i][j] = new BoardCell(i, j);
+                this.grid[i][j] = new BoardCell(i, j, 'W');
             }
         }
 

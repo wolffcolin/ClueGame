@@ -31,10 +31,15 @@ public class BoardCell {
         this.adjList = new HashSet<BoardCell>();
     }
 
-    public void addAdj(BoardCell cell) {
+    public void addAdjacency(BoardCell cell) {
 
         adjList.add(cell);
 
     }
+
+	public boolean isDoorway() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

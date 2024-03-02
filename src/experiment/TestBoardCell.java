@@ -12,7 +12,7 @@ package experiment;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BoardCell {
+public class TestBoardCell {
 	
 	private int row;
 	private int col;
@@ -20,10 +20,10 @@ public class BoardCell {
 	private Boolean isRoom;
 	private Boolean isOccupied;
 	
-	Set<BoardCell> adjList;
+	Set<TestBoardCell> adjList;
 
 	//constructor
-	public BoardCell(int setRow, int setColumn) {
+	public TestBoardCell(int setRow, int setColumn) {
 		
 		this.row = setRow;
 		
@@ -32,19 +32,19 @@ public class BoardCell {
 		this.isRoom = false;
 		this.isOccupied = false;
 		
-		this.adjList = new HashSet<BoardCell>();
+		this.adjList = new HashSet<TestBoardCell>();
 		
 	}
 	
 	//adds cell to adjacency list
-	public void addAdjacency(BoardCell cell) {
+	public void addAdjacency(TestBoardCell cell) {
 		
 		adjList.add(cell);
 		
 	}
 	
 	//returns list of adjacent cells
-	public Set<BoardCell> getAdjList() {
+	public Set<TestBoardCell> getAdjList() {
 		
 		return adjList;
 		
