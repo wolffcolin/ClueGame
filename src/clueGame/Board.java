@@ -13,13 +13,14 @@ public class Board {
 
     private int numColumns = 4;
     private int numRows = 4;
-    
+
     private String layoutConfigFile;
     private String setupConfigFile;
-    
+
     private Map<Character, Room> roomMap;
-    
+
     private static Board theInstance = new Board();
+
     // constructor
     private Board() {
         super();
@@ -28,14 +29,14 @@ public class Board {
         this.visited = new HashSet();
         this.grid = new BoardCell[numRows][numColumns];
 
-        //populate with cells
+        // populate with cells
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 this.grid[i][j] = new BoardCell(i, j);
             }
         }
 
-        //calculate adjacency for each cell
+        // calculate adjacency for each cell
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 BoardCell cell = this.grid[i][j];
@@ -55,50 +56,54 @@ public class Board {
             }
         }
     }
-    
+
     public static Board getInstance() {
-    	return theInstance;
+        return theInstance;
     }
-    
+
     public void initialize() {
-    	
+
     }
-    
+
     public void loadSetupConfig() {
-    	
+
     }
-    
+
     public void loadLayoutConfig() {
-    	
+
+    }
+
+    public void setConfigFiles(String board, String symbols) {
+
     }
 
     // calculates the targets for a starting cell
     public void calcTargets(BoardCell startCell, int pathLength) {
-    	visited.clear();
-    	targets.clear();
-    	findTargets(startCell, pathLength);
+        visited.clear();
+        targets.clear();
+        findTargets(startCell, pathLength);
     }
-    
-    //search algorithm to find all targets on path
+
+    // search algorithm to find all targets on path
     private void findTargets(BoardCell cell, int pathLength) {
-    	visited.add(cell);
-    	
-    	//base case
-    	if (pathLength == 0) {
-    		targets.add(cell);
-    		visited.remove(cell);
-    		return;
-    	}
-    	
-    	//recursive case
-    	for (BoardCell adj : cell.getAdjList()) {
-    		if (!visited.contains(adj) && !adj.getOccupied()) {
-    			findTargets(adj, pathLength - 1);
-    		}
-    	}
-    	
-    	//backtrack
-    	visited.remove(cell);
+        visited.add(cell);
+
+        // base case
+        if (pathLength == 0) {
+            targets.add(cell);
+            visited.remove(cell);
+            return;
+        }
+
+        // recursive case
+        for (BoardCell adj : cell.getAdjList()) {
+            if (!visited.contains(adj) && !adj.getOccupied()) {
+                findTargets(adj, pathLength - 1);
+            }
+        }
+
+        // backtrack
+        visited.remove(cell);
     }
 
     // returns the cell at given point
@@ -111,4 +116,3 @@ public class Board {
         return targets;
     }
 }
-
