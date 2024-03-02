@@ -10,8 +10,8 @@ public class Board {
     private BoardCell[][] grid;
     private Set<BoardCell> visited;
 
-    private int numColumns = 4;
-    private int numRows = 4;
+    private int numColumns = 16;
+    private int numRows = 16;
 
     private String layoutConfigFile;
     private String setupConfigFile;

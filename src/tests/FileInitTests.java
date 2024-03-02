@@ -80,7 +80,7 @@ class FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		Assert.assertEquals(1, numDoors);
+		Assert.assertEquals15, numDoors);
 	}
 
 	@Test
