@@ -37,9 +37,13 @@ public class BoardCell {
 
     }
 
-	public boolean isDoorway() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    public boolean isDoorway() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public String getName() {
+        return null;
+    }
 
 }
