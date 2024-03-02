@@ -116,7 +116,7 @@ public class Board {
         return targets;
     }
 
-	public Object getRoom(char c) {
+	public BoardCell getRoom(char c) {
 		// TODO Auto-generated method stub
 		return null;
 	}

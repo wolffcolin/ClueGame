@@ -85,6 +85,11 @@ public class BoardCell {
 	public int getCol() {
 		return this.col;
 	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
