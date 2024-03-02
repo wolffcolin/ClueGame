@@ -264,9 +264,9 @@ class BoardTestsExp {
 		Assert.assertTrue(targets7.contains(board.getCell(0, 3)));
 		Assert.assertTrue(targets7.contains(board.getCell(1, 0)));
 		Assert.assertTrue(targets7.contains(board.getCell(1, 2)));
+		Assert.assertTrue(targets7.contains(board.getCell(1, 1)));
 		Assert.assertTrue(targets7.contains(board.getCell(1, 3)));
 		Assert.assertTrue(targets7.contains(board.getCell(2, 0)));
-		Assert.assertTrue(targets7.contains(board.getCell(2, 1)));
 		Assert.assertTrue(targets7.contains(board.getCell(2, 2)));
 		Assert.assertTrue(targets7.contains(board.getCell(2, 3)));
 		Assert.assertTrue(targets7.contains(board.getCell(3, 0)));
