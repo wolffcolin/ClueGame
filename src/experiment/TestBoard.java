@@ -62,49 +62,27 @@ public class TestBoard {
 
     // calculates the targets for a starting cell
     public void calcTargets(TestBoardCell startCell, int pathLength) {
-
-        Set<TestBoardCell> adjCells = startCell.getAdjList();
-        visited.add(startCell);
-
-        for (TestBoardCell adj : adjCells) {
-            if (!visited.contains(adj) && !adj.getOccupied()) {
-                visited.add(adj);
-
-                if (pathLength == 1) {
-                    targets.add(adj);
-                } else {
-                    calcTargets(adj, pathLength - 1);
-                }
-                visited.remove(adj);
-            }
-        }
+    	visited.clear();
+    	targets.clear();
+    	findTargets(startCell, pathLength);
     }
     
-    private void findTargets(TestBoardCell currCell, int pathLength) {
+    private void findTargets(TestBoardCell cell, int pathLength) {
+    	visited.add(cell);
     	
     	if (pathLength == 0) {
-    		
-    		targets.add(currCell);
+    		targets.add(cell);
+    		visited.remove(cell);
     		return;
-    		
     	}
     	
-    	int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-    	for (int[] dir : directions) {
-    		
-    		int newRow = currCell.getRow() + dir[0];
-    		int newCol = currCell.getCol() + dir[1];
-    		
-            if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS) {
-                TestBoardCell nextCell = grid[newRow][newCol];
-                if (!visited.contains(nextCell) && !nextCell.getOccupied()) {
-                    visited.add(nextCell);
-                    findTargets(nextCell, pathLength - 1);
-                    visited.remove(nextCell);
-                }
-            }
-    		
+    	for (TestBoardCell adj : cell.getAdjList()) {
+    		if (!visited.contains(adj) && !adj.getOccupied()) {
+    			findTargets(adj, pathLength - 1);
+    		}
     	}
+    	
+    	visited.remove(cell);
     }
 
     // returns the cell at given point
