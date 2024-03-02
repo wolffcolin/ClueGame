@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
 public class Board {
     private Set<BoardCell> targets;
     private BoardCell[][] grid;
@@ -65,27 +64,27 @@ public class Board {
         }
     }
 
-    //returns the instance of board
+    // returns the instance of board
     public static Board getInstance() {
         return theInstance;
     }
 
-    //initialize instance
+    // initialize instance
     public void initialize() {
 
     }
 
-    //load setup file
+    // load setup file
     public void loadSetupConfig() {
 
     }
 
-    //load layout file
+    // load layout file
     public void loadLayoutConfig() {
 
     }
 
-    //sets file
+    // sets file
     public void setConfigFiles(String board, String symbols) {
 
     }
@@ -129,19 +128,25 @@ public class Board {
         return targets;
     }
 
-	public Room getRoom(char c) {
-		// TODO Auto-generated method stub
-		Room room = new Room("empty", null, null);
-		return room;
-	}
+    public Room getRoom(BoardCell cell) {
+        // TODO Auto-generated method stub
+        Room room = new Room("empty", null, null);
+        return room;
+    }
 
-	public int getNumRows() {
-		// TODO Auto-generated method stub
-		return numRows;
-	}
+    public Room getRoom(char c) {
+        // TODO Auto-generated method stub
+        Room room = new Room("empty", null, null);
+        return room;
+    }
 
-	public int getNumColumns() {
-		// TODO Auto-generated method stub
-		return numColumns;
-	}
+    public int getNumRows() {
+        // TODO Auto-generated method stub
+        return numRows;
+    }
+
+    public int getNumColumns() {
+        // TODO Auto-generated method stub
+        return numColumns;
+    }
 }
