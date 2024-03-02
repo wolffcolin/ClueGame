@@ -115,9 +115,10 @@ public class Board {
         return targets;
     }
 
-	public BoardCell getRoom(char c) {
+	public Room getRoom(char c) {
 		// TODO Auto-generated method stub
-		return null;
+		Room room = new Room("empty", null, null);
+		return room;
 	}
 
 	public int getNumRows() {

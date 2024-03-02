@@ -11,4 +11,9 @@ public class Room {
 		this.centerCell = center;
 		this.labelCell = label;
 	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
+	}
 }

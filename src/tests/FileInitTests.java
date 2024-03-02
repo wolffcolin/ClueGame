@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
@@ -52,7 +54,21 @@ class FileInitTests {
 	
 	@Test
 	public void FourDoorDirections() {
-		
+		BoardCell cell = board.getCell(6, 4);
+		assertTrue(cell.isDoorway());
+		assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
+		cell = board.getCell(3, 7);
+		assertTrue(cell.isDoorway());
+		assertEquals(DoorDirection.UP, cell.getDoorDirection());
+		cell = board.getCell(9, 11);
+		assertTrue(cell.isDoorway());
+		assertEquals(DoorDirection.RIGHT, cell.getDoorDirection());
+		cell = board.getCell(13, 7);
+		assertTrue(cell.isDoorway());
+		assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
+		// Test that walkways are not doors
+		cell = board.getCell(3, 4);
+		assertFalse(cell.isDoorway());
 	}
 	
 	@Test
@@ -64,7 +80,7 @@ class FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		Assert.assertEquals(17, numDoors);
+		Assert.assertEquals(1, numDoors);
 	}
 	
 	@Test

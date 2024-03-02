@@ -71,4 +71,9 @@ public class BoardCell {
 		return occupied;
 	}
 
+	public Object getDoorDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
