@@ -62,25 +62,20 @@ public class TestBoard {
 
     // calculates the targets for a starting cell
     public void calcTargets(TestBoardCell startCell, int pathLength) {
-        search(startCell, 0, pathLength);
-    }
-
-    private void search(TestBoardCell startCell, int distance, int pathLength) {
-        if (distance > pathLength) {
-            return;
-        }
-
         Set<TestBoardCell> adjCells = startCell.getAdjList();
+        visited.add(startCell);
 
         for (TestBoardCell adj : adjCells) {
-
             if (!visited.contains(adj) && !adj.getOccupied()) {
-
                 visited.add(adj);
-                targets.add(adj);
-                search(adj, distance + 1, pathLength);
-            }
 
+                if (pathLength == 1) {
+                    targets.add(adj);
+                } else {
+                    calcTargets(adj, pathLength - 1);
+                }
+                visited.remove(adj);
+            }
         }
     }
 
