@@ -27,12 +27,14 @@ public class TestBoard {
         this.visited = new HashSet();
         this.grid = new TestBoardCell[ROWS][COLS];
 
+        //populate with cells
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 this.grid[i][j] = new TestBoardCell(i, j);
             }
         }
 
+        //calculate adjacency for each cell
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 TestBoardCell cell = this.grid[i][j];
@@ -60,21 +62,25 @@ public class TestBoard {
     	findTargets(startCell, pathLength);
     }
     
+    //search algorithm to find all targets on path
     private void findTargets(TestBoardCell cell, int pathLength) {
     	visited.add(cell);
     	
+    	//base case
     	if (pathLength == 0) {
     		targets.add(cell);
     		visited.remove(cell);
     		return;
     	}
     	
+    	//recursive case
     	for (TestBoardCell adj : cell.getAdjList()) {
     		if (!visited.contains(adj) && !adj.getOccupied()) {
     			findTargets(adj, pathLength - 1);
     		}
     	}
     	
+    	//backtrack
     	visited.remove(cell);
     }
 
