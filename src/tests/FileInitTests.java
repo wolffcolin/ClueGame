@@ -79,8 +79,22 @@ class FileInitTests {
 				BoardCell cell = board.getCell(row, col);
 				if (cell.isDoorway())
 					numDoors++;
-			}
-		Assert.assertEquals15, numDoors);
+			}		BoardCell cell = board.getCell(8, 7);
+			assertTrue(cell.isDoorway());
+			assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
+			cell = board.getCell(7, 12);
+			assertTrue(cell.isDoorway());
+			assertEquals(DoorDirection.UP, cell.getDoorDirection());
+			cell = board.getCell(4, 8);
+			assertTrue(cell.isDoorway());
+			assertEquals(DoorDirection.RIGHT, cell.getDoorDirection());
+			cell = board.getCell(16, 9);
+			assertTrue(cell.isDoorway());
+			assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
+			// Test that walkways are not doors
+			cell = board.getCell(12, 14);
+			assertFalse(cell.isDoorway());
+		Assert.assertEquals(15, numDoors);
 	}
 
 	@Test

@@ -1,3 +1,12 @@
+/*
+ 
+Class: BoardCell
+Description: Represents singular cell on board.
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 package clueGame;
 
 import java.util.HashSet;
@@ -19,6 +28,7 @@ public class BoardCell {
     private Set<BoardCell> adjList;
     private boolean occupied;
 
+    //constructor
     public BoardCell(int setRow, int setColumn, char type) {
         this.row = setRow;
 
@@ -34,12 +44,14 @@ public class BoardCell {
         this.adjList = new HashSet<BoardCell>();
     }
 
+    //adds cell to adjacency list
     public void addAdjacency(BoardCell cell) {
 
         adjList.add(cell);
 
     }
 
+    //returns if doorway
     public boolean isDoorway() {
         // TODO Auto-generated method stub
         return false;
@@ -52,6 +64,7 @@ public class BoardCell {
 
     }
 
+    //returns row
     public int getRow() {
         return this.row;
     }

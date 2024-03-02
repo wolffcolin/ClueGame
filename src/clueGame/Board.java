@@ -1,3 +1,12 @@
+/*
+ 
+Class: Board
+Description: Represents the clue board as a whole. Can calculate the targets from a certain cell given a path length
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 package clueGame;
 
 import java.util.HashSet;
@@ -56,22 +65,27 @@ public class Board {
         }
     }
 
+    //returns the instance of board
     public static Board getInstance() {
         return theInstance;
     }
 
+    //initialize instance
     public void initialize() {
 
     }
 
+    //load setup file
     public void loadSetupConfig() {
 
     }
 
+    //load layout file
     public void loadLayoutConfig() {
 
     }
 
+    //sets file
     public void setConfigFiles(String board, String symbols) {
 
     }
