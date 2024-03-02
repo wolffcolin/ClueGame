@@ -41,7 +41,7 @@ public class TestBoard {
                         cell.addAdjacency(grid[i + 1][j]);
                     }
                 }
-                if (i - 1 > 0) {
+                if (i - 1 >= 0) {
                     if (!grid[i - 1][j].isRoom()) {
                         cell.addAdjacency(grid[i - 1][j]);
                     }
@@ -51,7 +51,7 @@ public class TestBoard {
                         cell.addAdjacency(grid[i][j + 1]);
                     }
                 }
-                if (j - 1 > 0) {
+                if (j - 1 >= 0) {
                     if (!grid[i][j - 1].isRoom()) {
                         cell.addAdjacency(grid[i][j - 1]);
                     }

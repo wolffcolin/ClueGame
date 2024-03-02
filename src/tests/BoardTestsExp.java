@@ -38,7 +38,7 @@ class BoardTestsExp {
 		TestBoardCell cell = board.getCell(0, 0);
 		Set<TestBoardCell> testList = cell.getAdjList();
 		Assert.assertTrue(testList.contains(board.getCell(1, 0)));
-		Assert.assertTrue(testList.contains(board.getCell(0, 1)));
+		Assert.assertTrue(testList.contains(board.getCell(0, 1)));  
 		
 		TestBoardCell cell1 = board.getCell(0, 3);
 		Set<TestBoardCell> testList1 = cell1.getAdjList();
