@@ -62,6 +62,7 @@ public class TestBoard {
 
     // calculates the targets for a starting cell
     public void calcTargets(TestBoardCell startCell, int pathLength) {
+    	visited.add(startCell);
         search(startCell, 0, pathLength);
     }
 
@@ -82,6 +83,33 @@ public class TestBoard {
             }
 
         }
+    }
+    
+    private void findTargets(TestBoardCell currCell, int pathLength) {
+    	
+    	if (pathLength == 0) {
+    		
+    		targets.add(currCell);
+    		return;
+    		
+    	}
+    	
+    	int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    	for (int[] dir : directions) {
+    		
+    		int newRow = currCell.getRow() + dir[0];
+    		int newCol = currCell.getCol() + dir[1];
+    		
+            if (newRow >= 0 && newRow < ROWS && newCol >= 0 && newCol < COLS) {
+                TestBoardCell nextCell = grid[newRow][newCol];
+                if (!visited.contains(nextCell) && !nextCell.getOccupied()) {
+                    visited.add(nextCell);
+                    findTargets(nextCell, pathLength - 1);
+                    visited.remove(nextCell);
+                }
+            }
+    		
+    	}
     }
 
     // returns the cell at given point
