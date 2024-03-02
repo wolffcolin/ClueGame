@@ -87,4 +87,8 @@ public class BoardCell {
         return false;
     }
 
+    public char getSecretPassage() {
+        return this.secretPassage;
+    }
+
 }
