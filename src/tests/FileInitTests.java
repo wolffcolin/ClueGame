@@ -17,6 +17,15 @@ import clueGame.BoardCell;
 import clueGame.DoorDirection;
 import clueGame.Room;
 
+/*
+ 
+Class: FileInitTests
+Description: Testing the file input validity and that all points on the map are lining up
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 class FileInitTests {
 
 	public static final int NUM_ROWS = 15;
@@ -34,6 +43,7 @@ class FileInitTests {
 
 	}
 
+	// tests that room labels are matching their symbols
 	@Test
 	public void testRoomLabels() {
 		assertEquals("Dinosaur Exhibit", board.getRoom('D').getName());
@@ -46,12 +56,14 @@ class FileInitTests {
 		assertEquals("Gift Shop", board.getRoom('G').getName());
 	}
 
+	// testing that the dimensions are correct
 	@Test
 	public void testBoardDimensions() {
 		assertEquals(NUM_ROWS, board.getNumRows());
 		assertEquals(NUM_COLUMNS, board.getNumColumns());
 	}
 
+	// testing the directions of the doors are working
 	@Test
 	public void FourDoorDirections() {
 		BoardCell cell = board.getCell(6, 4);
@@ -71,6 +83,7 @@ class FileInitTests {
 		assertFalse(cell.isDoorway());
 	}
 
+	// testing the number of doorways expected are present
 	@Test
 	public void testNumberDoorways() {
 		int numDoors = 0;
@@ -83,6 +96,7 @@ class FileInitTests {
 		Assert.assertEquals(1, numDoors);
 	}
 
+	// testing all the different types of room
 	@Test
 	public void testRooms() {
 		BoardCell cell = board.getCell(1, 2);
