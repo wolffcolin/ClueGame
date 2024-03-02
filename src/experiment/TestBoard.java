@@ -12,9 +12,9 @@ package experiment;
 import java.util.*;
 
 public class TestBoard {
-    private Set<TestBoardCell> targets;
-    private TestBoardCell[][] grid;
-    private Set<TestBoardCell> visited;
+    private Set<BoardCell> targets;
+    private BoardCell[][] grid;
+    private Set<BoardCell> visited;
 
     final static int COLS = 4;
     final static int ROWS = 4;
@@ -25,19 +25,19 @@ public class TestBoard {
 
         this.targets = new HashSet();
         this.visited = new HashSet();
-        this.grid = new TestBoardCell[ROWS][COLS];
+        this.grid = new BoardCell[ROWS][COLS];
 
         //populate with cells
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                this.grid[i][j] = new TestBoardCell(i, j);
+                this.grid[i][j] = new BoardCell(i, j);
             }
         }
 
         //calculate adjacency for each cell
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                TestBoardCell cell = this.grid[i][j];
+                BoardCell cell = this.grid[i][j];
                 if (i + 1 < ROWS) {
                     cell.addAdjacency(grid[i + 1][j]);
                 }
@@ -56,14 +56,14 @@ public class TestBoard {
     }
 
     // calculates the targets for a starting cell
-    public void calcTargets(TestBoardCell startCell, int pathLength) {
+    public void calcTargets(BoardCell startCell, int pathLength) {
     	visited.clear();
     	targets.clear();
     	findTargets(startCell, pathLength);
     }
     
     //search algorithm to find all targets on path
-    private void findTargets(TestBoardCell cell, int pathLength) {
+    private void findTargets(BoardCell cell, int pathLength) {
     	visited.add(cell);
     	
     	//base case
@@ -74,7 +74,7 @@ public class TestBoard {
     	}
     	
     	//recursive case
-    	for (TestBoardCell adj : cell.getAdjList()) {
+    	for (BoardCell adj : cell.getAdjList()) {
     		if (!visited.contains(adj) && !adj.getOccupied()) {
     			findTargets(adj, pathLength - 1);
     		}
@@ -85,12 +85,12 @@ public class TestBoard {
     }
 
     // returns the cell at given point
-    public TestBoardCell getCell(int row, int col) {
+    public BoardCell getCell(int row, int col) {
         return grid[row][col];
     }
 
     // returns target list
-    public Set<TestBoardCell> getTargets() {
+    public Set<BoardCell> getTargets() {
         return targets;
     }
 }
