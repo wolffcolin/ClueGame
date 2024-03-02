@@ -38,7 +38,6 @@ public class TestBoard {
                 TestBoardCell cell = this.grid[i][j];
                 if (i + 1 < ROWS) {
                     cell.addAdjacency(grid[i + 1][j]);
-                
                 }
                 if (i - 1 >= 0) {
                     cell.addAdjacency(grid[i - 1][j]);
