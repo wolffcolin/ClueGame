@@ -115,4 +115,19 @@ public class Board {
     public Set<BoardCell> getTargets() {
         return targets;
     }
+
+	public Object getRoom(char c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getNumRows() {
+		// TODO Auto-generated method stub
+		return numRows;
+	}
+
+	public int getNumColumns() {
+		// TODO Auto-generated method stub
+		return numColumns;
+	}
 }
