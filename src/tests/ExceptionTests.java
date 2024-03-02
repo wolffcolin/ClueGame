@@ -7,6 +7,15 @@ import org.junit.jupiter.api.Test;
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
 
+/*
+ 
+Class: ExceptionTests
+Description: Testing that BadConfigFormatException is throwing as expected
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 public class ExceptionTests {
 
 	// Test that an exception is thrown for a layout file that does not
