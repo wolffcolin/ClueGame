@@ -85,9 +85,14 @@ class FileInitTests {
 
 	@Test
 	public void testRooms() {
-		BoardCell cell = board.getCell(3, 4);
-		char roomChar = cell.getRoomChar();
-		Room room = board.getRoom(roomChar);
+		BoardCell cell = board.getCell(1, 2);
+		Room room = board.getRoom(cell.getRoomChar());
+
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Gift Shop");
+		assertFalse(cell.isLabel());
+		assertFalse(cell.isRoomCenter());
+		assertFalse(cell.isDoorway());
 	}
 
 }

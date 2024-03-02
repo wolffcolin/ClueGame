@@ -74,9 +74,17 @@ public class BoardCell {
         return this.initial;
     }
 
-	public Object getDoorDirection() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Object getDoorDirection() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public boolean isLabel() {
+        return false;
+    }
+
+    public boolean isRoomCenter() {
+        return false;
+    }
 
 }
