@@ -63,7 +63,7 @@ public class TestBoard {
     //calculates the targets for a starting cell
     public void calcTargets(TestBoardCell startCell, int pathLength) {
     	
-    	if (startCell.isRoom()) {
+    	if (pathLength == 0) {
     		targets.add(startCell);
     		return;
     	}
