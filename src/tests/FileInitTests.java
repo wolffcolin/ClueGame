@@ -88,11 +88,51 @@ class FileInitTests {
 		BoardCell cell = board.getCell(1, 2);
 		Room room = board.getRoom(cell.getRoomChar());
 
+		// testing a location
 		assertTrue(room != null);
 		assertEquals(room.getName(), "Gift Shop");
 		assertFalse(cell.isLabel());
 		assertFalse(cell.isRoomCenter());
 		assertFalse(cell.isDoorway());
+
+		// testing the label cell
+		cell = board.getCell(1, 13);
+		room = board.getRoom(cell.getRoomChar());
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Mummy Exhibit");
+		assertTrue(cell.isLabel());
+		assertTrue(room.getLabelCell() == cell);
+
+		// testing the center cell
+		cell = board.getCell(1, 12);
+		room = board.getRoom(cell.getRoomChar());
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Mummy Exhibit");
+		assertTrue(cell.isRoomCenter());
+		assertTrue(room.getCenterCell() == cell);
+
+		// testing secrete passage
+		cell = board.getCell(12, 14);
+		room = board.getRoom(cell.getRoomChar());
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Rock Exhibit");
+		assertTrue(cell.getSecretPassage() == 'G');
+
+		// testing walkways
+		cell = board.getCell(3, 8);
+		room = board.getRoom(cell.getRoomChar());
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Walkway");
+		assertFalse(cell.isRoomCenter());
+		assertFalse(cell.isLabel());
+
+		// testing closet
+		cell = board.getCell(6, 7);
+		room = board.getRoom(cell.getRoomChar());
+		assertTrue(room != null);
+		assertEquals(room.getName(), "Unused");
+		assertFalse(cell.isRoomCenter());
+		assertFalse(cell.isLabel());
 	}
 
 }
