@@ -37,7 +37,7 @@ class FileInitTests {
 	public static void setUp() {
 
 		board = Board.getInstance();
-		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");
+		board.setConfigFiles("data/ClueLayout.csv", "data/ClueSetup.txt");
 
 		board.initialize();
 
@@ -50,9 +50,9 @@ class FileInitTests {
 		assertEquals("Bathroom", board.getRoom('B').getName());
 		assertEquals("Mummy Exhibit", board.getRoom('M').getName());
 		assertEquals("Rock Exhibit", board.getRoom('R').getName());
-		assertEquals("Greek Exhibit", board.getRoom('G').getName());
+		assertEquals("Greek Exhibit", board.getRoom('Q').getName());
 		assertEquals("Entrance", board.getRoom('E').getName());
-		assertEquals("Food Court", board.getRoom('F').getName());
+		assertEquals("Food Court", board.getRoom('C').getName());
 		assertEquals("Gift Shop", board.getRoom('G').getName());
 	}
 
