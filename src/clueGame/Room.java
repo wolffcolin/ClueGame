@@ -16,13 +16,7 @@ public class Room {
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 
-	// constructor
-	public Room(String setName, BoardCell center, BoardCell label) {
-		this.name = setName;
-		this.centerCell = center;
-		this.labelCell = label;
-	}
-
+	// constructor for when we only know the name and symbol
 	public Room(String setName, Character setSymbol) {
 		this.name = setName;
 		this.symbol = setSymbol;
