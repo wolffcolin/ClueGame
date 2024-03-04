@@ -287,4 +287,9 @@ public class Board {
     public int getNumColumns() {
         return numColumns;
     }
+
+	public Set<BoardCell> getAdjList(int i, int j) {
+
+		return	getInstance().getCell(i, j).getAdjList();
+	}
 }

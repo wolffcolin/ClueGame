@@ -268,9 +268,9 @@ class BoardAdjTargetTest {
 	// test to make sure occupied locations do not cause problems
 	public void testTargetsOccupied() {
 		// test a roll of 4 blocked 2 down
-		board.getCell(15, 7).setOccupied(true);
-		board.calcTargets(board.getCell(13, 7), 4);
-		board.getCell(15, 7).setOccupied(false);
+		board.getCell(5, 7).setOccupied(true);
+		board.calcTargets(board.getCell(5, 9), 3);
+		board.getCell(5, 7).setOccupied(false);
 		Set<BoardCell> targets = board.getTargets();
 		assertEquals(13, targets.size());
 		assertTrue(targets.contains(board.getCell(14, 2)));
