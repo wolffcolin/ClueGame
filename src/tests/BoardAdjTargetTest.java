@@ -1,3 +1,12 @@
+/*
+ 
+Class: BoardAdjTargetTest
+Description: tests various cells in various situations on a real board
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -180,7 +189,6 @@ class BoardAdjTargetTest {
 		assertTrue(targets.contains(board.getCell(1, 12)));
 	}
 
-	// Tests out of room center, 1, 3 and 4
 	// These are LIGHT BLUE on the planning spreadsheet
 	@Test
 	public void testTargetsAtDoor() {
