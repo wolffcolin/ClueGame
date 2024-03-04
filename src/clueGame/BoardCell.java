@@ -128,4 +128,9 @@ public class BoardCell {
         return this.secretPassage;
     }
 
+	public void setOccupied(boolean b) {
+		this.occupied = b;
+		
+	}
+
 }
