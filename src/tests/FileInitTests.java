@@ -37,7 +37,7 @@ class FileInitTests {
 	public static void setUp() {
 
 		board = Board.getInstance();
-		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 
 		board.initialize();
 
@@ -50,9 +50,9 @@ class FileInitTests {
 		assertEquals("Bathroom", board.getRoom('B').getName());
 		assertEquals("Mummy Exhibit", board.getRoom('M').getName());
 		assertEquals("Rock Exhibit", board.getRoom('R').getName());
-		assertEquals("Greek Exhibit", board.getRoom('G').getName());
+		assertEquals("Greek Exhibit", board.getRoom('Q').getName());
 		assertEquals("Entrance", board.getRoom('E').getName());
-		assertEquals("Food Court", board.getRoom('F').getName());
+		assertEquals("Food Court", board.getRoom('C').getName());
 		assertEquals("Gift Shop", board.getRoom('G').getName());
 	}
 
@@ -75,7 +75,7 @@ class FileInitTests {
 		cell = board.getCell(9, 11);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.RIGHT, cell.getDoorDirection());
-		cell = board.getCell(13, 7);
+		cell = board.getCell(11, 7);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
 		// Test that walkways are not doors
@@ -93,28 +93,28 @@ class FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		BoardCell cell = board.getCell(8, 7);
+		BoardCell cell = board.getCell(7, 4);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
-		cell = board.getCell(7, 12);
+		cell = board.getCell(3, 7);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.UP, cell.getDoorDirection());
-		cell = board.getCell(4, 8);
+		cell = board.getCell(1, 10);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.RIGHT, cell.getDoorDirection());
-		cell = board.getCell(16, 9);
+		cell = board.getCell(10, 2);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
 		// Test that walkways are not doors
-		cell = board.getCell(12, 14);
+		cell = board.getCell(12, 11);
 		assertFalse(cell.isDoorway());
-		Assert.assertEquals(15, numDoors);
+		Assert.assertEquals(14, numDoors);
 	}
 
 	// testing all the different types of room
 	@Test
 	public void testRooms() {
-		BoardCell cell = board.getCell(1, 2);
+		BoardCell cell = board.getCell(2, 2);
 		Room room = board.getRoom(cell);
 
 		// testing a location

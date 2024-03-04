@@ -2,13 +2,13 @@
 Room, Dinosaur Exhibit, D
 Room, Bathroom, B
 Room, Mummy Exhibit, M
-Room, Rock Exhibit, R
+Room, Rock 
 Room, Fossil Exhibit, F
 Room, Greek Exhibit, Q
 Room, Entrance, E
 Room, Gift Shop, G
-Room, Food Court, C
-
+Room, Food Cou
+THis is a bad format
 //other unused spaces on board
 Space, Unused, X
 Space, Walkway, W

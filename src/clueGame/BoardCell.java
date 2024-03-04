@@ -12,8 +12,6 @@ package clueGame;
 import java.util.HashSet;
 import java.util.Set;
 
-import experiment.TestBoardCell;
-
 public class BoardCell {
     private int row;
     private int col;
@@ -29,12 +27,11 @@ public class BoardCell {
     private boolean occupied;
 
     // constructor
-    public BoardCell(int setRow, int setColumn, char type) {
+    public BoardCell(int setRow, int setColumn, char roomType) {
         this.row = setRow;
-
         this.col = setColumn;
 
-        this.initial = type;
+        this.initial = roomType;
 
         this.roomLabel = false;
         this.roomCenter = false;
@@ -44,22 +41,52 @@ public class BoardCell {
         this.adjList = new HashSet<BoardCell>();
     }
 
+    public BoardCell(int setRow, int setColumn, char roomType, char secondType) {
+        this.row = setRow;
+        this.col = setColumn;
+        this.initial = roomType;
+        this.adjList = new HashSet<BoardCell>();
+
+        if (secondType == '#') {
+            this.roomLabel = true;
+            this.doorDirection = DoorDirection.NONE;
+        } else if (secondType == '*') {
+            this.roomCenter = true;
+            this.doorDirection = DoorDirection.NONE;
+        } else if (secondType == '^') {
+            this.doorDirection = DoorDirection.UP;
+        } else if (secondType == '<') {
+            this.doorDirection = DoorDirection.LEFT;
+        } else if (secondType == '>') {
+            this.doorDirection = DoorDirection.RIGHT;
+        } else if (secondType == 'v') {
+            this.doorDirection = DoorDirection.DOWN;
+        } else {
+            this.secretPassage = secondType;
+            this.doorDirection = DoorDirection.NONE;
+        }
+    }
+
     // adds cell to adjacency list
     public void addAdjacency(BoardCell cell) {
-
         adjList.add(cell);
+    }
 
+    // returns char of room
+    public char getInitial() {
+        return this.initial;
     }
 
     // returns if doorway
     public boolean isDoorway() {
-        // TODO Auto-generated method stub
-        return false;
+        if (this.doorDirection == DoorDirection.NONE)
+            return false;
+        else
+            return true;
     }
 
     // returns list of adjacent cells
     public Set<BoardCell> getAdjList() {
-
         return this.adjList;
 
     }
@@ -74,26 +101,23 @@ public class BoardCell {
     }
 
     public String getName() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     public boolean getOccupied() {
-        // TODO Auto-generated method stub
-        return occupied;
+        return this.occupied;
     }
 
-    public Object getDoorDirection() {
-        // TODO Auto-generated method stub
-        return null;
+    public DoorDirection getDoorDirection() {
+        return this.doorDirection;
     }
 
     public boolean isLabel() {
-        return false;
+        return this.roomLabel;
     }
 
     public boolean isRoomCenter() {
-        return false;
+        return this.roomCenter;
     }
 
     public char getSecretPassage() {

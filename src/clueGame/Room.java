@@ -11,31 +11,45 @@ package clueGame;
 
 public class Room {
 
-	
 	private String name;
+	private Character symbol;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 
-	//constructor
+	// constructor
 	public Room(String setName, BoardCell center, BoardCell label) {
 		this.name = setName;
 		this.centerCell = center;
 		this.labelCell = label;
 	}
 
-	//returns name
+	public Room(String setName, Character setSymbol) {
+		this.name = setName;
+		this.symbol = setSymbol;
+	}
+
+	// returns name
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 
-	//returns cell from label
+	// returns cell from label
 	public BoardCell getLabelCell() {
-		return null;
+		return labelCell;
 	}
 
-	//returns center cell
+	// returns center cell
 	public BoardCell getCenterCell() {
-		return null;
+		return centerCell;
+	}
+
+	// set label cell
+	public void setLabelCell(BoardCell cell) {
+		this.labelCell = cell;
+	}
+
+	// set center cell
+	public void setCenterCell(BoardCell cell) {
+		this.centerCell = cell;
 	}
 }

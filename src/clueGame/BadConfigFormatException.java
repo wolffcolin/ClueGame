@@ -13,4 +13,8 @@ public class BadConfigFormatException extends Exception {
     public BadConfigFormatException(String message) {
         super(message);
     }
+
+    public BadConfigFormatException() {
+        super("Bad Config Format in config files encountered");
+    }
 }
