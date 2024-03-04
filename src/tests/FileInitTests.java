@@ -93,7 +93,7 @@ class FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		BoardCell cell = board.getCell(7, 4);
+		BoardCell cell = board.getCell(6, 4);
 		assertTrue(cell.isDoorway());
 		assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
 		cell = board.getCell(3, 7);
