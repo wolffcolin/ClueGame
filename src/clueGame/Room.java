@@ -30,17 +30,26 @@ public class Room {
 
 	// returns name
 	public String getName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 
 	// returns cell from label
 	public BoardCell getLabelCell() {
-		return null;
+		return labelCell;
 	}
 
 	// returns center cell
 	public BoardCell getCenterCell() {
-		return null;
+		return centerCell;
+	}
+
+	// set label cell
+	public void setLabelCell(BoardCell cell) {
+		this.labelCell = cell;
+	}
+
+	// set center cell
+	public void setCenterCell(BoardCell cell) {
+		this.centerCell = cell;
 	}
 }

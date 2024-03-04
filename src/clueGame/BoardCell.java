@@ -51,8 +51,10 @@ public class BoardCell {
 
         if (secondType == '#') {
             this.roomLabel = true;
+            this.doorDirection = DoorDirection.NONE;
         } else if (secondType == '*') {
             this.roomCenter = true;
+            this.doorDirection = DoorDirection.NONE;
         } else if (secondType == '^') {
             this.doorDirection = DoorDirection.UP;
         } else if (secondType == '<') {
@@ -63,6 +65,7 @@ public class BoardCell {
             this.doorDirection = DoorDirection.DOWN;
         } else {
             this.secretPassage = secondType;
+            this.doorDirection = DoorDirection.NONE;
         }
     }
 

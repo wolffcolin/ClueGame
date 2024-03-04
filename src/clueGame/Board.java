@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Scanner;
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -106,6 +107,8 @@ public class Board {
 
             if (line.startsWith("//")) {
                 continue;
+            } else if (line.isEmpty()) {
+                continue;
             } else if (line.startsWith("Room")) {
                 String[] lineSplit = line.split(",");
                 if (lineSplit.length == 3) {
@@ -136,11 +139,12 @@ public class Board {
 
     // load layout file
     public void loadLayoutConfig() throws BadConfigFormatException, FileNotFoundException {
-        File setupConfig = new File(setupConfigFile);
-        Scanner reader = new Scanner(setupConfig);
+        File layoutConfig = new File(layoutConfigFile);
+        Scanner reader = new Scanner(layoutConfig);
         // 2D ArrayList to temporarily hold file contents
         ArrayList<ArrayList<String>> layoutList = new ArrayList<>();
-        ArrayList<Integer> colNums = new ArrayList<>(); // to store number of columns of each row
+        ArrayList<Integer> colNums = new ArrayList<>(); // list of the number of columns in each row
+        List<Character> specialChars = List.of('#', '*', '<', '>', 'v', '^');
 
         /*
          * read each row in and add to layoutList to get row and column lengths and
@@ -188,11 +192,20 @@ public class Board {
                      */
                     if (!roomMap.containsKey(cellStr.charAt(0)))
                         throw new BadConfigFormatException("Bad Layout Config, Room symbols do not match Setup Config");
-                    if (!roomMap.containsKey(cellStr.charAt(1)))
+                    if (!specialChars.contains(cellStr.charAt(1)) && !roomMap.containsKey(cellStr.charAt(0)))
                         throw new BadConfigFormatException("Bad Layout Config, Room symbols do not match Setup Config");
                     // all ok now, so create BoardCell and add to grid
                     BoardCell cell = new BoardCell(i, j, cellStr.charAt(0), cellStr.charAt(1));
                     this.grid[i][j] = cell;
+
+                    // setting the room center and label cell if needed
+                    if (cellStr.charAt(1) == '#') {
+                        Room room = this.getRoom(cellStr.charAt(0));
+                        room.setLabelCell(cell);
+                    } else if (cellStr.charAt(1) == '*') {
+                        Room room = this.getRoom(cellStr.charAt(0));
+                        room.setCenterCell(cell);
+                    }
                 } else if (cellStr.length() == 1) {
                     /*
                      * checking to make sure room symbols are matching what is expected from setup
