@@ -12,11 +12,14 @@ package clueGame;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Board {
     private Set<BoardCell> targets;
-    private BoardCell[][] grid;
     private Set<BoardCell> visited;
+    private BoardCell[][] grid;
 
     private int numColumns = 16;
     private int numRows = 16;
@@ -75,8 +78,48 @@ public class Board {
     }
 
     // load setup file
-    public void loadSetupConfig() {
+    public void loadSetupConfig() throws BadConfigFormatException, FileNotFoundException {
+        setupConfigFile = "ClueSetup306.txt";
+        try {
+            File setupConfig = new File(setupConfigFile);
+            Scanner reader = new Scanner(setupConfig);
 
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+
+                if (line.startsWith("//")) {
+                    continue;
+                } else if (line.startsWith("Room")) {
+                    String[] lineSplit = line.split(",");
+                    if (lineSplit.length == 3) {
+                        String roomName = lineSplit[1].trim();
+                        String roomSymbolStr = lineSplit[2].trim();
+                        Character roomSymbol = roomSymbolStr.charAt(0); // convert the string to Character
+
+                        Room room = new Room(roomName, roomSymbol);
+                        roomMap.put(roomSymbol, room);
+                    }
+                } else if (line.startsWith("Space")) {
+                    String[] lineSplit = line.split(",");
+                    if (lineSplit.length == 3) {
+                        String roomName = lineSplit[1].trim();
+                        String roomSymbolStr = lineSplit[2].trim();
+                        Character roomSymbol = roomSymbolStr.charAt(0); // convert the string to Character
+
+                        Room room = new Room(roomName, roomSymbol);
+                        roomMap.put(roomSymbol, room);
+                    }
+                } else {
+                    reader.close();
+                    throw new BadConfigFormatException("Bad Setup Config layout");
+                }
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            throw e;
+        } catch (BadConfigFormatException e) {
+            throw e;
+        }
     }
 
     // load layout file

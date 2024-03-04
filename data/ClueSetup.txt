@@ -12,4 +12,3 @@ Room, Food Court, C
 //other unused spaces on board
 Space, Unused, X
 Space, Walkway, W
-git 
