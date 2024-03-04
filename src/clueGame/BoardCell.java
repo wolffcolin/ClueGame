@@ -12,8 +12,6 @@ package clueGame;
 import java.util.HashSet;
 import java.util.Set;
 
-import experiment.TestBoardCell;
-
 public class BoardCell {
     private int row;
     private int col;
