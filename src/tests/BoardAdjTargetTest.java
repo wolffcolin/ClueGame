@@ -77,32 +77,31 @@ class BoardAdjTargetTest {
 	@Test
 	public void testAdjacencyWalkways() {
 		// Test on bottom edge of board, just one walkway piece
-		Set<BoardCell> testList = board.getAdjList(24, 14);
+		Set<BoardCell> testList = board.getAdjList(3, 13);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCell(23, 14)));
+		assertTrue(testList.contains(board.getCell(3, 12)));
 
 		// Test near a door but not adjacent
-		testList = board.getAdjList(18, 4);
-		assertEquals(3, testList.size());
-		assertTrue(testList.contains(board.getCell(18, 3)));
-		assertTrue(testList.contains(board.getCell(17, 4)));
-		assertTrue(testList.contains(board.getCell(18, 5)));
+		testList = board.getAdjList(10, 8);
+		assertEquals(4, testList.size());
+		assertTrue(testList.contains(board.getCell(10, 9)));
+		assertTrue(testList.contains(board.getCell(9, 8)));
+		assertTrue(testList.contains(board.getCell(10, 7)));
+		assertTrue(testList.contains(board.getCell(11, 8)));
 
 		// Test adjacent to walkways
-		testList = board.getAdjList(19, 6);
-		assertEquals(4, testList.size());
-		assertTrue(testList.contains(board.getCell(19, 5)));
-		assertTrue(testList.contains(board.getCell(19, 7)));
-		assertTrue(testList.contains(board.getCell(18, 6)));
-		assertTrue(testList.contains(board.getCell(20, 6)));
+		testList = board.getAdjList(6, 5);
+		assertEquals(3, testList.size());
+		assertTrue(testList.contains(board.getCell(6, 4)));
+		assertTrue(testList.contains(board.getCell(7, 5)));
+		assertTrue(testList.contains(board.getCell(5, 5)));
 
 		// Test next to closet
-		testList = board.getAdjList(9, 14);
+		testList = board.getAdjList(5, 8);
 		assertEquals(3, testList.size());
-		assertTrue(testList.contains(board.getCell(9, 15)));
-		assertTrue(testList.contains(board.getCell(8, 14)));
-		assertTrue(testList.contains(board.getCell(10, 14)));
-
+		assertTrue(testList.contains(board.getCell(4, 8)));
+		assertTrue(testList.contains(board.getCell(5, 7)));
+		assertTrue(testList.contains(board.getCell(5, 9)));
 	}
 
 	// Tests out of room center, 1, 3 and 4
