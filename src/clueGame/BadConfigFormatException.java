@@ -17,8 +17,10 @@ import java.io.IOException;
 
 public class BadConfigFormatException extends Exception {
 
+	//logger to track errors
 	private static final Logger LOG = Logger.getLogger(BadConfigFormatException.class.getName());
 
+	//initialize logger and catch file errors
 	static {
 		try {
 			FileHandler fileHandler = new FileHandler("error.log", true);
@@ -29,11 +31,13 @@ public class BadConfigFormatException extends Exception {
 		}
 	}
 
+	//constructor w/ message
 	public BadConfigFormatException(String message) {
 		super(message);
 		LOG.log(Level.SEVERE, message);
 	}
 
+	//standard constructor
 	public BadConfigFormatException() {
 		super("Bad Config Format in config files encountered");
 		LOG.log(Level.SEVERE, "Bad Config Format in config files encountered");
