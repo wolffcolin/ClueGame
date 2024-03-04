@@ -142,7 +142,6 @@ class BoardAdjTargetTest {
 		assertTrue(targets.contains(board.getCell(9, 4)));
 		assertTrue(targets.contains(board.getCell(7, 4)));
 		assertTrue(targets.contains(board.getCell(5, 4)));
-
 		assertTrue(targets.contains(board.getCell(12, 4)));
 		assertTrue(targets.contains(board.getCell(10, 2)));
 		assertTrue(targets.contains(board.getCell(9, 5)));
