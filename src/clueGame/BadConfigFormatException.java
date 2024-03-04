@@ -15,11 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 import java.io.IOException;
 
-
 public class BadConfigFormatException extends Exception {
-	
+
 	private static final Logger LOG = Logger.getLogger(BadConfigFormatException.class.getName());
-	
+
 	static {
 		try {
 			FileHandler fileHandler = new FileHandler("error.log", true);
@@ -29,14 +28,14 @@ public class BadConfigFormatException extends Exception {
 			LOG.warning("Failed to access logger handler");
 		}
 	}
-	
-    public BadConfigFormatException(String message) {
-        super(message);
-        LOG.log(Level.SEVERE, message);
-    }
 
-    public BadConfigFormatException() {
-        super("Bad Config Format in config files encountered");
-        LOG.log(Level.SEVERE, "Bad Config Format in config files encountered");
-    }
+	public BadConfigFormatException(String message) {
+		super(message);
+		LOG.log(Level.SEVERE, message);
+	}
+
+	public BadConfigFormatException() {
+		super("Bad Config Format in config files encountered");
+		LOG.log(Level.SEVERE, "Bad Config Format in config files encountered");
+	}
 }
