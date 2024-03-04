@@ -224,8 +224,8 @@ public class Board {
 
     // sets file
     public void setConfigFiles(String board, String symbols) {
-        this.layoutConfigFile = board;
-        this.setupConfigFile = symbols;
+        this.layoutConfigFile = "data/" + board;
+        this.setupConfigFile = "data/" + symbols;
     }
 
     // calculates the targets for a starting cell
