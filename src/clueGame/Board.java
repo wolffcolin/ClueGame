@@ -164,7 +164,7 @@ public class Board {
         reader.close();
 
         // checking number of columns per row is same for all rows
-        Integer temp = colNums.getFirst();
+        Integer temp = colNums.get(0);
         for (Integer colNum : colNums) {
             if (colNum != temp) {
                 throw new BadConfigFormatException("Bad Layout Config, mismatching number of columns in each row");
