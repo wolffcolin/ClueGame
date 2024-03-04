@@ -288,8 +288,8 @@ public class Board {
         return numColumns;
     }
 
-	public Set<BoardCell> getAdjList(int i, int j) {
+    public Set<BoardCell> getAdjList(int row, int col) {
 
-		return	getInstance().getCell(i, j).getAdjList();
-	}
+        return getInstance().getCell(row, col).getAdjList();
+    }
 }
