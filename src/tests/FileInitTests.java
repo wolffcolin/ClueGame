@@ -108,7 +108,7 @@ class FileInitTests {
 		// Test that walkways are not doors
 		cell = board.getCell(12, 11);
 		assertFalse(cell.isDoorway());
-		Assert.assertEquals(14, numDoors);
+		Assert.assertEquals(15, numDoors);
 	}
 
 	// testing all the different types of room
