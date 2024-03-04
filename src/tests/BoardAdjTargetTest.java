@@ -50,23 +50,25 @@ class BoardAdjTargetTest {
 	// These cells are LIGHT ORANGE on the planning spreadsheet
 	@Test
 	public void testAdjacencyDoor() {
-		Set<BoardCell> testList = board.getAdjList(11, 1);
+		Set<BoardCell> testList = board.getCell(9, 2).getAdjList();
 		assertEquals(2, testList.size());
-		assertTrue(testList.contains(board.getCell(14, 2)));
-		assertTrue(testList.contains(board.getCell(11, 2)));
+		assertTrue(testList.contains(board.getCell(7, 1)));
+		assertTrue(testList.contains(board.getCell(9, 1)));
+		assertTrue(testList.contains(board.getCell(9, 3)));
+		assertTrue(testList.contains(board.getCell(10, 2)));
 
-		testList = board.getAdjList(19, 5);
+		testList = board.getCell(10, 2).getAdjList();
 		assertEquals(3, testList.size());
-		assertTrue(testList.contains(board.getCell(21, 2)));
-		assertTrue(testList.contains(board.getCell(18, 5)));
-		assertTrue(testList.contains(board.getCell(19, 6)));
+		assertTrue(testList.contains(board.getCell(13, 1)));
+		assertTrue(testList.contains(board.getCell(9, 2)));
+		assertTrue(testList.contains(board.getCell(10, 1)));
+		assertTrue(testList.contains(board.getCell(10, 3)));
 
-		testList = board.getAdjList(19, 7);
+		testList = board.getCell(13, 11).getAdjList();
 		assertEquals(4, testList.size());
-		assertTrue(testList.contains(board.getCell(18, 7)));
-		assertTrue(testList.contains(board.getCell(19, 6)));
-		assertTrue(testList.contains(board.getCell(20, 7)));
-		assertTrue(testList.contains(board.getCell(20, 11)));
+		assertTrue(testList.contains(board.getCell(13, 13)));
+		assertTrue(testList.contains(board.getCell(13, 10)));
+		assertTrue(testList.contains(board.getCell(12, 11)));
 	}
 
 	// Test a variety of walkway scenarios
