@@ -346,11 +346,10 @@ public class Board {
 
         // base case
         if (pathLength == 0) {
-        	targets.add(cell);
+            targets.add(cell);
             visited.remove(cell);
             return;
         }
-        
 
         // recursive case
         for (BoardCell adj : cell.getAdjList()) {
