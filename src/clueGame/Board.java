@@ -37,9 +37,33 @@ public class Board {
     // constructor
     private Board() {
         super();
-
         this.targets = new HashSet();
         this.visited = new HashSet();
+    }
+
+    // returns the instance of board
+    public static Board getInstance() {
+        return theInstance;
+    }
+
+    // initialize instance
+    public void initialize() {
+        try {
+            loadSetupConfig();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (BadConfigFormatException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        try {
+            loadLayoutConfig();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (BadConfigFormatException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
 
         // calculate adjacency for each cell
         for (int i = 0; i < numRows; i++) {
@@ -164,33 +188,6 @@ public class Board {
                 }
             }
         }
-    }
-
-    // returns the instance of board
-    public static Board getInstance() {
-        return theInstance;
-    }
-
-    // initialize instance
-    public void initialize() {
-        try {
-            loadSetupConfig();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (BadConfigFormatException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        try {
-            loadLayoutConfig();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (BadConfigFormatException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-
-        // then board constructor to make adj list
     }
 
     // load setup file
