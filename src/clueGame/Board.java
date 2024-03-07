@@ -346,20 +346,22 @@ public class Board {
 
         // base case
         if (pathLength == 0) {
-            targets.add(cell);
+        	targets.add(cell);
+        	if (cell.isRoomCenter()) {
+        		if (visited.size() == 1) {
+        			visited.remove(cell);
+        			return;
+        		}
+        		return;
+        	}
             visited.remove(cell);
             return;
         }
         
-        if (cell.isRoomCenter()) {
-        	targets.add(cell);
-        	visited.remove(cell);
-        	return;
-        }
 
         // recursive case
         for (BoardCell adj : cell.getAdjList()) {
-            if (!visited.contains(adj) && !adj.getOccupied()) {
+            if (!visited.contains(adj) && (!adj.getOccupied() || adj.isRoomCenter())) {
                 findTargets(adj, pathLength - 1);
             }
         }
