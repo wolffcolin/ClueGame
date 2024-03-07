@@ -350,6 +350,12 @@ public class Board {
             visited.remove(cell);
             return;
         }
+        
+        if (cell.isRoomCenter()) {
+        	targets.add(cell);
+        	visited.remove(cell);
+        	return;
+        }
 
         // recursive case
         for (BoardCell adj : cell.getAdjList()) {
