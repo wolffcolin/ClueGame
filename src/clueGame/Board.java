@@ -40,14 +40,6 @@ public class Board {
 
         this.targets = new HashSet();
         this.visited = new HashSet();
-        this.grid = new BoardCell[numRows][numColumns];
-
-        // populate with cells
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                this.grid[i][j] = new BoardCell(i, j, 'W');
-            }
-        }
 
         // calculate adjacency for each cell
         for (int i = 0; i < numRows; i++) {
@@ -64,7 +56,6 @@ public class Board {
                 }
                 if (j - 1 >= 0) {
                     cell.addAdjacency(grid[i][j - 1]);
-
                 }
             }
         }
