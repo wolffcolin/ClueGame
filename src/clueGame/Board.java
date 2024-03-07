@@ -45,17 +45,122 @@ public class Board {
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 BoardCell cell = this.grid[i][j];
-                if (i + 1 < numRows) {
-                    cell.addAdjacency(grid[i + 1][j]);
-                }
-                if (i - 1 >= 0) {
-                    cell.addAdjacency(grid[i - 1][j]);
-                }
-                if (j + 1 < numColumns) {
-                    cell.addAdjacency(grid[i][j + 1]);
-                }
-                if (j - 1 >= 0) {
-                    cell.addAdjacency(grid[i][j - 1]);
+                if (cell.isDoorway()) {
+                    DoorDirection doorDir = cell.getDoorDirection();
+                    if (doorDir == DoorDirection.DOWN && i - 1 >= 0) {
+                        Room room = theInstance.getRoom(this.grid[i - 1][j]);
+                        // bidirectional adjacency
+                        cell.addAdjacency(room.getCenterCell());
+                        room.getCenterCell().addAdjacency(cell);
+                        // normal walkway adj
+                        if (i + 1 < numRows) {
+                            if (grid[i + 1][j].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i + 1][j]);
+                            }
+                        }
+                        if (j + 1 < numColumns) {
+                            if (grid[i][j + 1].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i][j + 1]);
+                            }
+                        }
+                        if (j - 1 >= 0) {
+                            if (grid[i][j - 1].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i][j - 1]);
+                            }
+                        }
+                    } else if (doorDir == DoorDirection.UP && i + 1 < numRows) {
+                        Room room = theInstance.getRoom(this.grid[i + 1][j]);
+                        // bidirectional adjacency
+                        cell.addAdjacency(room.getCenterCell());
+                        room.getCenterCell().addAdjacency(cell);
+                        // normal walkway adj
+                        if (i - 1 >= 0) {
+                            if (grid[i - 1][j].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i - 1][j]);
+                            }
+                        }
+                        if (j + 1 < numColumns) {
+                            if (grid[i][j + 1].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i][j + 1]);
+                            }
+                        }
+                        if (j - 1 >= 0) {
+                            if (grid[i][j - 1].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i][j - 1]);
+                            }
+                        }
+                    } else if (doorDir == DoorDirection.LEFT && j - 1 >= 0) {
+                        Room room = theInstance.getRoom(this.grid[i][j - 1]);
+                        // bidirectional adjacency
+                        cell.addAdjacency(room.getCenterCell());
+                        room.getCenterCell().addAdjacency(cell);
+                        // normal walkway adj
+                        if (i + 1 < numRows) {
+                            if (grid[i + 1][j].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i + 1][j]);
+                            }
+                        }
+                        if (i - 1 >= 0) {
+                            if (grid[i - 1][j].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i - 1][j]);
+                            }
+                        }
+                        if (j + 1 < numColumns) {
+                            if (grid[i][j + 1].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i][j + 1]);
+                            }
+                        }
+                    } else if (doorDir == DoorDirection.RIGHT && j + 1 < numColumns) {
+                        Room room = theInstance.getRoom(this.grid[i][j + 1]);
+                        // bidirectional adjacency
+                        cell.addAdjacency(room.getCenterCell());
+                        room.getCenterCell().addAdjacency(cell);
+                        // normal walkway adj
+                        if (j - 1 >= 0) {
+                            if (grid[i][j - 1].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i][j - 1]);
+                            }
+                        }
+                        if (i + 1 < numRows) {
+                            if (grid[i + 1][j].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i + 1][j]);
+                            }
+                        }
+                        if (i - 1 >= 0) {
+                            if (grid[i - 1][j].getInitial() == 'W') {
+                                cell.addAdjacency(grid[i - 1][j]);
+                            }
+                        }
+                    }
+                } else if (cell.isRoomCenter()) {
+                    Room room = theInstance.getRoom(cell);
+                    if (room.doesPassageExist()) {
+                        Room passRoom = room.getPassageRoom();
+                        // bidirectional adjacency
+                        cell.addAdjacency(passRoom.getCenterCell());
+                        passRoom.getCenterCell().addAdjacency(cell);
+                    }
+                } else if (cell.getInitial() == 'W') {
+                    if (i + 1 < numRows) {
+                        if (grid[i + 1][j].getInitial() == 'W') {
+                            cell.addAdjacency(grid[i + 1][j]);
+                        }
+                    }
+                    if (i - 1 >= 0) {
+                        if (grid[i - 1][j].getInitial() == 'W') {
+                            cell.addAdjacency(grid[i - 1][j]);
+                        }
+                    }
+                    if (j + 1 < numColumns) {
+                        if (grid[i][j + 1].getInitial() == 'W') {
+                            cell.addAdjacency(grid[i][j + 1]);
+                        }
+                    }
+                    if (j - 1 >= 0) {
+                        if (grid[i][j - 1].getInitial() == 'W') {
+                            cell.addAdjacency(grid[i][j - 1]);
+                        }
+                    }
                 }
             }
         }
@@ -196,6 +301,10 @@ public class Board {
                     } else if (cellStr.charAt(1) == '*') {
                         Room room = this.getRoom(cellStr.charAt(0));
                         room.setCenterCell(cell);
+                    } else if (!specialChars.contains(cellStr.charAt(1)) && roomMap.containsKey(cellStr.charAt(1))) {
+                        Room room = this.getRoom(cellStr.charAt(0));
+                        Room passRoom = this.getRoom(cellStr.charAt(1));
+                        room.setSecretePassage(passRoom);
                     }
                 } else if (cellStr.length() == 1) {
                     /*

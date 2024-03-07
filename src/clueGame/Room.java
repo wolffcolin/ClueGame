@@ -15,6 +15,8 @@ public class Room {
 	private Character symbol;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	private boolean passageExist;
+	private Room passageRoom;
 
 	// constructor for when we only know the name and symbol
 	public Room(String setName, Character setSymbol) {
@@ -45,5 +47,18 @@ public class Room {
 	// set center cell
 	public void setCenterCell(BoardCell cell) {
 		this.centerCell = cell;
+	}
+
+	public void setSecretePassage(Room setPassageRoom) {
+		this.passageExist = true;
+		this.passageRoom = setPassageRoom;
+	}
+
+	public boolean doesPassageExist() {
+		return this.passageExist;
+	}
+
+	public Room getPassageRoom() {
+		return this.passageRoom;
 	}
 }
