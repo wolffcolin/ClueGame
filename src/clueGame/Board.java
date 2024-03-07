@@ -39,6 +39,14 @@ public class Board {
         super();
         this.targets = new HashSet();
         this.visited = new HashSet();
+        
+        this.grid = new BoardCell[1][1];
+        
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numColumns; j++) {
+            	grid[i][j] = new BoardCell(i, j, '~');
+            }
+        }
     }
 
     // returns the instance of board
