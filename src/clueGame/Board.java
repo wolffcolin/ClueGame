@@ -39,12 +39,12 @@ public class Board {
         super();
         this.targets = new HashSet();
         this.visited = new HashSet();
-        
+
         this.grid = new BoardCell[1][1];
-        
+
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
-            	grid[i][j] = new BoardCell(i, j, '~');
+                grid[i][j] = new BoardCell(i, j, '~');
             }
         }
     }
@@ -79,7 +79,7 @@ public class Board {
                 BoardCell cell = this.grid[i][j];
                 if (cell.isDoorway()) {
                     DoorDirection doorDir = cell.getDoorDirection();
-                    if (doorDir == DoorDirection.DOWN && i - 1 >= 0) {
+                    if (doorDir == DoorDirection.UP && i - 1 >= 0) {
                         Room room = theInstance.getRoom(this.grid[i - 1][j]);
                         // bidirectional adjacency
                         cell.addAdjacency(room.getCenterCell());
@@ -100,7 +100,7 @@ public class Board {
                                 cell.addAdjacency(grid[i][j - 1]);
                             }
                         }
-                    } else if (doorDir == DoorDirection.UP && i + 1 < numRows) {
+                    } else if (doorDir == DoorDirection.DOWN && i + 1 < numRows) {
                         Room room = theInstance.getRoom(this.grid[i + 1][j]);
                         // bidirectional adjacency
                         cell.addAdjacency(room.getCenterCell());
