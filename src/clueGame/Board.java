@@ -347,13 +347,6 @@ public class Board {
         // base case
         if (pathLength == 0) {
         	targets.add(cell);
-        	if (cell.isRoomCenter()) {
-        		if (visited.size() == 1) {
-        			visited.remove(cell);
-        			return;
-        		}
-        		return;
-        	}
             visited.remove(cell);
             return;
         }
