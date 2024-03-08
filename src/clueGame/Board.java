@@ -330,15 +330,15 @@ public class Board {
     public void calcTargets(BoardCell startCell, int pathLength) {
         visited.clear();
         targets.clear();
-        findTargets(startCell, pathLength);
+        findTargets(startCell, pathLength, true);
     }
 
     // search algorithm to find all targets on path
-    private void findTargets(BoardCell cell, int pathLength) {
+    private void findTargets(BoardCell cell, int pathLength, boolean startingCell) {
         visited.add(cell);
 
         // base case
-        if (pathLength == 0) {
+        if (pathLength == 0 || (cell.isRoomCenter() && !startingCell)) {
             targets.add(cell);
             visited.remove(cell);
             return;
@@ -347,7 +347,7 @@ public class Board {
         // recursive case
         for (BoardCell adj : cell.getAdjList()) {
             if (!visited.contains(adj) && (!adj.getOccupied() || adj.isRoomCenter())) {
-                findTargets(adj, pathLength - 1);
+                findTargets(adj, pathLength - 1, false);
             }
         }
 
