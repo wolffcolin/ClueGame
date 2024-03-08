@@ -37,7 +37,7 @@ public class Board {
     // constructor
     private Board() {
         super();
-        this.targets = new HashSet();
+        this.targets = new HashSet(); // type specify
         this.visited = new HashSet();
 
         this.grid = new BoardCell[1][1];
@@ -58,13 +58,6 @@ public class Board {
     public void initialize() {
         try {
             loadSetupConfig();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (BadConfigFormatException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        try {
             loadLayoutConfig();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
