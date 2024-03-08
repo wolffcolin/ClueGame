@@ -37,7 +37,7 @@ public class Board {
     // constructor
     private Board() {
         super();
-        this.targets = new HashSet();
+        this.targets = new HashSet(); // type specify
         this.visited = new HashSet();
 
         this.grid = new BoardCell[1][1];
@@ -58,13 +58,6 @@ public class Board {
     public void initialize() {
         try {
             loadSetupConfig();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (BadConfigFormatException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        try {
             loadLayoutConfig();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -337,25 +330,24 @@ public class Board {
     public void calcTargets(BoardCell startCell, int pathLength) {
         visited.clear();
         targets.clear();
-        findTargets(startCell, pathLength);
+        findTargets(startCell, pathLength, true);
     }
 
     // search algorithm to find all targets on path
-    private void findTargets(BoardCell cell, int pathLength) {
+    private void findTargets(BoardCell cell, int pathLength, boolean startingCell) {
         visited.add(cell);
 
         // base case
-        if (pathLength == 0) {
-        	targets.add(cell);
+        if (pathLength == 0 || (cell.isRoomCenter() && !startingCell)) {
+            targets.add(cell);
             visited.remove(cell);
             return;
         }
-        
 
         // recursive case
         for (BoardCell adj : cell.getAdjList()) {
             if (!visited.contains(adj) && (!adj.getOccupied() || adj.isRoomCenter())) {
-                findTargets(adj, pathLength - 1);
+                findTargets(adj, pathLength - 1, false);
             }
         }
 
