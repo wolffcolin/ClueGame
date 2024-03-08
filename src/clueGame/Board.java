@@ -37,8 +37,8 @@ public class Board {
     // constructor
     private Board() {
         super();
-        this.targets = new HashSet(); // type specify
-        this.visited = new HashSet();
+        this.targets = new HashSet<BoardCell>();
+        this.visited = new HashSet<BoardCell>();
 
         this.grid = new BoardCell[1][1];
 
