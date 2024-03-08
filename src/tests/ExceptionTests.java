@@ -3,6 +3,8 @@ package tests;
 import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
@@ -17,6 +19,11 @@ Authors: Colin Wolff and Eoghan Cowley
 */
 
 public class ExceptionTests {
+	
+	@BeforeAll
+	public static void cleanInstance() {
+		Board.getInstance().clearInstance();
+	}
 
 	// Test that an exception is thrown for a layout file that does not
 	// have the same number of columns for each row
