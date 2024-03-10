@@ -75,6 +75,11 @@ public class Board {
             for (int j = 0; j < numColumns; j++) {
                 BoardCell cell = this.grid[i][j];
                 if (cell.isDoorway()) {
+                    /*
+                     * Door direction allows us to find what room the door is pointing into.
+                     * By checking the cell in the direction, then finding that cell's room center,
+                     * we can create a bidirectional adjacency between the door and the room center.
+                     */
                     DoorDirection doorDir = cell.getDoorDirection();
                     if (doorDir == DoorDirection.UP && i - 1 >= 0) {
                         Room room = theInstance.getRoom(this.grid[i - 1][j]);
@@ -204,7 +209,7 @@ public class Board {
             String line = reader.nextLine();
 
             if (line.startsWith("//") || line.isEmpty()) {
-                //skips this line
+                // skips this line
             } else if (line.startsWith("Room")) {
                 String[] lineSplit = line.split(",");
                 if (lineSplit.length == 3) {
