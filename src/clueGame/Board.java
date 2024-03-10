@@ -30,15 +30,15 @@ public class Board {
     private String layoutConfigFile;
     private String setupConfigFile;
 
-    private Map<Character, Room> roomMap = new HashMap<Character, Room>();
+    private Map<Character, Room> roomMap = new HashMap<>();
 
     private static Board theInstance = new Board();
 
     // constructor
     private Board() {
         super();
-        this.targets = new HashSet<BoardCell>();
-        this.visited = new HashSet<BoardCell>();
+        this.targets = new HashSet<>();
+        this.visited = new HashSet<>();
 
         this.grid = new BoardCell[1][1];
 
