@@ -202,9 +202,7 @@ public class Board {
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
 
-            if (line.startsWith("//")) {
-                continue;
-            } else if (line.isEmpty()) {
+            if (line.startsWith("//") || line.isEmpty()) {
                 continue;
             } else if (line.startsWith("Room")) {
                 String[] lineSplit = line.split(",");
