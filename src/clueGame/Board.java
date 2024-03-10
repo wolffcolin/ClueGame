@@ -398,7 +398,7 @@ public class Board {
         return getInstance().getCell(row, col).getAdjList();
     }
 
-    public void clearInstance() {
+    public static void clearInstance() {
         theInstance = new Board();
     }
 }
