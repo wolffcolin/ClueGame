@@ -68,6 +68,7 @@ public class Board {
         makeAdjLists();
     }
 
+    // finds adjacency for every cell on the grid
     public void makeAdjLists() {
         // calculate adjacency for each cell
         for (int i = 0; i < numRows; i++) {
