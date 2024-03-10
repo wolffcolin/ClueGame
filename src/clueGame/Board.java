@@ -204,7 +204,7 @@ public class Board {
             String line = reader.nextLine();
 
             if (line.startsWith("//") || line.isEmpty()) {
-                continue;
+                
             } else if (line.startsWith("Room")) {
                 String[] lineSplit = line.split(",");
                 if (lineSplit.length == 3) {
