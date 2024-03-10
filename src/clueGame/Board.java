@@ -65,7 +65,10 @@ public class Board {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+        makeAdjLists();
+    }
 
+    public void makeAdjLists() {
         // calculate adjacency for each cell
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
@@ -390,8 +393,8 @@ public class Board {
 
         return getInstance().getCell(row, col).getAdjList();
     }
-    
+
     public void clearInstance() {
-    	theInstance = new Board();
+        theInstance = new Board();
     }
 }
