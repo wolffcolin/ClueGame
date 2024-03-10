@@ -62,7 +62,6 @@ public class Board {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (BadConfigFormatException e) {
-            System.out.println(e.getMessage());
             e.printStackTrace();
         }
         makeAdjLists();
