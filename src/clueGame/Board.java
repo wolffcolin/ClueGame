@@ -109,49 +109,14 @@ public class Board {
                             cell.addAdjacency(grid[i][j + 1]);
                         }
                         if (j - 1 >= 0 && grid[i][j - 1].getInitial() == 'W') {
-                            {
-                                cell.addAdjacency(grid[i][j - 1]);
-                            }
-                        } else if (doorDir == DoorDirection.LEFT && j - 1 >= 0) {
-                            room = theInstance.getRoom(this.grid[i][j - 1]);
-                            // bidirectional adjacency
-                            cell.addAdjacency(room.getCenterCell());
-                            room.getCenterCell().addAdjacency(cell);
-                            // normal walkway adj
-                            if (i + 1 < numRows && grid[i + 1][j].getInitial() == 'W') {
-                                cell.addAdjacency(grid[i + 1][j]);
-                            }
-                            if (i - 1 >= 0 && grid[i - 1][j].getInitial() == 'W') {
-                                cell.addAdjacency(grid[i - 1][j]);
-                            }
-                            if (j + 1 < numColumns && grid[i][j + 1].getInitial() == 'W') {
-                                cell.addAdjacency(grid[i][j + 1]);
-                            }
-                        } else if (doorDir == DoorDirection.RIGHT && j + 1 < numColumns) {
-                            room = theInstance.getRoom(this.grid[i][j + 1]);
-                            // bidirectional adjacency
-                            cell.addAdjacency(room.getCenterCell());
-                            room.getCenterCell().addAdjacency(cell);
-                            // normal walkway adj
-                            if (j - 1 >= 0 && grid[i][j - 1].getInitial() == 'W') {
-                                cell.addAdjacency(grid[i][j - 1]);
-                            }
-                            if (i + 1 < numRows && grid[i + 1][j].getInitial() == 'W') {
-                                cell.addAdjacency(grid[i + 1][j]);
-                            }
-                            if (i - 1 >= 0 && grid[i - 1][j].getInitial() == 'W') {
-                                cell.addAdjacency(grid[i - 1][j]);
-                            }
+                            cell.addAdjacency(grid[i][j - 1]);
                         }
-                    } else if (cell.isRoomCenter()) {
-                        room = theInstance.getRoom(cell);
-                        if (room.doesPassageExist()) {
-                            Room passRoom = room.getPassageRoom();
-                            // bidirectional adjacency
-                            cell.addAdjacency(passRoom.getCenterCell());
-                            passRoom.getCenterCell().addAdjacency(cell);
-                        }
-                    } else if (cell.getInitial() == 'W') {
+                    } else if (doorDir == DoorDirection.LEFT && j - 1 >= 0) {
+                        room = theInstance.getRoom(this.grid[i][j - 1]);
+                        // bidirectional adjacency
+                        cell.addAdjacency(room.getCenterCell());
+                        room.getCenterCell().addAdjacency(cell);
+                        // normal walkway adj
                         if (i + 1 < numRows && grid[i + 1][j].getInitial() == 'W') {
                             cell.addAdjacency(grid[i + 1][j]);
                         }
@@ -161,9 +126,42 @@ public class Board {
                         if (j + 1 < numColumns && grid[i][j + 1].getInitial() == 'W') {
                             cell.addAdjacency(grid[i][j + 1]);
                         }
+                    } else if (doorDir == DoorDirection.RIGHT && j + 1 < numColumns) {
+                        room = theInstance.getRoom(this.grid[i][j + 1]);
+                        // bidirectional adjacency
+                        cell.addAdjacency(room.getCenterCell());
+                        room.getCenterCell().addAdjacency(cell);
+                        // normal walkway adj
                         if (j - 1 >= 0 && grid[i][j - 1].getInitial() == 'W') {
                             cell.addAdjacency(grid[i][j - 1]);
                         }
+                        if (i + 1 < numRows && grid[i + 1][j].getInitial() == 'W') {
+                            cell.addAdjacency(grid[i + 1][j]);
+                        }
+                        if (i - 1 >= 0 && grid[i - 1][j].getInitial() == 'W') {
+                            cell.addAdjacency(grid[i - 1][j]);
+                        }
+                    }
+                } else if (cell.isRoomCenter()) {
+                    room = theInstance.getRoom(cell);
+                    if (room.doesPassageExist()) {
+                        Room passRoom = room.getPassageRoom();
+                        // bidirectional adjacency
+                        cell.addAdjacency(passRoom.getCenterCell());
+                        passRoom.getCenterCell().addAdjacency(cell);
+                    }
+                } else if (cell.getInitial() == 'W') {
+                    if (i + 1 < numRows && grid[i + 1][j].getInitial() == 'W') {
+                        cell.addAdjacency(grid[i + 1][j]);
+                    }
+                    if (i - 1 >= 0 && grid[i - 1][j].getInitial() == 'W') {
+                        cell.addAdjacency(grid[i - 1][j]);
+                    }
+                    if (j + 1 < numColumns && grid[i][j + 1].getInitial() == 'W') {
+                        cell.addAdjacency(grid[i][j + 1]);
+                    }
+                    if (j - 1 >= 0 && grid[i][j - 1].getInitial() == 'W') {
+                        cell.addAdjacency(grid[i][j - 1]);
                     }
                 }
             }
