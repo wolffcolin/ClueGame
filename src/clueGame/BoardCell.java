@@ -90,7 +90,6 @@ public class BoardCell {
     // returns list of adjacent cells
     public Set<BoardCell> getAdjList() {
         return this.adjList;
-
     }
 
     // returns row position
@@ -128,9 +127,8 @@ public class BoardCell {
         return this.secretPassage;
     }
 
-	public void setOccupied(boolean b) {
-		this.occupied = b;
-		
-	}
+    public void setOccupied(boolean b) {
+        this.occupied = b;
+    }
 
 }
