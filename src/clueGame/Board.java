@@ -109,9 +109,7 @@ public class Board {
                             cell.addAdjacency(grid[i][j + 1]);
                         }
                         if (j - 1 >= 0 && grid[i][j - 1].getInitial() == 'W') {
-                            {
-                                cell.addAdjacency(grid[i][j - 1]);
-                            }
+                            cell.addAdjacency(grid[i][j - 1]);
                         } else if (doorDir == DoorDirection.LEFT && j - 1 >= 0) {
                             room = theInstance.getRoom(this.grid[i][j - 1]);
                             // bidirectional adjacency
