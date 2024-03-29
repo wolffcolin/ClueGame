@@ -415,6 +415,10 @@ public class Board {
         return players.size();
     }
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
     public int getWeaponCount() {
         int count = 0;
         for (int i = 0; i < cards.size(); i++) {
@@ -427,5 +431,9 @@ public class Board {
 
     public int getCardDeckSize() {
         return cards.size();
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 }
