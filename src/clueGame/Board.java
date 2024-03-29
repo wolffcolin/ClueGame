@@ -29,6 +29,8 @@ public class Board {
 
     private String layoutConfigFile;
     private String setupConfigFile;
+    
+    private ArrayList<Player> players;
 
     private Map<Character, Room> roomMap = new HashMap<>();
 
@@ -198,6 +200,27 @@ public class Board {
                     Room room = new Room(roomName, roomSymbol);
                     roomMap.put(roomSymbol, room);
                 }
+            } else if (line.startsWith("Player")) {
+            	String[] lineSplit = line.split(",");
+            	if (lineSplit.length == 4) {
+            		String playerName = lineSplit[1].trim();
+            		String playerColor = lineSplit[2].trim();
+            		boolean isHuman = false;
+            		if (lineSplit[3].equals("true")) {
+            			isHuman = true;
+            		} else if (lineSplit[3].equals("false")) {
+            			isHuman = false;
+            		}
+            		
+            		Player player;
+            		if (isHuman == true) {
+            			player = new HumanPlayer(playerName, playerColor);
+            		} else {
+            			player = new ComputerPlayer(playerName, playerColor);
+            		}
+            		
+            		players.add(player);
+            	}
             } else {
                 reader.close();
                 throw new BadConfigFormatException("Bad Setup Config format");
@@ -206,7 +229,7 @@ public class Board {
         reader.close();
     }
 
-    // load layout file
+	// load layout file
     public void loadLayoutConfig() throws BadConfigFormatException, FileNotFoundException {
         File layoutConfig = new File(layoutConfigFile);
         Scanner reader = new Scanner(layoutConfig);
@@ -368,5 +391,9 @@ public class Board {
 
     public static void clearInstance() {
         theInstance = new Board();
+    }
+    
+    public int getPlayerCount() {
+    	return players.size();
     }
 }
