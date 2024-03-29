@@ -190,6 +190,9 @@ public class Board {
 
                     Room room = new Room(roomName, roomSymbol);
                     roomMap.put(roomSymbol, room);
+
+                    Card roomCard = new Card(roomName, CardType.ROOM);
+                    cards.add(roomCard);
                 }
             } else if (line.startsWith("Space")) {
                 String[] lineSplit = line.split(",");
@@ -222,6 +225,9 @@ public class Board {
                     }
 
                     players.add(player);
+
+                    Card playerCard = new Card(playerName, CardType.PERSON);
+                    cards.add(playerCard);
                 }
             } else if (line.startsWith("Weapon")) {
                 String[] lineSplit = line.split(",");
@@ -409,13 +415,17 @@ public class Board {
         return players.size();
     }
 
-	public int getWeaponCount() {
-		int count = 0;
-		for (int i = 0; i < cards.size(); i++) {
-			if (cards.get(i).getCardType().equals(CardType.WEAPON)) {
-				count++;
-			}
-		}
-		return count;
-	}
+    public int getWeaponCount() {
+        int count = 0;
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardType().equals(CardType.WEAPON)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getCardDeckSize() {
+        return cards.size();
+    }
 }
