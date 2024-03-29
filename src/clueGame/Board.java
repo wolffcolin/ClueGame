@@ -31,6 +31,7 @@ public class Board {
     private String setupConfigFile;
 
     private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Card> cards = new ArrayList<>();
 
     private Map<Character, Room> roomMap = new HashMap<>();
 
@@ -397,4 +398,14 @@ public class Board {
     public int getPlayerCount() {
         return players.size();
     }
+
+	public int getWeaponCount() {
+		int count = 0;
+		for (int i = 0; i < cards.size(); i++) {
+			if (cards.get(i).getCardType().equals(CardType.WEAPON)) {
+				count++;
+			}
+		}
+		return count;
+	}
 }

@@ -27,7 +27,7 @@ public class GameSetupTests {
 	
 	@Test
 	public void TestNumWeapons() {
-		Assert.assertEquals(6, 0);
+		Assert.assertEquals(6, board.getWeaponCount());
 	}
 		
 }
