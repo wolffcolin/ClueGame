@@ -22,4 +22,8 @@ public abstract class Player {
 		hand.add(card);
 	}
 	
+	public ArrayList<Card> getHand() {
+		return hand;
+	}
+	
 }

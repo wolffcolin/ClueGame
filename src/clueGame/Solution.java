@@ -9,6 +9,7 @@ public class Solution {
 		this.room = room;
 		this.player = player;
 		this.weapon = weapon;
+		
 	}
 	
 	public Card[] theAnswer() {

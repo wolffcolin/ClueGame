@@ -10,9 +10,11 @@ Authors: Colin Wolff and Eoghan Cowley
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.Scanner;
 import java.util.List;
@@ -36,6 +38,8 @@ public class Board {
     private Map<Character, Room> roomMap = new HashMap<>();
 
     private static Board theInstance = new Board();
+    
+    private Solution theAnswer;
 
     // constructor
     private Board() {
@@ -334,6 +338,51 @@ public class Board {
                     throw new BadConfigFormatException("Bad Layout Config, Room symbols are not expected size");
             }
         }
+    }
+    
+    public void dealCards() {
+    	ArrayList<Card> weapons = new ArrayList<>();
+    	ArrayList<Card> people = new ArrayList<>();
+    	ArrayList<Card> rooms = new ArrayList<>();
+    	
+    	for (int i = 0; i < cards.size(); i++) {
+    		if (cards.get(i).getCardType().equals(CardType.WEAPON)) {
+    			weapons.add(cards.get(i));
+    		} else if (cards.get(i).getCardType().equals(CardType.ROOM)) {
+    			rooms.add(cards.get(i));
+    		} else if (cards.get(i).getCardType().equals(CardType.PERSON)) {
+    			people.add(cards.get(i));
+    		}
+    	}
+    	
+    	Random random = new Random();
+    	int randIndexWeapons = random.nextInt(weapons.size());
+    	
+    	int randIndexPeople = random.nextInt(people.size());
+    	
+    	int randIndexRooms = random.nextInt(rooms.size());
+    	
+    	theAnswer = new Solution(rooms.get(randIndexRooms), people.get(randIndexPeople), weapons.get(randIndexWeapons));
+    	
+    	weapons.remove(randIndexWeapons);
+    	people.remove(randIndexPeople);
+    	rooms.remove(randIndexRooms);
+    	
+    	ArrayList<Card> newDeck = new ArrayList<>();
+    	newDeck.addAll(weapons);
+    	newDeck.addAll(rooms);
+    	newDeck.addAll(people);
+    	
+    	Collections.shuffle(newDeck);
+    	
+    	int topCard = 0;
+    	while (!newDeck.isEmpty()) {
+    		for (int i = 0; i < players.size(); i++) {
+    			players.get(i).updateHand(newDeck.get(topCard));
+    			newDeck.remove(topCard);
+    		}
+    	}
+    	
     }
 
     // sets file
