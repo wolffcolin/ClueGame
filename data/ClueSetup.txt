@@ -12,3 +12,19 @@ Room, Food Court, C
 //other unused spaces on board
 Space, Unused, X
 Space, Walkway, W
+
+// Players:
+Player, Janitor, Red, true
+Player, Security Guard, Blue, false
+Player, School Child, Green, false
+Player, Docent, Yellow, false
+Player, Museum Director, White, flase
+Player, School Teacher, Red, false
+
+// Weapons:
+Weapon, Kitchen Knife
+Weapon, Butter Knife
+Weapon, Nunchucks
+Weapon, Silenced Pistol
+Weapon, Baton
+Weapon, Brass Knuckles
