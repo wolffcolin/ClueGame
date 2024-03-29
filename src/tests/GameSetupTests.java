@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
@@ -79,4 +81,32 @@ public class GameSetupTests {
         assertEquals(9, roomCount);
     }
 
+    @Test
+    public void testDealtCards() {
+        ArrayList<Player> players = board.getPlayers();
+        ArrayList<Card> cards = board.getCards();
+
+        Player tempPlayer = players.get(0);
+        float expectedRatio = tempPlayer.getHand().size() / cards.size();
+
+        for (Player player : players) {
+            float ratio = player.getHand().size() / cards.size();
+            assertEquals(expectedRatio, ratio, 0.2);
+        }
+    }
+
+    @Test
+    public void testHandDuplicates() {
+        ArrayList<Player> players = board.getPlayers();
+        Set<Card> dealtCards = new HashSet<>();
+
+        for (Player player : players) {
+            ArrayList<Card> hand = player.getHand();
+            for (Card card : hand) {
+                dealtCards.add(card);
+            }
+        }
+
+        assertEquals(board.getCardDeckSize(), dealtCards.size());
+    }
 }

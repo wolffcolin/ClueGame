@@ -12,7 +12,10 @@ public class Card {
     }
 
     public boolean equals(Card target) {
-        return false;
+        if (this.getCardType() == target.getCardType()) {
+            return true;
+        } else
+            return false;
     }
 
     public CardType getCardType() {
