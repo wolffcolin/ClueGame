@@ -72,6 +72,7 @@ public class Board {
             e.printStackTrace();
         }
         makeAdjLists();
+        dealCards();
     }
 
     // finds adjacency for every cell on the grid
