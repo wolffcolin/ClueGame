@@ -208,8 +208,6 @@ public class Board {
             		boolean isHuman = false;
             		if (lineSplit[3].equals("true")) {
             			isHuman = true;
-            		} else if (lineSplit[3].equals("false")) {
-            			isHuman = false;
             		}
             		
             		Player player;
