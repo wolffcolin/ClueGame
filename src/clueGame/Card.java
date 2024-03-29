@@ -1,5 +1,7 @@
 package clueGame;
 
+import java.util.ArrayList;
+
 public class Card {
     private String cardName;
     private CardType type;
