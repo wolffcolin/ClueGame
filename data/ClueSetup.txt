@@ -18,7 +18,7 @@ Player, Janitor, Red, true
 Player, Security Guard, Blue, false
 Player, School Child, Green, false
 Player, Docent, Yellow, false
-Player, Museum Director, White, flase
+Player, Museum Director, White, false
 Player, School Teacher, Red, false
 
 // Weapons:
