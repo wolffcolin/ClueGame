@@ -223,7 +223,17 @@ public class Board {
 
                     players.add(player);
                 }
-            } else {
+            } else if (line.startsWith("Weapon")) {
+                String[] lineSplit = line.split(",");
+                if (lineSplit.length == 2) {
+                    String weaponName = lineSplit[1].trim();
+
+                    Card weapon = new Card(weaponName, CardType.WEAPON);
+                    cards.add(weapon);
+                }
+            }
+
+            else {
                 reader.close();
                 throw new BadConfigFormatException("Bad Setup Config format");
             }
