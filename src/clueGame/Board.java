@@ -30,7 +30,7 @@ public class Board {
     private String layoutConfigFile;
     private String setupConfigFile;
 
-    private ArrayList<Player> players;
+    private ArrayList<Player> players = new ArrayList<>();
 
     private Map<Character, Room> roomMap = new HashMap<>();
 
