@@ -26,9 +26,11 @@ public class FileInitTests306 {
 	// NOTE: I made Board static because I only want to set it up one
 	// time (using @BeforeAll), no need to do setup before each test.
 	private static Board board;
+	
 
 	@BeforeAll
 	public static void setUp() {
+		board.clearInstance();
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
