@@ -18,6 +18,11 @@ public class BoardAdjTargetTest306 {
 	private static Board board;
 	
 	@BeforeAll
+	public static void cleanInstance() {
+		Board.getInstance().clearInstance();
+	}
+	
+	@BeforeAll
 	public static void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();

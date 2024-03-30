@@ -21,6 +21,11 @@ import clueGame.BoardCell;
 
 class BoardAdjTargetTest {
 	private static Board board;
+	
+	@BeforeAll
+	public static void cleanInstance() {
+		Board.getInstance().clearInstance();
+	}
 
 	@BeforeAll
 	public static void setUp() {

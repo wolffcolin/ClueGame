@@ -32,6 +32,11 @@ class FileInitTests {
 	public static final int NUM_COLUMNS = 15;
 
 	private static Board board;
+	
+	@BeforeAll
+	public static void cleanInstance() {
+		Board.getInstance().clearInstance();
+	}
 
 	@BeforeAll
 	public static void setUp() {
