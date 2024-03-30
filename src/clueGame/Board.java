@@ -38,7 +38,7 @@ public class Board {
     private Map<Character, Room> roomMap = new HashMap<>();
 
     private static Board theInstance = new Board();
-    
+
     private Solution theAnswer;
 
     // constructor
@@ -193,10 +193,10 @@ public class Board {
                     String roomSymbolStr = lineSplit[2].trim();
                     Character roomSymbol = roomSymbolStr.charAt(0); // convert the string to Character
 
-                    Room room = new Room(roomName, roomSymbol);
+                    Room room = new Room(roomName, roomSymbol); // create room
                     roomMap.put(roomSymbol, room);
 
-                    Card roomCard = new Card(roomName, CardType.ROOM);
+                    Card roomCard = new Card(roomName, CardType.ROOM); // create room card
                     cards.add(roomCard);
                 }
             } else if (line.startsWith("Space")) {
@@ -206,7 +206,7 @@ public class Board {
                     String roomSymbolStr = lineSplit[2].trim();
                     Character roomSymbol = roomSymbolStr.charAt(0); // convert the string to Character
 
-                    Room room = new Room(roomName, roomSymbol);
+                    Room room = new Room(roomName, roomSymbol); // create room card
                     roomMap.put(roomSymbol, room);
                 }
             } else if (line.startsWith("Player")) {
@@ -222,7 +222,7 @@ public class Board {
                         isHuman = false;
                     }
 
-                    Player player;
+                    Player player; // create player
                     if (isHuman == true) {
                         player = new HumanPlayer(playerName, playerColor);
                     } else {
@@ -231,7 +231,7 @@ public class Board {
 
                     players.add(player);
 
-                    Card playerCard = new Card(playerName, CardType.PERSON);
+                    Card playerCard = new Card(playerName, CardType.PERSON); // create person card
                     cards.add(playerCard);
                 }
             } else if (line.startsWith("Weapon")) {
@@ -239,7 +239,7 @@ public class Board {
                 if (lineSplit.length == 2) {
                     String weaponName = lineSplit[1].trim();
 
-                    Card weapon = new Card(weaponName, CardType.WEAPON);
+                    Card weapon = new Card(weaponName, CardType.WEAPON); // create weapon card
                     cards.add(weapon);
                 }
             }
@@ -340,50 +340,55 @@ public class Board {
             }
         }
     }
-    
+
+    // deals cards to players after selecting a random room, weapon, and person as
+    // the solution
     public void dealCards() {
-    	ArrayList<Card> weapons = new ArrayList<>();
-    	ArrayList<Card> people = new ArrayList<>();
-    	ArrayList<Card> rooms = new ArrayList<>();
-    	
-    	for (int i = 0; i < cards.size(); i++) {
-    		if (cards.get(i).getCardType().equals(CardType.WEAPON)) {
-    			weapons.add(cards.get(i));
-    		} else if (cards.get(i).getCardType().equals(CardType.ROOM)) {
-    			rooms.add(cards.get(i));
-    		} else if (cards.get(i).getCardType().equals(CardType.PERSON)) {
-    			people.add(cards.get(i));
-    		}
-    	}
-    	
-    	Random random = new Random();
-    	int randIndexWeapons = random.nextInt(weapons.size());
-    	
-    	int randIndexPeople = random.nextInt(people.size());
-    	
-    	int randIndexRooms = random.nextInt(rooms.size());
-    	
-    	theAnswer = new Solution(rooms.get(randIndexRooms), people.get(randIndexPeople), weapons.get(randIndexWeapons));
-    	
-    	weapons.remove(randIndexWeapons);
-    	people.remove(randIndexPeople);
-    	rooms.remove(randIndexRooms);
-    	
-    	ArrayList<Card> newDeck = new ArrayList<>();
-    	newDeck.addAll(weapons);
-    	newDeck.addAll(rooms);
-    	newDeck.addAll(people);
-    	
-    	Collections.shuffle(newDeck);
-    	
-    	int topCard = 0;
-    	while (!newDeck.isEmpty()) {
-    		for (int i = 0; i < players.size(); i++) {
-    			players.get(i).updateHand(newDeck.get(topCard));
-    			newDeck.remove(topCard);
-    		}
-    	}
-    	
+        ArrayList<Card> weapons = new ArrayList<>();
+        ArrayList<Card> people = new ArrayList<>();
+        ArrayList<Card> rooms = new ArrayList<>();
+
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardType().equals(CardType.WEAPON)) {
+                weapons.add(cards.get(i));
+            } else if (cards.get(i).getCardType().equals(CardType.ROOM)) {
+                rooms.add(cards.get(i));
+            } else if (cards.get(i).getCardType().equals(CardType.PERSON)) {
+                people.add(cards.get(i));
+            }
+        }
+
+        Random random = new Random();
+        int randIndexWeapons = random.nextInt(weapons.size());
+
+        int randIndexPeople = random.nextInt(people.size());
+
+        int randIndexRooms = random.nextInt(rooms.size());
+
+        // set solution as a private instance called theAnswer
+        theAnswer = new Solution(rooms.get(randIndexRooms), people.get(randIndexPeople), weapons.get(randIndexWeapons));
+
+        // remove solution from the deck
+        weapons.remove(randIndexWeapons);
+        people.remove(randIndexPeople);
+        rooms.remove(randIndexRooms);
+
+        ArrayList<Card> newDeck = new ArrayList<>();
+        newDeck.addAll(weapons);
+        newDeck.addAll(rooms);
+        newDeck.addAll(people);
+
+        Collections.shuffle(newDeck);
+
+        // deal cards out to players after the shuffle
+        int topCard = 0;
+        while (!newDeck.isEmpty()) {
+            for (int i = 0; i < players.size(); i++) {
+                players.get(i).updateHand(newDeck.get(topCard));
+                newDeck.remove(topCard);
+            }
+        }
+
     }
 
     // sets file
@@ -471,6 +476,7 @@ public class Board {
 
     public int getWeaponCount() {
         int count = 0;
+        // looping for only the cards with type WEAPON
         for (int i = 0; i < cards.size(); i++) {
             if (cards.get(i).getCardType().equals(CardType.WEAPON)) {
                 count++;
