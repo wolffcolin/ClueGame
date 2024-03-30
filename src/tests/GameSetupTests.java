@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
@@ -29,6 +30,11 @@ import clueGame.Card;
 public class GameSetupTests {
 
     private static Board board;
+    
+    @BeforeAll
+	public static void cleanInstance() {
+		Board.getInstance().clearInstance();
+	}
 
     @BeforeAll
     public static void setup() {
