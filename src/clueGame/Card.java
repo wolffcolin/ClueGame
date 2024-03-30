@@ -1,7 +1,7 @@
 package clueGame;
 
 /*
-Class: PLayer
+Class: Card
 Description: Class that represents the cards in the game, uses the CardType enum
 Collaborators: N/A
 Sources: N/A
