@@ -107,6 +107,6 @@ public class GameSetupTests {
             }
         }
 
-        assertEquals(board.getCardDeckSize(), dealtCards.size());
+        assertEquals(board.getCardDeckSize() - 3, dealtCards.size());
     }
 }
