@@ -1,5 +1,13 @@
 package tests;
 
+/*
+Class: GameSetupTests
+Description: tests our game setup with our players and cards
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Array;

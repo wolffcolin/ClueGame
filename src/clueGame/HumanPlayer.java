@@ -1,10 +1,18 @@
 package clueGame;
 
+/*
+Class: PLayer
+Description: human player class that is extends Player
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 public class HumanPlayer extends Player {
 
-	//constructor
+	// constructor
 	public HumanPlayer(String name, String color) {
 		super(name, color, true);
 	}
-	
+
 }
