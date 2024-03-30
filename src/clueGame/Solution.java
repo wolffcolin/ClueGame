@@ -1,5 +1,13 @@
 package clueGame;
 
+/*
+Class: Solution
+Description: Solution class that stores the solution cards to end the game.
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 public class Solution {
 	//solution data
 	private Card room;
