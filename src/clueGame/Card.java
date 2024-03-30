@@ -16,8 +16,9 @@ public class Card {
     public boolean equals(Card target) {
         if (this.getCardType() == target.getCardType()) {
             return true;
-        } else
-            return false;
+        }
+        
+        return false;
     }
 
     //returns card type
