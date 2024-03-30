@@ -1,7 +1,7 @@
 package clueGame;
 
 /*
-Class: PLayer
+Class: ComputerPlayer
 Description: computer player class that is extends Player
 Collaborators: N/A
 Sources: N/A
