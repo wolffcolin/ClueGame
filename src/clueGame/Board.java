@@ -505,4 +505,31 @@ public class Board {
     public Solution getTheAnswer() {
         return theAnswer;
     }
+    
+    public Card roomCard(int row, int column) {
+    	
+    	BoardCell cellCheck = grid[row][column];
+    	char cellType = cellCheck.getInitial();
+    	
+    	Room currRoom = roomMap.get(cellType);
+    	
+    	String name = currRoom.getName();
+    	
+    	Card returnCard = new Card(name, CardType.ROOM);
+    	
+    	return returnCard;
+    	
+    }
+    
+    public ArrayList<Card> allCardsOfType(CardType type) {
+    	ArrayList<Card> cardsOfType = new ArrayList<>();
+    	for (int i = 0; i < cards.size(); i++) {
+    		if (cards.get(i).getCardType().equals(type)) {
+    			cardsOfType.add(cards.get(i));
+    		}
+    	}
+    	
+    	return cardsOfType;
+    }
+    
 }

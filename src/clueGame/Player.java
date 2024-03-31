@@ -49,5 +49,14 @@ public abstract class Player {
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
+	
+	public boolean isAHuman() {
+		return isHuman;
+	}
+	
+	public void teleport(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
 
 }
