@@ -33,14 +33,14 @@ public class ComputerPlayer extends Player {
 		
 		ArrayList<Card> weaponsNotSeen = new ArrayList<>();
 		for (int i = 0; i < allWeapons.size(); i++) {
-			if (seen.contains(allWeapons.get(i))) {
+			if (!seen.contains(allWeapons.get(i))) {
 				weaponsNotSeen.add(allWeapons.get(i));
 			}
 		}
 		
 		ArrayList<Card> playersNotSeen = new ArrayList<>();
 		for (int i = 0; i < allPlayers.size(); i++) {
-			if (seen.contains(allPlayers.get(i))) {
+			if (!seen.contains(allPlayers.get(i))) {
 				playersNotSeen.add(allPlayers.get(i));
 			}
 		}

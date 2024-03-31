@@ -63,8 +63,11 @@ class ComputerAITest {
 		
 		Card currentRoom = board.roomCard(11, 13);
 		
+		String currentRoomName = currentRoom.toString();
+		String roomName = room.toString();
+		
 		//test if room in suggestion is current room
-		assertEquals(currentRoom, room);
+		assertEquals(currentRoomName, roomName);
 		
 		ArrayList<Card> allWeapons = board.allCardsOfType(CardType.WEAPON);
 		ArrayList<Card> allPlayers = board.allCardsOfType(CardType.PERSON);
@@ -79,15 +82,23 @@ class ComputerAITest {
 		}
 		
 		Solution suggestion2 = bot.createSuggestion();
-		Card[] cards2 = suggestion.theAnswerCards();	
+		Card[] cards2 = suggestion2.theAnswerCards();
+		
+		for (int i = 0; i < allWeapons.size()-1; i++) {
+			bot.updateSeen(allWeapons.get(i));
+		}
+		
+		for (int i = 0; i < allPlayers.size()-1; i++) {
+			bot.updateSeen(allPlayers.get(i));
+		}
 		
 		Card room2 = cards2[0];
 		Card player2 = cards2[1];
 		Card weapon2 = cards2[2];
 		
 		//checks if only 1 weapon not seen, its selected
-		assertEquals(weapon2, allWeapons.get(allWeapons.size() - 1));
-		assertEquals(player2, allPlayers.get(allPlayers.size()-1));
+		assertEquals(allWeapons.get(allWeapons.size() - 1), weapon2);
+		assertEquals(allPlayers.get(allPlayers.size()-1), player2);
 		
 		
 		Set<Card> weaponsNotSeen = new HashSet<>();

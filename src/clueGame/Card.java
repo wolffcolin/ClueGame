@@ -32,4 +32,8 @@ public class Card {
     public CardType getCardType() {
         return this.type;
     }
+    
+    public String toString() {
+    	return cardName;
+    }
 }
