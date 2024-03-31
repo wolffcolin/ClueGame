@@ -9,6 +9,8 @@ Authors: Colin Wolff and Eoghan Cowley
 */
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Player {
 
@@ -21,6 +23,8 @@ public abstract class Player {
 
 	// stores the player's hand
 	private ArrayList<Card> hand = new ArrayList<>();
+	
+	private Set<Card> seenCards = new HashSet<>();
 
 	public Player(String name, String color, boolean isHuman) {
 		this.name = name;
@@ -31,6 +35,14 @@ public abstract class Player {
 	// adds card to hand
 	public void updateHand(Card card) {
 		hand.add(card);
+	}
+	
+	public void updateSeen(Card seenCard) {
+		//seenCards.add(seenCard);
+	}
+	
+	public Card disproveSuggestion() {
+		return hand.get(0);
 	}
 
 	// returns hand
