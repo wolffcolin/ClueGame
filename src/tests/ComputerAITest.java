@@ -3,6 +3,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -53,7 +55,7 @@ class ComputerAITest {
 		bot.teleport(11, 13);
 		
 		Solution suggestion = bot.createSuggestion();
-		Card[] cards = suggestion.theAnswer();	
+		Card[] cards = suggestion.theAnswerCards();	
 		
 		Card room = cards[0];
 		Card player = cards[1];
@@ -68,6 +70,42 @@ class ComputerAITest {
 		ArrayList<Card> allPlayers = board.allCardsOfType(CardType.PERSON);
 		ArrayList<Card> allRooms = board.allCardsOfType(CardType.ROOM);
 		
+		for (int i = 0; i < (allWeapons.size() - 1); i++) {
+			bot.updateSeen(allWeapons.get(i));
+		}
+		
+		for (int i = 0; i < (allPlayers.size() - 1); i++) {
+			bot.updateSeen(allPlayers.get(i));
+		}
+		
+		Solution suggestion2 = bot.createSuggestion();
+		Card[] cards2 = suggestion.theAnswerCards();	
+		
+		Card room2 = cards2[0];
+		Card player2 = cards2[1];
+		Card weapon2 = cards2[2];
+		
+		//checks if only 1 weapon not seen, its selected
+		assertEquals(weapon2, allWeapons.get(allWeapons.size() - 1));
+		assertEquals(player2, allPlayers.get(allPlayers.size()-1));
+		
+		
+		Set<Card> weaponsNotSeen = new HashSet<>();
+		for (int i = 0; i < allWeapons.size(); i++) {
+			if (!bot.getSeen().contains(allWeapons.get(i))) {
+				weaponsNotSeen.add(allWeapons.get(i));
+			}
+		}
+		
+		Set<Card> playersNotSeen = new HashSet<>();
+		for (int i = 0; i < allPlayers.size(); i++) {
+			if (!bot.getSeen().contains(allPlayers.get(i))) {
+				playersNotSeen.add(allPlayers.get(i));
+			}
+		}
+		
+		assertTrue(weaponsNotSeen.contains(weapon2));
+		assertTrue(playersNotSeen.contains(player2));
 		
 	}
 	

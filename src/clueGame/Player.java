@@ -58,5 +58,9 @@ public abstract class Player {
 		this.row = row;
 		this.column = column;
 	}
+	
+	public Set<Card> getSeen() {
+		return seenCards;
+	}
 
 }
