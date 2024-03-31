@@ -390,14 +390,14 @@ public class Board {
         }
 
     }
-    
-    public boolean checkAccusation() {
-    	return true;
+
+    public boolean checkAccusation(Solution potentialSolution) {
+        return true;
     }
-    
+
     public Card handleSuggestionn() {
-    	Card dispute = new Card("null", null);
-    	return dispute;
+        Card dispute = new Card("null", null);
+        return dispute;
     }
 
     // sets file
@@ -500,5 +500,9 @@ public class Board {
 
     public ArrayList<Card> getCards() {
         return cards;
+    }
+
+    public Solution getTheAnswer() {
+        return theAnswer;
     }
 }
