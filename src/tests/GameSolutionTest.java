@@ -36,22 +36,22 @@ public class GameSolutionTest {
         board.rigTheAnswer(riggedSolution);
 
         ArrayList<Card> deck = new ArrayList<>();
-        Card security = new Card("Security", CardType.PERSON);
-        deck.add(security);
         Card dinosaur = new Card("dinosaur", CardType.ROOM);
         deck.add(dinosaur);
+        Card security = new Card("Security", CardType.PERSON);
+        deck.add(security);
         Card kitchenKnife = new Card("kitchen knife", CardType.WEAPON);
         deck.add(kitchenKnife);
-        Card child = new Card("child", CardType.PERSON);
-        deck.add(child);
         Card bathroom = new Card("bathroom", CardType.ROOM);
         deck.add(bathroom);
+        Card child = new Card("child", CardType.PERSON);
+        deck.add(child);
         Card butter = new Card("butter", CardType.WEAPON);
         deck.add(butter);
-        Card janitor = new Card("janitor", CardType.PERSON);
-        deck.add(janitor);
         Card mummy = new Card("mummy", CardType.ROOM);
         deck.add(mummy);
+        Card janitor = new Card("janitor", CardType.PERSON);
+        deck.add(janitor);
         Card nunchucks = new Card("nunchucks", CardType.WEAPON);
         deck.add(nunchucks);
 
@@ -66,7 +66,6 @@ public class GameSolutionTest {
             player.setHand(deck);
             count += 3;
         }
-
     }
 
     @Test
@@ -101,6 +100,35 @@ public class GameSolutionTest {
 
     @Test
     public void testDisproveSuggestion() {
+        ArrayList<Player> players = board.getPlayers();
+        Player player1 = players.get(0);
+        ArrayList<Card> hand1 = player1.getHand();
 
+        Solution theSolution = board.getTheAnswer();
+        Card[] solutionCards = theSolution.theAnswerCards();
+
+        Solution oneMatch = new Solution(hand1.get(0), solutionCards[1], solutionCards[2]);
+        Solution noMatches = new Solution(solutionCards[0], solutionCards[1], solutionCards[2]);
+        Solution threeMatches = new Solution(hand1.get(0), hand1.get(1), hand1.get(2));
+
+        assertEquals(hand1.get(0), player1.disproveSuggestion(oneMatch));
+
+        assertNull(player1.disproveSuggestion(noMatches));
+
+        int card0 = 0;
+        int card1 = 0;
+        int card2 = 0;
+        for (int i = 0; i < 100; i++) {
+            if (player1.disproveSuggestion(threeMatches) == hand1.get(0)) {
+                card0++;
+            } else if (player1.disproveSuggestion(threeMatches) == hand1.get(1)) {
+                card1++;
+            } else if (player1.disproveSuggestion(threeMatches) == hand1.get(2)) {
+                card2++;
+            }
+        }
+        assertTrue(card0 > 1);
+        assertTrue(card1 > 1);
+        assertTrue(card2 > 1);
     }
 }

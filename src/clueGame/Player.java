@@ -41,7 +41,7 @@ public abstract class Player {
 		// seenCards.add(seenCard);
 	}
 
-	public Card disproveSuggestion() {
+	public Card disproveSuggestion(Solution suggestion) {
 		return hand.get(0);
 	}
 
@@ -63,15 +63,15 @@ public abstract class Player {
 		this.row = row;
 		this.column = column;
 	}
-	
+
 	public Set<Card> getSeen() {
 		return seenCards;
 	}
-	
+
 	public int getRow() {
 		return row;
 	}
-	
+
 	public int getCol() {
 		return column;
 	}
