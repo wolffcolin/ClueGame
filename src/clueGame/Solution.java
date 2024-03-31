@@ -9,22 +9,22 @@ Authors: Colin Wolff and Eoghan Cowley
 */
 
 public class Solution {
-	//solution data
+	// solution data
 	private Card room;
 	private Card player;
 	private Card weapon;
-	
-	//constructor
+
+	// constructor
 	public Solution(Card room, Card player, Card weapon) {
 		this.room = room;
 		this.player = player;
 		this.weapon = weapon;
-		
+
 	}
-	
-	//returns array of cards that is the answer
-	public Card[] theAnswer() {
-		Card[] answer = {room, player, weapon};
+
+	// returns array of cards that is the answer
+	public Card[] theAnswerCards() {
+		Card[] answer = { room, player, weapon };
 		return answer;
 	}
 }
