@@ -62,5 +62,13 @@ public abstract class Player {
 	public Set<Card> getSeen() {
 		return seenCards;
 	}
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getCol() {
+		return column;
+	}
 
 }
