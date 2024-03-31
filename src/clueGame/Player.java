@@ -23,7 +23,7 @@ public abstract class Player {
 
 	// stores the player's hand
 	private ArrayList<Card> hand = new ArrayList<>();
-	
+
 	private Set<Card> seenCards = new HashSet<>();
 
 	public Player(String name, String color, boolean isHuman) {
@@ -36,11 +36,11 @@ public abstract class Player {
 	public void updateHand(Card card) {
 		hand.add(card);
 	}
-	
+
 	public void updateSeen(Card seenCard) {
-		//seenCards.add(seenCard);
+		// seenCards.add(seenCard);
 	}
-	
+
 	public Card disproveSuggestion() {
 		return hand.get(0);
 	}
@@ -49,11 +49,16 @@ public abstract class Player {
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
-	
+
+	// only to be used in testing
+	public void setHand(ArrayList<Card> newHand) {
+		hand = newHand;
+	}
+
 	public boolean isAHuman() {
 		return isHuman;
 	}
-	
+
 	public void teleport(int row, int column) {
 		this.row = row;
 		this.column = column;
