@@ -11,3 +11,6 @@ Room, Hall, H
 // other spaces on board
 Space, Unused, X
 Space, Walkway, W
+
+Weapon, Kitchen Knife
+Player, Janitor, Red, true
