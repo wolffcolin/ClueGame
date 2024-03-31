@@ -390,6 +390,15 @@ public class Board {
         }
 
     }
+    
+    public boolean checkAccusation() {
+    	return true;
+    }
+    
+    public Card handleSuggestionn() {
+    	Card dispute = new Card("null", null);
+    	return dispute;
+    }
 
     // sets file
     public void setConfigFiles(String board, String symbols) {
