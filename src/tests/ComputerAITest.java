@@ -83,8 +83,6 @@ class ComputerAITest {
 			bot.updateSeen(allPlayers.get(i));
 		}
 		
-		System.out.println(bot.getSeen());
-		
 		Solution suggestion2 = bot.createSuggestion();
 		Card[] cards2 = suggestion2.theAnswerCards();
 		
@@ -167,9 +165,47 @@ class ComputerAITest {
 		targets2.add(cell5);
 		targets2.add(cell6);
 		
+		int[] selectionRates = {0,0,0};
+		
 		
 		for (int i = 0; i < 100; i++) {
 			BoardCell chosenTarget2 = bot.selectTarget(targets2);
+			for (int j = 0; j < targets2.size(); j++) {
+				if (chosenTarget2.equals(targets2.get(j))) {
+					selectionRates[j]++;
+				}
+			}
+		}
+		
+		for (int i = 0; i < 3; i++) {
+			assertTrue(selectionRates[i] > 0);
+		}
+		
+		BoardCell cell7 = new BoardCell(1, 9, 'W');
+		BoardCell cell8 = new BoardCell(2, 10, 'W');
+		BoardCell cell9 = new BoardCell(1, 12, 'M');
+		
+		ArrayList<BoardCell> targets3 = new ArrayList<>();
+		targets3.add(cell7);
+		targets3.add(cell8);
+		targets3.add(cell9);
+		
+		Card room = board.roomCard(cell9.getRow(), cell9.getCol());
+		bot.updateSeen(room);
+		
+		int[] selectionRates2 = {0,0,0};
+		
+		for (int i = 0; i < 100; i++) {
+			BoardCell chosenTarget3 = bot.selectTarget(targets3);
+			for (int j = 0; j < targets3.size(); j++) {
+				if (chosenTarget3.equals(targets3.get(j))) {
+					selectionRates2[j]++;
+				}
+			}
+		}
+		
+		for (int i = 0; i < 3; i++) {
+			assertTrue(selectionRates2[i] > 0);
 		}
 		
 	}
