@@ -168,6 +168,10 @@ class ComputerAITest {
 		targets2.add(cell6);
 		
 		
+		for (int i = 0; i < 100; i++) {
+			BoardCell chosenTarget2 = bot.selectTarget(targets2);
+		}
+		
 	}
 
 }
