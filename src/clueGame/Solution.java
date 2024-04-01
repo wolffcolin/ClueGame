@@ -19,7 +19,14 @@ public class Solution {
 		this.room = room;
 		this.player = player;
 		this.weapon = weapon;
+	}
 
+	public boolean equals(Solution potentialSolution) {
+		Card[] potentialCards = potentialSolution.theAnswerCards();
+		if (room == potentialCards[0] && player == potentialCards[1] && weapon == potentialCards[2]) {
+			return true;
+		} else
+			return false;
 	}
 
 	// returns array of cards that is the answer

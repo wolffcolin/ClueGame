@@ -392,7 +392,10 @@ public class Board {
     }
 
     public boolean checkAccusation(Solution potentialSolution) {
-        return true;
+        if (theAnswer.equals(potentialSolution)) {
+            return true;
+        } else
+            return false;
     }
 
     public Card handleSuggestionn() {
