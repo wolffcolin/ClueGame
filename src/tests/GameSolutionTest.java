@@ -1,5 +1,13 @@
 package tests;
 
+/*
+Class: GameSolutionTest
+Description: tests various solution checks: suggestions, accusations, handling of suggestions
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
