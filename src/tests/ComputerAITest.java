@@ -156,8 +156,6 @@ class ComputerAITest {
 		
 		ComputerPlayer bot = (ComputerPlayer) players.get(index);
 		
-		int row = bot.getRow();
-		int col = bot.getCol();
 
 		
 		//BoardCell cell2 = new BoardCell();
