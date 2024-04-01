@@ -21,8 +21,10 @@ public class Solution {
 		this.weapon = weapon;
 	}
 
-	public boolean equals(Solution potentialSolution) {
-		Card[] potentialCards = potentialSolution.theAnswerCards();
+	// this checks to make sure that all cards in a target solution are equal to the
+	// calling solution
+	public boolean equals(Solution targetSolution) {
+		Card[] potentialCards = targetSolution.theAnswerCards();
 		if (room == potentialCards[0] && player == potentialCards[1] && weapon == potentialCards[2]) {
 			return true;
 		} else

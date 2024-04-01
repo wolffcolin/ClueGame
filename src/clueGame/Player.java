@@ -42,6 +42,8 @@ public abstract class Player {
 		seenCards.add(seenCard);
 	}
 
+	// checks the hand of the player to see if they can disprove the suggestion, if
+	// so it returns the matching card
 	public Card disproveSuggestion(Solution suggestion) {
 		Card[] suggestionCards = suggestion.theAnswerCards();
 		ArrayList<Card> matchingCards = new ArrayList<>();

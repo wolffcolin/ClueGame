@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
@@ -19,7 +18,7 @@ public class GameSolutionTest {
 
     @BeforeAll
     public static void cleanInstance() {
-        Board.getInstance().clearInstance();
+        board.clearInstance();
     }
 
     @BeforeAll
@@ -100,6 +99,7 @@ public class GameSolutionTest {
 
     @Test
     public void testDisproveSuggestion() {
+        // setup for the testing:
         ArrayList<Player> players = board.getPlayers();
         Player player1 = players.get(0);
         ArrayList<Card> hand1 = player1.getHand();
@@ -111,10 +111,14 @@ public class GameSolutionTest {
         Solution noMatches = new Solution(solutionCards[0], solutionCards[1], solutionCards[2]);
         Solution threeMatches = new Solution(hand1.get(0), hand1.get(1), hand1.get(2));
 
+        // testing correct card is returned
         assertEquals(hand1.get(0), player1.disproveSuggestion(oneMatch));
 
+        // testing the no cards are returned when there are no matches
         assertNull(player1.disproveSuggestion(noMatches));
 
+        // this block tests that if there are multiple matches (in this case 3) one card
+        // will be randomly returned at least once
         int card0 = 0;
         int card1 = 0;
         int card2 = 0;
@@ -134,6 +138,7 @@ public class GameSolutionTest {
 
     @Test
     public void testHandleSuggestion() {
+        // setup for the testing:
         Solution theSolution = board.getTheAnswer();
         Card[] solutionCards = theSolution.theAnswerCards();
 
@@ -149,12 +154,18 @@ public class GameSolutionTest {
         Solution onlySuggestingPlayer = new Solution(solutionCards[0], hand0.get(1), solutionCards[2]);
         Solution onlyPlayer1 = new Solution(solutionCards[0], solutionCards[1], hand1.get(2));
         Solution player1And2 = new Solution(solutionCards[0], hand2.get(1), hand1.get(2));
-        Solution onlyHuman = new Solution(solutionCards[0], hand0.get(1), hand1.get(2));
+        Solution onlyHuman = new Solution(solutionCards[0], hand0.get(1), solutionCards[2]);
 
+        // testing that if no one has the cards it is returned null
         assertNull(board.handleSuggestionn(noDisprove, player0));
+        // testing that if only the suggester has the card it is returned null
         assertNull(board.handleSuggestionn(onlySuggestingPlayer, player0));
+        // testing that player 1 will return the correct card
         assertEquals(hand1.get(2), board.handleSuggestionn(onlyPlayer1, player0));
+        // testing that the human can return the correct card
         assertEquals(hand0.get(1), board.handleSuggestionn(onlyHuman, player1));
+        // testing that if two players can dispute, only the first player will return
+        // the card
         assertEquals(hand1.get(2), board.handleSuggestionn(player1And2, player0));
     }
 }

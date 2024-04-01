@@ -8,8 +8,6 @@ Sources: N/A
 Authors: Colin Wolff and Eoghan Cowley
 */
 
-import java.util.ArrayList;
-
 public class Card {
     private String cardName;
     private CardType type;

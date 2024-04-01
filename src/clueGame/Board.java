@@ -391,6 +391,8 @@ public class Board {
 
     }
 
+    // checks the the solution offered in the accusation is equal to the answer, if
+    // not it returns null
     public boolean checkAccusation(Solution potentialSolution) {
         if (theAnswer.equals(potentialSolution)) {
             return true;
@@ -398,6 +400,8 @@ public class Board {
             return false;
     }
 
+    // handles when a suggestion is raised, if there are no cards that can dispute
+    // the suggestion it returns null
     public Card handleSuggestionn(Solution suggestion, Player suggester) {
         Card dispute;
         for (Player player : players) {
@@ -524,18 +528,18 @@ public class Board {
 
         BoardCell cellCheck = grid[row][column];
         char cellType = cellCheck.getInitial();
-        
+
         if (cellType != 'W' || cellType != 'X') {
             Room currRoom = roomMap.get(cellType);
 
             String name = currRoom.getName();
-            
+
             for (Card tempCard : cards) {
-            	if (tempCard.getCardType().equals(CardType.ROOM) && tempCard.toString() == name) {
-            		return tempCard;
-            	}
+                if (tempCard.getCardType().equals(CardType.ROOM) && tempCard.toString() == name) {
+                    return tempCard;
+                }
             }
-            
+
         }
 
         return null;
