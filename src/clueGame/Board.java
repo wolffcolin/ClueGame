@@ -518,14 +518,18 @@ public class Board {
 
         BoardCell cellCheck = grid[row][column];
         char cellType = cellCheck.getInitial();
+        
+        if (cellType != 'W' || cellType != 'X') {
+            Room currRoom = roomMap.get(cellType);
 
-        Room currRoom = roomMap.get(cellType);
+            String name = currRoom.getName();
 
-        String name = currRoom.getName();
+            Card returnCard = new Card(name, CardType.ROOM);
+            
+            return returnCard;
+        }
 
-        Card returnCard = new Card(name, CardType.ROOM);
-
-        return returnCard;
+        return null;
 
     }
 

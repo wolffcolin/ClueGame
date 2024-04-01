@@ -61,8 +61,44 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public BoardCell selectTarget(ArrayList<BoardCell> targets) {
-		BoardCell targetPlaceholder = new BoardCell(0, 0, 'W');
-		return targetPlaceholder;
+		
+		Set<Card> seen = this.getSeen();
+		
+		Board board = Board.getInstance();
+		
+		BoardCell returnCell;
+		
+		ArrayList<BoardCell> rooms = new ArrayList<>();
+		
+		ArrayList<BoardCell> unseenRooms = new ArrayList<>();
+		
+		for (int i = 0; i < targets.size(); i++) {
+			if (targets.get(i).getInitial() != 'W' && targets.get(i).getInitial() != 'X') {
+				rooms.add(targets.get(i));
+			}
+		}
+		
+		for (int i = 0; i < rooms.size(); i++) {
+			BoardCell currCell = rooms.get(i);
+			Card currRoom = board.roomCard(currCell.getRow(), currCell.getCol());
+			if (!seen.contains(currRoom)) {
+				unseenRooms.add(currCell);
+			}
+		}
+
+		
+		Random random = new Random();
+		
+		if (!unseenRooms.isEmpty()) {
+			int index = random.nextInt(unseenRooms.size());
+			returnCell = unseenRooms.get(index);
+		} else {
+			int index = random.nextInt(targets.size());
+			returnCell = targets.get(index);
+		}
+		
+		return returnCell;
+		
 	}
 
 }

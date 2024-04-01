@@ -204,6 +204,8 @@ class ComputerAITest {
 			}
 		}
 		
+		System.out.println(selectionRates2[0] + " " + selectionRates2[1] + " " + selectionRates2[2]);
+		
 		for (int i = 0; i < 3; i++) {
 			assertTrue(selectionRates2[i] > 0);
 		}
