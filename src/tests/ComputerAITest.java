@@ -156,6 +156,8 @@ class ComputerAITest {
 		//if a target is an unseen room, it should be selected
 		assertTrue(chosenTarget1.equals(cell2));
 		
+		bot.clearSeen();
+		
 		BoardCell cell4 = new BoardCell(1, 9, 'W');
 		BoardCell cell5 = new BoardCell(3, 11, 'W');
 		BoardCell cell6 = new BoardCell(4, 8, 'W');
@@ -180,6 +182,8 @@ class ComputerAITest {
 		for (int i = 0; i < 3; i++) {
 			assertTrue(selectionRates[i] > 0);
 		}
+		
+		bot.clearSeen();
 		
 		BoardCell cell7 = new BoardCell(1, 9, 'W');
 		BoardCell cell8 = new BoardCell(2, 10, 'W');

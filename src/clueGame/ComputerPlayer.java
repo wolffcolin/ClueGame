@@ -86,6 +86,7 @@ public class ComputerPlayer extends Player {
 			}
 		}
 
+		System.out.println("seen: " + seen.toString());
 		
 		Random random = new Random();
 		
@@ -99,6 +100,10 @@ public class ComputerPlayer extends Player {
 		
 		return returnCell;
 		
+	}
+	
+	public void clearSeen() {
+		this.getSeen().clear();
 	}
 
 }

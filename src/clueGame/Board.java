@@ -529,10 +529,13 @@ public class Board {
             Room currRoom = roomMap.get(cellType);
 
             String name = currRoom.getName();
-
-            Card returnCard = new Card(name, CardType.ROOM);
             
-            return returnCard;
+            for (Card tempCard : cards) {
+            	if (tempCard.getCardType().equals(CardType.ROOM) && tempCard.toString() == name) {
+            		return tempCard;
+            	}
+            }
+            
         }
 
         return null;
