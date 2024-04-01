@@ -158,9 +158,7 @@ class ComputerAITest {
 		
 		int row = bot.getRow();
 		int col = bot.getCol();
-		
-		//gets cell from board at bot location
-		BoardCell currentCell = board.getCell(row, col);
+
 		
 		//BoardCell cell2 = new BoardCell();
 		BoardCell cell1 = new BoardCell(3, 9, 'W');
