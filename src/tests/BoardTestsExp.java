@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import experiment.TestBoard;
 import experiment.TestBoardCell;
-import junit.framework.Assert;
 
 class BoardTestsExp {
 

@@ -10,7 +10,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
@@ -32,7 +31,7 @@ class FileInitTests {
 	public static final int NUM_COLUMNS = 15;
 
 	private static Board board;
-	
+
 	@BeforeAll
 	public static void cleanInstance() {
 		Board.getInstance().clearInstance();
