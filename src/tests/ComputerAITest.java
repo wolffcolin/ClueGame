@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import clueGame.Board;
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
@@ -124,6 +126,47 @@ class ComputerAITest {
 	
 	@Test
 	void testSelectTargets() {
+		
+		ArrayList<Player> players = board.getPlayers();
+		int index = 0;
+		for (int i = 0; i < players.size(); i++) {
+			if (!players.get(i).isAHuman()) {
+				index = i;
+				i = players.size();
+			}
+		}
+		
+		ComputerPlayer bot = (ComputerPlayer) players.get(index);
+		
+		int row = bot.getRow();
+		int col = bot.getCol();
+		
+		BoardCell currentCell = board.getCell(row, col);
+		
+		//BoardCell cell2 = new BoardCell();
+		BoardCell cell1 = new BoardCell(3, 9, 'W');
+		BoardCell cell2 = new BoardCell(1, 12, 'M');
+		BoardCell cell3 = new BoardCell(4, 10, 'W');
+		
+		ArrayList<BoardCell> targets1 = new ArrayList<>();
+		targets1.add(cell1);
+		targets1.add(cell2);
+		targets1.add(cell3);
+		
+		BoardCell chosenTarget1 = bot.selectTarget(targets1);
+		
+		//if a target is an unseen room, it should be selected
+		assertTrue(chosenTarget1.equals(cell2));
+		
+		BoardCell cell4 = new BoardCell(1, 9, 'W');
+		BoardCell cell5 = new BoardCell(3, 11, 'W');
+		BoardCell cell6 = new BoardCell(4, 8, 'W');
+		
+		ArrayList<BoardCell> targets2 = new ArrayList<>();
+		targets2.add(cell4);
+		targets2.add(cell5);
+		targets2.add(cell6);
+		
 		
 	}
 

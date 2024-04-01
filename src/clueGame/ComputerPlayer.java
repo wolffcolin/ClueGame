@@ -60,7 +60,7 @@ public class ComputerPlayer extends Player {
 		return potentialSolution;
 	}
 	
-	public BoardCell selectTarget() {
+	public BoardCell selectTarget(ArrayList<BoardCell> targets) {
 		BoardCell targetPlaceholder = new BoardCell(0, 0, 'W');
 		return targetPlaceholder;
 	}

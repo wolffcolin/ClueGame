@@ -130,5 +130,12 @@ public class BoardCell {
     public void setOccupied(boolean b) {
         this.occupied = b;
     }
+    
+    public boolean equals(BoardCell otherCell) {
+    	if (otherCell.getRow() == this.row && otherCell.getCol() == this.col) {
+    		return true;
+    	}
+    	return false;
+    }
 
 }
