@@ -30,11 +30,11 @@ import clueGame.Card;
 public class GameSetupTests {
 
     private static Board board;
-    
+
     @BeforeAll
-	public static void cleanInstance() {
-		Board.getInstance().clearInstance();
-	}
+    public static void cleanInstance() {
+        Board.getInstance().clearInstance();
+    }
 
     @BeforeAll
     public static void setup() {
