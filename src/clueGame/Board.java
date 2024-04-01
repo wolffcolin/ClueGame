@@ -398,9 +398,15 @@ public class Board {
             return false;
     }
 
-    public Card handleSuggestionn() {
-        Card dispute = new Card("null", null);
-        return dispute;
+    public Card handleSuggestionn(Solution suggestion, Player suggester) {
+        Card dispute;
+        for (Player player : players) {
+            if (player.disproveSuggestion(suggestion) != null && suggester != player) {
+                dispute = player.disproveSuggestion(suggestion);
+                return dispute;
+            }
+        }
+        return null;
     }
 
     // sets file

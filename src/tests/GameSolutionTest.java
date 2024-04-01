@@ -38,7 +38,7 @@ public class GameSolutionTest {
         ArrayList<Card> deck = new ArrayList<>();
         Card dinosaur = new Card("dinosaur", CardType.ROOM);
         deck.add(dinosaur);
-        Card security = new Card("Security", CardType.PERSON);
+        Card security = new Card("security", CardType.PERSON);
         deck.add(security);
         Card kitchenKnife = new Card("kitchen knife", CardType.WEAPON);
         deck.add(kitchenKnife);
@@ -130,5 +130,31 @@ public class GameSolutionTest {
         assertTrue(card0 > 1);
         assertTrue(card1 > 1);
         assertTrue(card2 > 1);
+    }
+
+    @Test
+    public void testHandleSuggestion() {
+        Solution theSolution = board.getTheAnswer();
+        Card[] solutionCards = theSolution.theAnswerCards();
+
+        ArrayList<Player> players = board.getPlayers();
+        Player player0 = players.get(0);
+        Player player1 = players.get(1);
+        Player player2 = players.get(2);
+        ArrayList<Card> hand0 = player0.getHand();
+        ArrayList<Card> hand1 = player1.getHand();
+        ArrayList<Card> hand2 = player2.getHand();
+
+        Solution noDisprove = new Solution(solutionCards[0], solutionCards[1], solutionCards[2]);
+        Solution onlySuggestingPlayer = new Solution(solutionCards[0], hand0.get(1), solutionCards[2]);
+        Solution onlyPlayer1 = new Solution(solutionCards[0], solutionCards[1], hand1.get(2));
+        Solution player1And2 = new Solution(solutionCards[0], hand2.get(1), hand1.get(2));
+        Solution onlyHuman = new Solution(solutionCards[0], hand0.get(1), hand1.get(2));
+
+        assertNull(board.handleSuggestionn(noDisprove, player0));
+        assertNull(board.handleSuggestionn(onlySuggestingPlayer, player0));
+        assertEquals(hand1.get(2), board.handleSuggestionn(onlyPlayer1, player0));
+        assertEquals(hand0.get(1), board.handleSuggestionn(onlyHuman, player1));
+        assertEquals(hand1.get(2), board.handleSuggestionn(player1And2, player0));
     }
 }
