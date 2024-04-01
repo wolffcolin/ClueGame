@@ -63,7 +63,7 @@ public class GameSolutionTest {
             newHand.add(deck.get(count));
             newHand.add(deck.get(count + 1));
             newHand.add(deck.get(count + 2));
-            player.setHand(deck);
+            player.setHand(newHand);
             count += 3;
         }
     }

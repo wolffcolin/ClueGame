@@ -9,6 +9,7 @@ Authors: Colin Wolff and Eoghan Cowley
 */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,7 +43,22 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
-		return hand.get(0);
+		Card[] suggestionCards = suggestion.theAnswerCards();
+		ArrayList<Card> matchingCards = new ArrayList<>();
+		for (Card card : hand) {
+			for (int i = 0; i < 3; i++) {
+				if (card == suggestionCards[i]) {
+					matchingCards.add(card);
+				}
+			}
+		}
+		// select a random matching card
+		if (matchingCards.isEmpty()) {
+			return null;
+		} else {
+			Collections.shuffle(matchingCards);
+			return matchingCards.get(0);
+		}
 	}
 
 	// returns hand
