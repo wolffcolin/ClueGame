@@ -81,6 +81,8 @@ class ComputerAITest {
 			bot.updateSeen(allPlayers.get(i));
 		}
 		
+		System.out.println(bot.getSeen());
+		
 		Solution suggestion2 = bot.createSuggestion();
 		Card[] cards2 = suggestion2.theAnswerCards();
 		

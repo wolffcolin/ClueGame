@@ -38,7 +38,7 @@ public abstract class Player {
 	}
 
 	public void updateSeen(Card seenCard) {
-		// seenCards.add(seenCard);
+		seenCards.add(seenCard);
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
