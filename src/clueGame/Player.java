@@ -94,4 +94,8 @@ public abstract class Player {
 		return column;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 }

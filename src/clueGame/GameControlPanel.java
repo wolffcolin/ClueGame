@@ -84,13 +84,14 @@ public class GameControlPanel extends JPanel {
         frame.setVisible(true); // make it visible
 
         // testing data
-        panel.setTurnName("The killer");
+        panel.setTurnName(new ComputerPlayer("The Killer", "Red"));
         panel.setRoll("5");
         panel.setGuess("I dont have a guess");
         panel.setGuessResult("Why did you make a guess with nothing??");
     }
 
-    public void setTurnName(String name) {
+    public void setTurnName(Player player) {
+        String name = player.getName();
         turnName.setText(name);
     }
 
