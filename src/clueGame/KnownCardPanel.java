@@ -58,7 +58,7 @@ public class KnownCardPanel extends JPanel {
         KnownCardPanel panel = new KnownCardPanel(); // create the panel
         JFrame frame = new JFrame(); // create the frame
         frame.setContentPane(panel); // put the panel in the frame
-        frame.setSize(750, 180); // size the frame
+        frame.setSize(180, 750); // size the frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
         frame.setTitle("Control Panel");
         frame.setVisible(true); // make it visible
