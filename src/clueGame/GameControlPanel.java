@@ -5,16 +5,23 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 public class GameControlPanel extends JPanel {
     private JTextField turnName;
     private JTextField roll;
+    private JTextField guess;
+    private JTextField guessResult;
 
     public GameControlPanel() {
         setLayout(new GridLayout(2, 0));
         JPanel panel = createTurnAndRollPanel();
+        add(panel);
+        panel = createGuessPanel();
         add(panel);
     }
 
@@ -49,6 +56,21 @@ public class GameControlPanel extends JPanel {
     private JPanel createGuessPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 2));
+
+        JPanel guessPanel = new JPanel();
+        guessPanel.setLayout(new GridLayout(1, 0));
+        guess = new JTextField(20);
+        guessPanel.add(guess);
+        guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
+
+        JPanel guessResultPanel = new JPanel();
+        guessResultPanel.setLayout(new GridLayout(1, 0));
+        guessResult = new JTextField(20);
+        guessResultPanel.add(guessResult);
+        guessResultPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
+
+        panel.add(guessPanel);
+        panel.add(guessResultPanel);
         return panel;
     }
 
@@ -60,5 +82,27 @@ public class GameControlPanel extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
         frame.setTitle("Control Panel");
         frame.setVisible(true); // make it visible
+
+        // testing data
+        panel.setTurnName("The killer");
+        panel.setRoll("5");
+        panel.setGuess("I dont have a guess");
+        panel.setGuessResult("Why did you make a guess with nothing??");
+    }
+
+    public void setTurnName(String name) {
+        turnName.setText(name);
+    }
+
+    public void setRoll(String rollNum) {
+        roll.setText(rollNum);
+    }
+
+    public void setGuess(String guessText) {
+        guess.setText(guessText);
+    }
+
+    public void setGuessResult(String guessResultText) {
+        guessResult.setText(guessResultText);
     }
 }
