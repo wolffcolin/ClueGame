@@ -551,15 +551,14 @@ public class Board {
 
         return cardsOfType;
     }
-    
+
     public Player getHumanPlayer() {
-    	for (Player player : players) {
-    		if (player.isAHuman()) {
-    			return player;
-    		}
-    	}
-    	
-    	return null;
+        for (Player player : players) {
+            if (player.isAHuman()) {
+                return player;
+            }
+        }
+        return null;
     }
 
     public Color getColorString(String col) {
