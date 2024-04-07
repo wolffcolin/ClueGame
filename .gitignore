@@ -2,6 +2,7 @@
 .project
 .classpath
 error.log
+gitlog.txt
 
 # Ignore Eclipse project settings
 .settings/
