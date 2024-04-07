@@ -1,6 +1,9 @@
 package clueGame;
 
 import java.awt.GridLayout;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -13,15 +16,50 @@ import java.awt.*;
 
 public class KnownCardPanel extends JPanel {
 
-	public KnownCardPanel() {
+	public KnownCardPanel(Player player) {
+		
+		ArrayList<Card> seen = new ArrayList<>(player.getSeen());
+		ArrayList<Card> hand = player.getHand();
+		
+		ArrayList<Card> peopleSeen = new ArrayList<>();
+		ArrayList<Card> peopleHand = new ArrayList<>();
+		ArrayList<Card> roomSeen = new ArrayList<>();
+		ArrayList<Card> roomHand = new ArrayList<>();
+		ArrayList<Card> weaponSeen = new ArrayList<>();
+		ArrayList<Card> weaponHand = new ArrayList<>();
+		
+		for (int i = 0; i < hand.size(); i++) {
+			if (hand.get(i).getCardType() == CardType.PERSON) {
+				peopleHand.add(hand.get(i));
+			} else if (hand.get(i).getCardType() == CardType.WEAPON) {
+				weaponHand.add(hand.get(i));
+			} else if (hand.get(i).getCardType() == CardType.ROOM) {
+				roomHand.add(hand.get(i));
+			}
+		}
+		
+		for (int i = 0; i < seen.size(); i++) {
+			if (seen.get(i).getCardType() == CardType.PERSON) {
+				peopleSeen.add(seen.get(i));
+			} else if (seen.get(i).getCardType() == CardType.WEAPON) {
+				weaponSeen.add(seen.get(i));
+			} else if (seen.get(i).getCardType() == CardType.ROOM) {
+				roomSeen.add(seen.get(i));
+			}
+		}
+		
+		System.out.println("Weapon Hand:" + weaponHand.toString());
+		System.out.println("People Hand: " + peopleHand.toString());
+		System.out.println("Room Hand: " + roomHand.toString());
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		add(createSectionPanel("People"));
-		add(createSectionPanel("Rooms"));
-		add(createSectionPanel("Weapons"));
+		add(createSectionPanel("People", peopleSeen, peopleHand));
+		add(createSectionPanel("Rooms", roomSeen, roomHand));
+		add(createSectionPanel("Weapons", weaponSeen, weaponHand));
 		
 	}
 	
-	private JPanel createSectionPanel(String title) {
+	private JPanel createSectionPanel(String title, ArrayList<Card> seen, ArrayList<Card> hand) {
 		JPanel sectionPanel = new JPanel(new BorderLayout());
 		
 		Border titleBorder = BorderFactory.createTitledBorder(title);
@@ -30,9 +68,9 @@ public class KnownCardPanel extends JPanel {
 		
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
-		innerPanel.add(createFieldPanel("In Hand"));
+		innerPanel.add(createFieldPanel("In Hand", hand));
 		
-		innerPanel.add(createFieldPanel("Seen"));
+		innerPanel.add(createFieldPanel("Seen", seen));
 		
 		sectionPanel.add(innerPanel, BorderLayout.NORTH);
 		
@@ -40,22 +78,35 @@ public class KnownCardPanel extends JPanel {
 		
 	}
 	
-	private JPanel createFieldPanel(String fieldName) {
+	private JPanel createFieldPanel(String fieldName, ArrayList<Card> cards) {
 		
-		JPanel fieldPanel = new JPanel(new BorderLayout());
-		fieldPanel.add(new JLabel(fieldName + ":"), BorderLayout.NORTH);
+		JPanel fieldPanel = new JPanel();
+		fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.Y_AXIS));
+		fieldPanel.add(new JLabel(fieldName + ":"));
 		
-		JTextArea textArea = new JTextArea(4, 20);
-		textArea.setText("Test");
-		JScrollPane scrollPane = new JScrollPane(textArea);
-		fieldPanel.add(scrollPane, BorderLayout.CENTER);
+		for (Card card : cards) {
+			JTextField textField = new JTextField(card.toString(), 20);
+			textField.setEditable(false);
+			textField.setMaximumSize(new Dimension(Integer.MAX_VALUE, textField.getPreferredSize().height));
+			fieldPanel.add(textField);
+		}
 		
 		return fieldPanel;
 		
 	}
 	
-    public static void main(String[] args) {
-        KnownCardPanel panel = new KnownCardPanel(); // create the panel
+    public static void main(String[] args) throws FileNotFoundException, BadConfigFormatException {
+    	
+    	Board board = Board.getInstance();
+    	board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+    	board.initialize();
+    	
+    	Player humanPlayer = board.getHumanPlayer();
+    	
+    	System.out.println(humanPlayer.getHand().toString());
+    	System.out.println(humanPlayer.getSeen().toString());
+    	
+        KnownCardPanel panel = new KnownCardPanel(humanPlayer); // create the panel
         JFrame frame = new JFrame(); // create the frame
         frame.setContentPane(panel); // put the panel in the frame
         frame.setSize(180, 750); // size the frame
@@ -63,4 +114,5 @@ public class KnownCardPanel extends JPanel {
         frame.setTitle("Control Panel");
         frame.setVisible(true); // make it visible
     }
+    
 }

@@ -556,5 +556,15 @@ public class Board {
 
         return cardsOfType;
     }
+    
+    public Player getHumanPlayer() {
+    	for (Player player : players) {
+    		if (player.isAHuman()) {
+    			return player;
+    		}
+    	}
+    	
+    	return null;
+    }
 
 }
