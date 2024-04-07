@@ -37,6 +37,7 @@ public abstract class Player {
 
 	// adds card to hand
 	public void updateHand(Card card) {
+		card.setColor(color);
 		hand.add(card);
 	}
 
@@ -99,5 +100,6 @@ public abstract class Player {
 	public String getName() {
 		return name;
 	}
+	
 
 }

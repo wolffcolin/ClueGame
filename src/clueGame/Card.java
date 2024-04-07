@@ -1,4 +1,5 @@
 package clueGame;
+import java.awt.Color;
 
 /*
 Class: Card
@@ -11,6 +12,7 @@ Authors: Colin Wolff and Eoghan Cowley
 public class Card {
     private String cardName;
     private CardType type;
+    private Color ownerColor;
 
     // constructor
     public Card(String name, CardType type) {
@@ -25,5 +27,13 @@ public class Card {
 
     public String toString() {
         return cardName;
+    }
+    
+    public void setColor(Color color) {
+    	this.ownerColor = color;
+    }
+    
+    public Color getColor() {
+    	return ownerColor;
     }
 }

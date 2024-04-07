@@ -68,9 +68,9 @@ public class KnownCardPanel extends JPanel {
 		
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
-		innerPanel.add(createFieldPanel("In Hand", hand));
+		innerPanel.add(createFieldPanel("In Hand", hand, false));
 		
-		innerPanel.add(createFieldPanel("Seen", seen));
+		innerPanel.add(createFieldPanel("Seen", seen, true));
 		
 		sectionPanel.add(innerPanel, BorderLayout.NORTH);
 		
@@ -78,7 +78,7 @@ public class KnownCardPanel extends JPanel {
 		
 	}
 	
-	private JPanel createFieldPanel(String fieldName, ArrayList<Card> cards) {
+	private JPanel createFieldPanel(String fieldName, ArrayList<Card> cards, boolean isSeen) {
 		
 		JPanel fieldPanel = new JPanel();
 		fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.Y_AXIS));
@@ -87,6 +87,11 @@ public class KnownCardPanel extends JPanel {
 		for (Card card : cards) {
 			JTextField textField = new JTextField(card.toString(), 20);
 			textField.setEditable(false);
+			if (isSeen) {
+				textField.setBackground(card.getColor());
+			} else {
+				textField.setBackground(Color.WHITE);
+			}
 			textField.setMaximumSize(new Dimension(Integer.MAX_VALUE, textField.getPreferredSize().height));
 			fieldPanel.add(textField);
 		}
@@ -103,6 +108,15 @@ public class KnownCardPanel extends JPanel {
     	
     	Player humanPlayer = board.getHumanPlayer();
     	
+    	ArrayList<Player> players = board.getPlayers();
+    	
+    	for (Player player : players) {
+    		if (!player.isAHuman()) {
+    			Card randomCard = player.getHand().get(0);
+    			humanPlayer.updateSeen(randomCard);
+    		}
+    	}
+    	
     	System.out.println(humanPlayer.getHand().toString());
     	System.out.println(humanPlayer.getSeen().toString());
     	
@@ -114,5 +128,6 @@ public class KnownCardPanel extends JPanel {
         frame.setTitle("Control Panel");
         frame.setVisible(true); // make it visible
     }
+    
     
 }
