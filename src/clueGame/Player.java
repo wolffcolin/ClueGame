@@ -1,5 +1,7 @@
 package clueGame;
 
+import java.awt.Color;
+
 /*
 Class: Player
 Description: Abstract player class that is extended by the ComputerPlayer and HumanPlayer class
@@ -17,7 +19,7 @@ public abstract class Player {
 
 	// data about player
 	private String name;
-	private String color;
+	private Color color;
 	private int row;
 	private int column;
 	private boolean isHuman;
@@ -27,7 +29,7 @@ public abstract class Player {
 
 	private Set<Card> seenCards = new HashSet<>();
 
-	public Player(String name, String color, boolean isHuman) {
+	public Player(String name, Color color, boolean isHuman) {
 		this.name = name;
 		this.color = color;
 		this.isHuman = isHuman;

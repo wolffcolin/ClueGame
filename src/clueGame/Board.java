@@ -18,6 +18,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Scanner;
 import java.util.List;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -222,11 +223,12 @@ public class Board {
                         isHuman = false;
                     }
 
+                    Color color = getColorString(playerColor);
                     Player player; // create player
                     if (isHuman == true) {
-                        player = new HumanPlayer(playerName, playerColor);
+                        player = new HumanPlayer(playerName, color);
                     } else {
-                        player = new ComputerPlayer(playerName, playerColor);
+                        player = new ComputerPlayer(playerName, color);
                     }
 
                     players.add(player);
@@ -525,25 +527,18 @@ public class Board {
     }
 
     public Card roomCard(int row, int column) {
-
         BoardCell cellCheck = grid[row][column];
         char cellType = cellCheck.getInitial();
-
         if (cellType != 'W' || cellType != 'X') {
             Room currRoom = roomMap.get(cellType);
-
             String name = currRoom.getName();
-
             for (Card tempCard : cards) {
                 if (tempCard.getCardType().equals(CardType.ROOM) && tempCard.toString() == name) {
                     return tempCard;
                 }
             }
-
         }
-
         return null;
-
     }
 
     public ArrayList<Card> allCardsOfType(CardType type) {
@@ -557,4 +552,49 @@ public class Board {
         return cardsOfType;
     }
 
+    public Color getColorString(String col) {
+        Color color = null;
+        switch (col.toLowerCase()) {
+            case "black":
+                color = Color.BLACK;
+                break;
+            case "blue":
+                color = Color.BLUE;
+                break;
+            case "cyan":
+                color = Color.CYAN;
+                break;
+            case "darkgray":
+                color = Color.DARK_GRAY;
+                break;
+            case "gray":
+                color = Color.GRAY;
+                break;
+            case "green":
+                color = Color.GREEN;
+                break;
+            case "yellow":
+                color = Color.YELLOW;
+                break;
+            case "lightgray":
+                color = Color.LIGHT_GRAY;
+                break;
+            case "magneta":
+                color = Color.MAGENTA;
+                break;
+            case "orange":
+                color = Color.ORANGE;
+                break;
+            case "pink":
+                color = Color.PINK;
+                break;
+            case "red":
+                color = Color.RED;
+                break;
+            case "white":
+                color = Color.WHITE;
+                break;
+        }
+        return color;
+    }
 }

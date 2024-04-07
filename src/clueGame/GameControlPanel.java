@@ -9,6 +9,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 public class GameControlPanel extends JPanel {
@@ -84,7 +85,7 @@ public class GameControlPanel extends JPanel {
         frame.setVisible(true); // make it visible
 
         // testing data
-        panel.setTurnName(new ComputerPlayer("The Killer", "Red"));
+        panel.setTurnName(new ComputerPlayer("The Killer", Color.RED));
         panel.setRoll("5");
         panel.setGuess("I dont have a guess");
         panel.setGuessResult("Why did you make a guess with nothing??");

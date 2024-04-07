@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
@@ -15,7 +16,7 @@ Authors: Colin Wolff and Eoghan Cowley
 public class ComputerPlayer extends Player {
 
 	// constructor
-	public ComputerPlayer(String name, String color) {
+	public ComputerPlayer(String name, Color color) {
 		super(name, color, false);
 	}
 
