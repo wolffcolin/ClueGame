@@ -1,5 +1,13 @@
 package clueGame;
 
+/*
+Class: GameControlPanel
+Description: GUI control panel for the human player
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 public class GameControlPanel extends JPanel {
@@ -25,18 +33,22 @@ public class GameControlPanel extends JPanel {
         add(panel);
     }
 
+    // creates the text fields for the name of whose turn it is, their roll, and two
+    // buttons for making an accusation and passing on the turn to the next player
     private JPanel createTurnAndRollPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 4));
 
         JLabel nameLabel = new JLabel("Whose Turn?");
         turnName = new JTextField(20);
+        turnName.setEditable(false);
         JPanel turnPanel = new JPanel();
         turnPanel.add(nameLabel);
         turnPanel.add(turnName);
 
         JLabel rollLabel = new JLabel("Roll");
         roll = new JTextField(2);
+        roll.setEditable(false);
         JPanel rollPanel = new JPanel();
         rollPanel.add(rollLabel);
         rollPanel.add(roll);
@@ -53,6 +65,8 @@ public class GameControlPanel extends JPanel {
         return panel;
     }
 
+    // creates two text fields where the guess and the response for the guess are
+    // displayed
     private JPanel createGuessPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 2));
@@ -60,12 +74,14 @@ public class GameControlPanel extends JPanel {
         JPanel guessPanel = new JPanel();
         guessPanel.setLayout(new GridLayout(1, 0));
         guess = new JTextField(20);
+        guess.setEditable(false);
         guessPanel.add(guess);
         guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 
         JPanel guessResultPanel = new JPanel();
         guessResultPanel.setLayout(new GridLayout(1, 0));
         guessResult = new JTextField(20);
+        guessResult.setEditable(false);
         guessResultPanel.add(guessResult);
         guessResultPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 
@@ -84,7 +100,7 @@ public class GameControlPanel extends JPanel {
         frame.setVisible(true); // make it visible
 
         // testing data
-        panel.setTurnName(new ComputerPlayer("The Killer", "Red"));
+        panel.setTurnName(new ComputerPlayer("The Killer", Color.RED));
         panel.setRoll("5");
         panel.setGuess("I dont have a guess");
         panel.setGuessResult("Why did you make a guess with nothing??");
