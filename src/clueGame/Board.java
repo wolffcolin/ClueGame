@@ -16,13 +16,17 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import javax.swing.JPanel;
+
 import java.util.Scanner;
 import java.util.List;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.awt.Graphics;
 
-public class Board {
+public class Board extends JPanel {
     private Set<BoardCell> targets;
     private Set<BoardCell> visited;
     private BoardCell[][] grid;
@@ -55,6 +59,11 @@ public class Board {
                 grid[i][j] = new BoardCell(i, j, '~');
             }
         }
+    }
+    
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+  
     }
 
     // returns the instance of board
