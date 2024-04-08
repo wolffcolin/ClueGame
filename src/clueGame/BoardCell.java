@@ -87,6 +87,7 @@ public class BoardCell {
         g.setColor(this.color);
         g.fillRect(x, y, size, size);
 
+        // if and only if they are walways then they get borders drawn in black
         if (this.initial == 'X' || this.initial == 'W') {
             g.setColor(color.BLACK);
             g.drawRect(x, y, size, size);
@@ -110,6 +111,7 @@ public class BoardCell {
             int textWidth = fm.stringWidth(roomName);
             int textHeight = fm.getHeight();
 
+            // positioning the text on the center of the room
             g.drawString(roomName, x + (size - textWidth) / 2, y + ((size - textHeight)) / 2 + fm.getAscent());
         }
     }
