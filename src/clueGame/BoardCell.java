@@ -96,14 +96,14 @@ public class BoardCell extends JPanel {
         if (roomLabel) {
         	
         	Board board = Board.getInstance();
-        	
         	String roomName = board.getRoom(initial).getName();
         	
         	g.setColor(Color.BLACK);
         	g.setFont(new Font("SansSerif", Font.BOLD, 12));
-        	
         	FontMetrics fm = g.getFontMetrics();
+        	
         	int textWidth = fm.stringWidth(roomName);
+        	
         	int textHeight = fm.getHeight();
         	
         	g.drawString(roomName, x + (size - textWidth) / 2, y + ((size - textHeight)) / 2 + fm.getAscent());
