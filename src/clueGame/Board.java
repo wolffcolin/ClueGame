@@ -86,6 +86,10 @@ public class Board extends JPanel {
                 grid[i][j].drawDoor(g, cellSize);
             }
         }
+        
+        for (int i = 0; i < players.size(); i++) {
+        	players.get(i).draw();
+        }
 
     }
 

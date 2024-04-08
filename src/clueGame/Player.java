@@ -34,7 +34,6 @@ public abstract class Player {
 		this.color = color;
 		this.isHuman = isHuman;
 	}
-	
 
 	// adds card to hand
 	public void updateHand(Card card) {
