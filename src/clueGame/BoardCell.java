@@ -77,6 +77,7 @@ public class BoardCell {
         }
     }
 
+    // draws the cell and colors it based off if it is a room or walkway/unused spot
     public void draw(Graphics g, int size) {
         int y = row * size;
         int x = col * size;
@@ -86,6 +87,7 @@ public class BoardCell {
         g.setColor(this.color);
         g.fillRect(x, y, size, size);
 
+        // if and only if they are walways then they get borders drawn in black
         if (this.initial == 'X' || this.initial == 'W') {
             g.setColor(color.BLACK);
             g.drawRect(x, y, size, size);
@@ -93,11 +95,11 @@ public class BoardCell {
 
     }
 
+    // draws the room name labels on the label cell
     public void drawLabel(Graphics g, int size) {
-        int y = row * size;
-        int x = col * size;
-
         if (roomLabel) {
+            int y = row * size;
+            int x = col * size;
 
             Board board = Board.getInstance();
             String roomName = board.getRoom(initial).getName();
@@ -109,10 +111,12 @@ public class BoardCell {
             int textWidth = fm.stringWidth(roomName);
             int textHeight = fm.getHeight();
 
+            // positioning the text on the center of the room
             g.drawString(roomName, x + (size - textWidth) / 2, y + ((size - textHeight)) / 2 + fm.getAscent());
         }
     }
 
+    // draws the door onto the board with the directions indicated
     public void drawDoor(Graphics g, int size) {
         int y = row * size;
         int x = col * size;
