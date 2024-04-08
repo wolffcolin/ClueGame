@@ -88,7 +88,7 @@ public class Board extends JPanel {
         }
         
         for (int i = 0; i < players.size(); i++) {
-        	players.get(i).draw();
+        	players.get(i).draw(g, cellSize);
         }
 
     }
