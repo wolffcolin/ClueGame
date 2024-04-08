@@ -87,50 +87,49 @@ public class BoardCell {
 
         g.setColor(this.color);
         g.fillRect(x, y, size, size);
-        
+
         if (this.initial == 'X' || this.initial == 'W') {
             g.setColor(color.BLACK);
             g.drawRect(x, y, size, size);
         }
-       
 
     }
-    
+
     public void drawLabel(Graphics g, int size) {
         int y = row * size;
         int x = col * size;
-    	
+
         if (roomLabel) {
-        	
-        	Board board = Board.getInstance();
-        	String roomName = board.getRoom(initial).getName();
-        	
-        	g.setColor(Color.BLACK);
-        	g.setFont(new Font("SansSerif", Font.BOLD, 12));
-        	FontMetrics fm = g.getFontMetrics();
-        	
-        	int textWidth = fm.stringWidth(roomName);
-        	int textHeight = fm.getHeight();
-        	
-        	g.drawString(roomName, x + (size - textWidth) / 2, y + ((size - textHeight)) / 2 + fm.getAscent());
+
+            Board board = Board.getInstance();
+            String roomName = board.getRoom(initial).getName();
+
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("SansSerif", Font.BOLD, 12));
+            FontMetrics fm = g.getFontMetrics();
+
+            int textWidth = fm.stringWidth(roomName);
+            int textHeight = fm.getHeight();
+
+            g.drawString(roomName, x + (size - textWidth) / 2, y + ((size - textHeight)) / 2 + fm.getAscent());
         }
     }
-    
+
     public void drawDoor(Graphics g, int size) {
         int y = row * size;
         int x = col * size;
-    	
-		g.setColor(Color.BLUE);
-        
-    	if (doorDirection == DoorDirection.DOWN) {
-    		g.fillRect(x, y+size, size, 5);
-    	} else if (doorDirection == DoorDirection.LEFT) {
-    		g.fillRect(x-5, y, 5, size);
-    	} else if (doorDirection == DoorDirection.RIGHT) {
-    		g.fillRect(x+size, y, 5, size);
-    	} else if (doorDirection == DoorDirection.UP) {
-    		g.fillRect(x, y-5, size, 5);
-    	}
+
+        g.setColor(Color.BLUE);
+
+        if (doorDirection == DoorDirection.DOWN) {
+            g.fillRect(x, y + size, size, 5);
+        } else if (doorDirection == DoorDirection.LEFT) {
+            g.fillRect(x - 5, y, 5, size);
+        } else if (doorDirection == DoorDirection.RIGHT) {
+            g.fillRect(x + size, y, 5, size);
+        } else if (doorDirection == DoorDirection.UP) {
+            g.fillRect(x, y - 5, size, 5);
+        }
     }
 
     // adds cell to adjacency list

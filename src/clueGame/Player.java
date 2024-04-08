@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 /*
 Class: Player
@@ -34,7 +35,6 @@ public abstract class Player {
 		this.color = color;
 		this.isHuman = isHuman;
 	}
-	
 
 	// adds card to hand
 	public void updateHand(Card card) {
@@ -67,6 +67,21 @@ public abstract class Player {
 		}
 	}
 
+	public void draw(Graphics g, int size) {
+		int x = column * size;
+		int y = row * size;
+
+		int radius = size / 2;
+
+		g.setColor(color);
+		g.fillOval(x + radius, y + radius, 2 * radius, 2 * radius);
+	}
+
+	public void teleport(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
+
 	// returns hand
 	public ArrayList<Card> getHand() {
 		return hand;
@@ -79,11 +94,6 @@ public abstract class Player {
 
 	public boolean isAHuman() {
 		return isHuman;
-	}
-
-	public void teleport(int row, int column) {
-		this.row = row;
-		this.column = column;
 	}
 
 	public Set<Card> getSeen() {
@@ -101,6 +111,5 @@ public abstract class Player {
 	public String getName() {
 		return name;
 	}
-	
 
 }
