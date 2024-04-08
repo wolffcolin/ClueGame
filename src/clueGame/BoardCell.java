@@ -88,7 +88,7 @@ public class BoardCell extends JPanel {
     	draw(g, x, y);
     }
     
-    public void draw(Graphics g, int x, int y) {
+    public void draw(Graphics g, int xGiven, int yGiven) {
    
     	this.setColor();
     	
@@ -96,9 +96,9 @@ public class BoardCell extends JPanel {
     	int yPos = col + y;
     	
     	g.setColor(this.color);
-    	g.fillRect(xPos, yPos, x, y);
+    	g.fillRect(xPos, yPos, xGiven, yGiven);
     	g.setColor(color.BLACK);
-    	g.drawRect(xPos, yPos, x, y);
+    	g.drawRect(xPos, yPos, xGiven, yGiven);
     	
     }
 
