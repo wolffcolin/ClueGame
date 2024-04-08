@@ -92,7 +92,14 @@ public class BoardCell extends JPanel {
             g.setColor(color.BLACK);
             g.drawRect(x, y, size, size);
         }
-        
+       
+
+    }
+    
+    public void drawLabel(Graphics g, int size) {
+        int y = row * size;
+        int x = col * size;
+    	
         if (roomLabel) {
         	
         	Board board = Board.getInstance();
@@ -103,12 +110,10 @@ public class BoardCell extends JPanel {
         	FontMetrics fm = g.getFontMetrics();
         	
         	int textWidth = fm.stringWidth(roomName);
-        	
         	int textHeight = fm.getHeight();
         	
         	g.drawString(roomName, x + (size - textWidth) / 2, y + ((size - textHeight)) / 2 + fm.getAscent());
         }
-
     }
 
     // adds cell to adjacency list
