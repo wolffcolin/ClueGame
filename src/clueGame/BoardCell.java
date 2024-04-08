@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 public class BoardCell extends JPanel {
     private int row;
@@ -85,8 +87,28 @@ public class BoardCell extends JPanel {
 
         g.setColor(this.color);
         g.fillRect(x, y, size, size);
-        g.setColor(color.BLACK);
-        g.drawRect(x, y, size, size);
+        
+        if (this.initial == 'X' || this.initial == 'W') {
+            g.setColor(color.BLACK);
+            g.drawRect(x, y, size, size);
+        }
+        
+        if (roomLabel) {
+        	
+        	Board board = Board.getInstance();
+        	
+        	String roomName = board.getRoom(initial).getName();
+        	
+        	g.setColor(Color.BLACK);
+        	g.setFont(new Font("SansSerif", Font.BOLD, 12));
+        	
+        	FontMetrics fm = g.getFontMetrics();
+        	int textWidth = fm.stringWidth(roomName);
+        	int textHeight = fm.getHeight();
+        	
+        	g.drawString(roomName, x + (size - textWidth) / 2, y + ((size - textHeight)) / 2 + fm.getAscent());
+        }
+
     }
 
     // adds cell to adjacency list
