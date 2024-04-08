@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 
-public class BoardCell extends JPanel {
+public class BoardCell {
     private int row;
     private int col;
     private char initial;
