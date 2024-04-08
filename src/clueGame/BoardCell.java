@@ -27,7 +27,7 @@ public class BoardCell extends JPanel {
     private boolean roomLabel;
     private boolean roomCenter;
     private char secretPassage;
-    
+
     private int x;
     private int y;
 
@@ -78,8 +78,8 @@ public class BoardCell extends JPanel {
     }
 
     public void draw(Graphics g, int size) {
-        int x = row * size;
-        int y = col * size;
+        int y = row * size;
+        int x = col * size;
 
         this.setColor();
 
