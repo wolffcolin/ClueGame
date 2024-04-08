@@ -10,4 +10,4 @@ public class ClueGame extends JFrame {
 		
 	}
 	
-}christopherfischer@mines.edu
+}

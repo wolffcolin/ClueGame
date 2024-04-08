@@ -11,13 +11,15 @@ package clueGame;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.awt.Graphics;
+import java.awt.Color;
 
 public class BoardCell {
     private int row;
     private int col;
     private char initial;
     private Set<BoardCell> adjList;
-
+    private Color color; 
     private DoorDirection doorDirection;
     private boolean roomLabel;
     private boolean roomCenter;
@@ -67,6 +69,20 @@ public class BoardCell {
             this.secretPassage = secondType;
             this.doorDirection = DoorDirection.NONE;
         }
+    }
+    
+    public void Draw(Graphics g, int size, int offset) {
+    	
+    	int x = row + offset; 
+    	int y = col + offset;
+    	
+    	this.setColor();
+    	
+    	g.setColor(this.color);
+    	g.fillRect(x, y, size, size);
+    	g.setColor(color.BLACK);
+    	g.drawRect(x, y, size, size);
+    	
     }
 
     // adds cell to adjacency list
@@ -137,5 +153,14 @@ public class BoardCell {
     	}
     	return false;
     }
-
+    
+    public void setColor() {
+    	if (this.initial == 'W') {
+    		this.color = Color.YELLOW;
+    	} else if (this.initial == 'X') {
+    		this.color = Color.BLACK;
+    	} else {
+    		this.color = Color.GRAY;
+    	}
+    }
 }
