@@ -67,6 +67,7 @@ public abstract class Player {
 		}
 	}
 
+	// draws the player as a circle in the cetner on their position cell
 	public void draw(Graphics g, int size) {
 		int radius = size / 2;
 		int x = column * size;
