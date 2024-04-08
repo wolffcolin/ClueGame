@@ -22,7 +22,7 @@ public class BoardCell extends JPanel {
     private int col;
     private char initial;
     private Set<BoardCell> adjList;
-    private Color color; 
+    private Color color;
     private DoorDirection doorDirection;
     private boolean roomLabel;
     private boolean roomCenter;
@@ -76,30 +76,17 @@ public class BoardCell extends JPanel {
             this.doorDirection = DoorDirection.NONE;
         }
     }
-    
-    public void getOffset(int x, int y) {
-    	this.x = x;
-    	this.y = y;
-    }
-    
-    @Override
-    public void paintComponent(Graphics g) {
-    	super.paintComponent(g);
-    	draw(g, x, y);
-    }
-    
-    public void draw(Graphics g, int xGiven, int yGiven) {
-   
-    	this.setColor();
-    	
-    	int xPos = row + x;
-    	int yPos = col + y;
-    	
-    	g.setColor(this.color);
-    	g.fillRect(xPos, yPos, xGiven, yGiven);
-    	g.setColor(color.BLACK);
-    	g.drawRect(xPos, yPos, xGiven, yGiven);
-    	
+
+    public void draw(Graphics g, int size) {
+        int x = row * size;
+        int y = col * size;
+
+        this.setColor();
+
+        g.setColor(this.color);
+        g.fillRect(x, y, size, size);
+        g.setColor(color.BLACK);
+        g.drawRect(x, y, size, size);
     }
 
     // adds cell to adjacency list
@@ -163,21 +150,21 @@ public class BoardCell extends JPanel {
     public void setOccupied(boolean b) {
         this.occupied = b;
     }
-    
+
     public boolean equals(BoardCell otherCell) {
-    	if (otherCell.getRow() == this.row && otherCell.getCol() == this.col) {
-    		return true;
-    	}
-    	return false;
+        if (otherCell.getRow() == this.row && otherCell.getCol() == this.col) {
+            return true;
+        }
+        return false;
     }
-    
+
     public void setColor() {
-    	if (this.initial == 'W') {
-    		this.color = Color.YELLOW;
-    	} else if (this.initial == 'X') {
-    		this.color = Color.BLACK;
-    	} else {
-    		this.color = Color.GRAY;
-    	}
+        if (this.initial == 'W') {
+            this.color = Color.YELLOW;
+        } else if (this.initial == 'X') {
+            this.color = Color.BLACK;
+        } else {
+            this.color = Color.GRAY;
+        }
     }
 }

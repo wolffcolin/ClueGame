@@ -46,7 +46,7 @@ public class Board extends JPanel {
     private static Board theInstance = new Board();
 
     private Solution theAnswer;
-    
+
     private JPanel boardPanel = new JPanel();
 
     // constructor
@@ -64,31 +64,22 @@ public class Board extends JPanel {
         }
         setLayout(new GridLayout(grid.length, grid[0].length));
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
-    	
-    	super.paintComponent(g);
-    	
-    	
-    	int boardWidth = getWidth();
-    	int boardHeight = getHeight();
-    	
-    	int numCellsWidth = grid.length;
-    	int numCellsHeight = grid[0].length;
-    	
-    	int cellSize = Math.min(boardWidth / numCellsWidth, boardHeight / numCellsHeight);
-    	
-    	for (int i = 0; i < grid.length; i++) {
-    		for (int j = 0; j < grid[i].length; j++) {
-    			int x = j * cellSize;
-    			int y = i * cellSize;
-    			grid[i][j].getOffset(x, y);
-    			this.add(grid[i][j]);
-    		}
-    	}
-    
-    	
+        super.paintComponent(g);
+
+        int cellWidth = getWidth() / 15;
+        int cellHeight = getHeight() / 15;
+
+        int cellSize = Math.min(cellWidth, cellHeight);
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                grid[i][j].draw(g, cellSize);
+            }
+        }
+
     }
 
     // returns the instance of board
