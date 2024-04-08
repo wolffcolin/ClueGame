@@ -68,13 +68,12 @@ public abstract class Player {
 	}
 
 	public void draw(Graphics g, int size) {
+		int radius = size / 2;
 		int x = column * size;
 		int y = row * size;
 
-		int radius = size / 2;
-
 		g.setColor(color);
-		g.fillOval(x + radius, y + radius, 2 * radius, 2 * radius);
+		g.fillOval(x, y, 2 * radius, 2 * radius);
 	}
 
 	public void teleport(int row, int column) {

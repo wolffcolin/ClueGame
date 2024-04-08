@@ -79,16 +79,16 @@ public class Board extends JPanel {
                 grid[i][j].draw(g, cellSize);
             }
         }
-        
+
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j].drawLabel(g, cellSize);
                 grid[i][j].drawDoor(g, cellSize);
             }
         }
-        
+
         for (int i = 0; i < players.size(); i++) {
-        	players.get(i).draw(g, cellSize);
+            players.get(i).draw(g, cellSize);
         }
 
     }
@@ -110,6 +110,7 @@ public class Board extends JPanel {
         }
         makeAdjLists();
         dealCards();
+        setStartingPositions();
     }
 
     // finds adjacency for every cell on the grid
@@ -426,7 +427,16 @@ public class Board extends JPanel {
                 newDeck.remove(topCard);
             }
         }
+    }
 
+    public void setStartingPositions() {
+        int[] startingPositions = { 0, 4, 0, 10, 10, 1, 13, 4, 13, 9, 3, 13 };
+
+        int count = 0;
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).teleport(startingPositions[count], startingPositions[count + 1]);
+            count += 2;
+        }
     }
 
     // checks the the solution offered in the accusation is equal to the answer, if
@@ -624,7 +634,7 @@ public class Board extends JPanel {
             case "lightgray":
                 color = Color.LIGHT_GRAY;
                 break;
-            case "magneta":
+            case "magenta":
                 color = Color.MAGENTA;
                 break;
             case "orange":
