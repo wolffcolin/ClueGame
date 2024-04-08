@@ -11,10 +11,13 @@ package clueGame;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.JPanel;
+
 import java.awt.Graphics;
 import java.awt.Color;
 
-public class BoardCell {
+public class BoardCell extends JPanel {
     private int row;
     private int col;
     private char initial;
@@ -24,6 +27,9 @@ public class BoardCell {
     private boolean roomLabel;
     private boolean roomCenter;
     private char secretPassage;
+    
+    private int x;
+    private int y;
 
     private boolean occupied;
 
@@ -71,17 +77,28 @@ public class BoardCell {
         }
     }
     
-    public void Draw(Graphics g, int size, int offset) {
-    	
-    	int x = row + offset; 
-    	int y = col + offset;
-    	
+    public void getOffset(int x, int y) {
+    	this.x = x;
+    	this.y = y;
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+    	draw(g, x, y);
+    }
+    
+    public void draw(Graphics g, int x, int y) {
+   
     	this.setColor();
     	
+    	int xPos = row + x;
+    	int yPos = col + y;
+    	
     	g.setColor(this.color);
-    	g.fillRect(x, y, size, size);
+    	g.fillRect(xPos, yPos, x, y);
     	g.setColor(color.BLACK);
-    	g.drawRect(x, y, size, size);
+    	g.drawRect(xPos, yPos, x, y);
     	
     }
 

@@ -18,9 +18,11 @@ public class ClueGame extends JFrame {
 	public static void main(String[] args) {
 		ClueGame frame = new ClueGame(); // create the panel
 		g = board.getGraphics();
-		board.paintComponents(g);
+		board.paintComponent(g);
+		frame.add(board);
+		frame.pack();
 		frame.setContentPane(board); // put the panel in the frame
-		frame.setSize(300, 300); // size the frame
+		//frame.setSize(300, 300); // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setTitle("Clue Game Board");
 		frame.setVisible(true); // make it visible

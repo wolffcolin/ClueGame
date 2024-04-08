@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 
 public class Board extends JPanel {
     private Set<BoardCell> targets;
@@ -61,6 +62,7 @@ public class Board extends JPanel {
                 grid[i][j] = new BoardCell(i, j, '~');
             }
         }
+        setLayout(new GridLayout(grid.length, grid[0].length));
     }
     
     @Override
@@ -68,19 +70,24 @@ public class Board extends JPanel {
     	
     	super.paintComponent(g);
     	
-    	int cellWidth = getWidth() / 15;
-    	int cellHeight = getHeight() / 15;
     	
-    	int cellSize = Math.min(cellWidth, cellHeight);
+    	int boardWidth = getWidth();
+    	int boardHeight = getHeight();
+    	
+    	int numCellsWidth = grid.length;
+    	int numCellsHeight = grid[0].length;
+    	
+    	int cellSize = Math.min(boardWidth / numCellsWidth, boardHeight / numCellsHeight);
     	
     	for (int i = 0; i < grid.length; i++) {
     		for (int j = 0; j < grid[i].length; j++) {
     			int x = j * cellSize;
     			int y = i * cellSize;
-    			
-    			grid[i][j].Draw(g, x, y);
+    			grid[i][j].getOffset(x, y);
+    			this.add(grid[i][j]);
     		}
     	}
+    
     	
     }
 
