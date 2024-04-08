@@ -18,7 +18,7 @@ public class ClueGame extends JFrame {
 	public static void main(String[] args) {
 		ClueGame frame = new ClueGame(); // create the panel
 		g = board.getGraphics();
-		board.paintComponent(g);
+		board.paintComponents(g);
 		frame.add(board);
 		frame.pack();
 		frame.setContentPane(board); // put the panel in the frame
