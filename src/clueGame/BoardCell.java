@@ -11,10 +11,13 @@ package clueGame;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.JPanel;
+
 import java.awt.Graphics;
 import java.awt.Color;
 
-public class BoardCell {
+public class BoardCell extends JPanel {
     private int row;
     private int col;
     private char initial;
@@ -24,6 +27,9 @@ public class BoardCell {
     private boolean roomLabel;
     private boolean roomCenter;
     private char secretPassage;
+    
+    private int x;
+    private int y;
 
     private boolean occupied;
 
@@ -72,7 +78,6 @@ public class BoardCell {
     }
 
     public void draw(Graphics g, int size) {
-
         int x = row * size;
         int y = col * size;
 
@@ -82,7 +87,6 @@ public class BoardCell {
         g.fillRect(x, y, size, size);
         g.setColor(color.BLACK);
         g.drawRect(x, y, size, size);
-
     }
 
     // adds cell to adjacency list

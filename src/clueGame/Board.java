@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 
 public class Board extends JPanel {
     private Set<BoardCell> targets;
@@ -61,11 +62,11 @@ public class Board extends JPanel {
                 grid[i][j] = new BoardCell(i, j, '~');
             }
         }
+        setLayout(new GridLayout(grid.length, grid[0].length));
     }
 
     @Override
     public void paintComponent(Graphics g) {
-
         super.paintComponent(g);
 
         int cellWidth = getWidth() / 15;
