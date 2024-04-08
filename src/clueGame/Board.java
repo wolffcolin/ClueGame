@@ -83,6 +83,7 @@ public class Board extends JPanel {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j].drawLabel(g, cellSize);
+                grid[i][j].drawDoor(g, cellSize);
             }
         }
 
