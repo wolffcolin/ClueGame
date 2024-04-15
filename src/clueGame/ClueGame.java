@@ -10,6 +10,8 @@ Authors: Colin Wolff and Eoghan Cowley
 package clueGame;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import java.awt.Graphics;
 import java.awt.BorderLayout;
 
@@ -40,6 +42,15 @@ public class ClueGame extends JFrame {
 		//make instance of panels for controls and known cards
 		GameControlPanel controls = new GameControlPanel();
 		KnownCardPanel cards = new KnownCardPanel(humanPlayer);
+		
+		String humanPlayerName = humanPlayer.getName();
+		
+        String message = "<html><body><div style='text-align: center;'>"
+                + "You are " + humanPlayerName + ".<br>"
+                + "Can you find the solution<br>before the Computer players?"
+                + "</div></body></html>";
+		
+		JOptionPane.showMessageDialog(null, message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		
 		//add all panels to frame and set close behavior
 		frame.add(board, BorderLayout.CENTER);
