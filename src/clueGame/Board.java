@@ -47,7 +47,7 @@ public class Board extends JPanel {
     private static Board theInstance = new Board();
 
     private Solution theAnswer;
-    
+
     private Player currentPlayer;
     private int currPlayerIndex;
 
@@ -485,26 +485,29 @@ public class Board extends JPanel {
 		} else {
 			
 		}
-		
 
-	}
-	
-	public int rollDice() {
-		Random random = new Random();
-		int roll = random.nextInt(12) + 1;
-		return roll;
-	}
-	
-	public int getHumanPlayerIndex() {
-		int humanPlayerIndex = 0;
-		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).isAHuman()) {
-				humanPlayerIndex = i;
-			}
-		}
-		
-		return humanPlayerIndex;
-	}
+    }
+
+    public int rollDice() {
+        Random random = new Random();
+        int roll = random.nextInt(12) + 1;
+        return roll;
+    }
+
+    public int getHumanPlayerIndex() {
+        int humanPlayerIndex = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isAHuman()) {
+                humanPlayerIndex = i;
+            }
+        }
+
+        return humanPlayerIndex;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currPlayerIndex;
+    }
 
     // sets file
     public void setConfigFiles(String board, String symbols) {
