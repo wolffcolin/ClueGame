@@ -14,9 +14,9 @@ Space, Unused, X
 Space, Walkway, W
 
 // Players:
-Player, Janitor, Red, true
-Player, Security Guard, Blue, false
-Player, School Child, Green, false
+Player, Janitor, Red, true, 0, 1
+Player, Security Guard, Blue, false, 0, 3
+Player, School Child, Green, false, 0, 4
 
 // Weapons:
 Weapon, Kitchen Knife

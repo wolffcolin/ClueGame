@@ -14,12 +14,12 @@ Space, Unused, X
 Space, Walkway, W
 
 // Players:
-Player, Janitor, Red, true
-Player, Security Guard, Blue, false
-Player, School Child, Green, false
-Player, Docent, Magenta, false
-Player, Museum Director, White, false
-Player, School Teacher, Orange, false
+Player, Janitor, Red, true, 0, 4
+Player, Security Guard, Blue, false, 0, 10
+Player, School Child, Green, false, 10, 1
+Player, Docent, Magenta, false, 13, 4
+Player, Museum Director, White, false, 13, 9
+Player, School Teacher, Orange, false, 3, 13
 
 // Weapons:
 Weapon, Kitchen Knife

@@ -17,11 +17,11 @@ import java.awt.BorderLayout;
 
 public class ClueGame extends JFrame {
 
-	//getting instance of board and graphics
+	// getting instance of board and graphics
 	private static Board board = Board.getInstance();
 	private static Graphics g;
 
-	//constructor
+	// constructor
 	public ClueGame() {
 		setSize(300, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,30 +29,30 @@ public class ClueGame extends JFrame {
 		board.initialize();
 	}
 
-	//main
+	// main
 	public static void main(String[] args) {
-		//make new frame and get graphics + paint components
+		// make new frame and get graphics + paint components
 		ClueGame frame = new ClueGame(); // create the panel
 		g = board.getGraphics();
 		board.paintComponents(g);
-		
-		//get human player to generate known card panel
+
+		// get human player to generate known card panel
 		Player humanPlayer = board.getHumanPlayer();
-		
-		//make instance of panels for controls and known cards
+
+		// make instance of panels for controls and known cards
 		GameControlPanel controls = new GameControlPanel();
 		KnownCardPanel cards = new KnownCardPanel(humanPlayer);
-		
+
 		String humanPlayerName = humanPlayer.getName();
-		
-        String message = "<html><body><div style='text-align: center;'>"
-                + "You are " + humanPlayerName + ".<br>"
-                + "Can you find the solution<br>before the Computer players?"
-                + "</div></body></html>";
-		
+
+		String message = "<html><body><div style='text-align: center;'>"
+				+ "You are " + humanPlayerName + ".<br>"
+				+ "Can you find the solution<br>before the Computer players?"
+				+ "</div></body></html>";
+
 		JOptionPane.showMessageDialog(null, message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
-		
-		//add all panels to frame and set close behavior
+
+		// add all panels to frame and set close behavior
 		frame.add(board, BorderLayout.CENTER);
 		frame.add(controls, BorderLayout.SOUTH);
 		frame.add(cards, BorderLayout.EAST);

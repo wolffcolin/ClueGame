@@ -13,4 +13,4 @@ Space, Unused, X
 Space, Walkway, W
 
 Weapon, Kitchen Knife
-Player, Janitor, Red, true
+Player, Janitor, Red, true, 1, 0

@@ -63,26 +63,26 @@ public class Board extends JPanel {
         setLayout(new GridLayout(grid.length, grid[0].length));
     }
 
-    //draws the components of board
+    // draws the components of board
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        //calculate the height and width of the cell
+        // calculate the height and width of the cell
         int cellWidth = getWidth() / 15;
         int cellHeight = getHeight() / 15;
 
-        //pick the smaller of the two to ensure squareness
+        // pick the smaller of the two to ensure squareness
         int cellSize = Math.min(cellWidth, cellHeight);
 
-        //draw each cell
+        // draw each cell
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j].draw(g, cellSize);
             }
         }
 
-        //draw the labels for the rooms and doors where applicable
+        // draw the labels for the rooms and doors where applicable
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j].drawLabel(g, cellSize);
@@ -90,7 +90,7 @@ public class Board extends JPanel {
             }
         }
 
-        //draw players
+        // draw players
         for (int i = 0; i < players.size(); i++) {
             players.get(i).draw(g, cellSize);
         }
@@ -114,7 +114,6 @@ public class Board extends JPanel {
         }
         makeAdjLists();
         dealCards();
-        setStartingPositions();
     }
 
     // finds adjacency for every cell on the grid
@@ -253,10 +252,15 @@ public class Board extends JPanel {
                 }
             } else if (line.startsWith("Player")) {
                 String[] lineSplit = line.split(",");
-                if (lineSplit.length == 4) {
+                if (lineSplit.length == 6) {
                     String playerName = lineSplit[1].trim();
                     String playerColor = lineSplit[2].trim();
                     String isHumanString = lineSplit[3].trim();
+                    String xPosStr = lineSplit[4].trim();
+                    String yPosStr = lineSplit[5].trim();
+                    Integer xPos = Integer.valueOf(xPosStr);
+                    Integer yPos = Integer.valueOf(yPosStr);
+
                     boolean isHuman = false;
                     if (isHumanString.equals("true")) {
                         isHuman = true;
@@ -271,7 +275,7 @@ public class Board extends JPanel {
                     } else {
                         player = new ComputerPlayer(playerName, color);
                     }
-
+                    player.teleport(yPos, xPos);
                     players.add(player);
 
                     Card playerCard = new Card(playerName, CardType.PERSON); // create person card
@@ -430,16 +434,6 @@ public class Board extends JPanel {
                 players.get(i).updateHand(newDeck.get(topCard));
                 newDeck.remove(topCard);
             }
-        }
-    }
-
-    public void setStartingPositions() {
-        int[] startingPositions = { 0, 4, 0, 10, 10, 1, 13, 4, 13, 9, 3, 13 };
-
-        int count = 0;
-        for (int i = 0; i < players.size(); i++) {
-            players.get(i).teleport(startingPositions[count], startingPositions[count + 1]);
-            count += 2;
         }
     }
 
