@@ -47,7 +47,7 @@ public class Board extends JPanel {
     private static Board theInstance = new Board();
 
     private Solution theAnswer;
-    
+
     private Player currentPlayer;
     private int currPlayerIndex;
 
@@ -462,47 +462,51 @@ public class Board extends JPanel {
         }
         return null;
     }
-    
-	public void nextClicked() {
-		
-		Player humanPlayer = getHumanPlayer();
-		
-		int humanIndex = getHumanPlayerIndex();
-		
-		if (currPlayerIndex == humanIndex) {
-			if (humanPlayer.hasMoved()) {
-				currPlayerIndex++;
-				if (currPlayerIndex == players.size()) {
-					currPlayerIndex = 0;
-				}
-				int rollResult = rollDice();
-			} else {
-				
-				JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error", JOptionPane.INFORMATION_MESSAGE);
-			}
-		} else {
-			
-		}
-		
 
-	}
-	
-	public int rollDice() {
-		Random random = new Random();
-		int roll = random.nextInt(12) + 1;
-		return roll;
-	}
-	
-	public int getHumanPlayerIndex() {
-		int humanPlayerIndex = 0;
-		for (int i = 0; i < players.size(); i++) {
-			if (players.get(i).isAHuman()) {
-				humanPlayerIndex = i;
-			}
-		}
-		
-		return humanPlayerIndex;
-	}
+    public void nextClicked() {
+
+        Player humanPlayer = getHumanPlayer();
+
+        int humanIndex = getHumanPlayerIndex();
+
+        if (currPlayerIndex == humanIndex) {
+            if (humanPlayer.hasMoved()) {
+                currPlayerIndex++;
+                if (currPlayerIndex == players.size()) {
+                    currPlayerIndex = 0;
+                }
+                int rollResult = rollDice();
+            } else {
+
+                JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+
+        }
+
+    }
+
+    public int rollDice() {
+        Random random = new Random();
+        int roll = random.nextInt(12) + 1;
+        return roll;
+    }
+
+    public int getHumanPlayerIndex() {
+        int humanPlayerIndex = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isAHuman()) {
+                humanPlayerIndex = i;
+            }
+        }
+
+        return humanPlayerIndex;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currPlayerIndex;
+    }
 
     // sets file
     public void setConfigFiles(String board, String symbols) {

@@ -12,7 +12,13 @@ package clueGame;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -93,6 +99,30 @@ public class BoardCell {
             g.drawRect(x, y, size, size);
         }
 
+        JPanel cellPanel = new JPanel();
+        cellPanel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cellClicked();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+        });
+
     }
 
     // draws the room name labels on the label cell
@@ -131,6 +161,20 @@ public class BoardCell {
             g.fillRect(x + size, y, 5, size);
         } else if (doorDirection == DoorDirection.UP) {
             g.fillRect(x, y - 5, size, 5);
+        }
+    }
+
+    public void cellClicked() {
+        Board board = Board.getInstance();
+        Player humanPlayer = board.getHumanPlayer();
+        int humanIndex = board.getHumanPlayerIndex();
+        int currIndex = board.getCurrentPlayerIndex();
+
+        if (currIndex == humanIndex) {
+            humanPlayer.teleport(row, col);
+        } else {
+            JOptionPane.showMessageDialog(null, "You cannot move as it is not your turn", "Error",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
