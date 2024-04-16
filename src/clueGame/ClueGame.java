@@ -21,6 +21,8 @@ public class ClueGame extends JFrame {
 	private static Board board = Board.getInstance();
 	private static Graphics g;
 
+	private Player currentPlayer;
+
 	// constructor
 	public ClueGame() {
 		setSize(300, 300);
@@ -63,8 +65,6 @@ public class ClueGame extends JFrame {
 		frame.setVisible(true); // make it visible
 	}
 	
-	public static void nextClicked() {
-		
-	}
+
 
 }

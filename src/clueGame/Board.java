@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.util.Scanner;
@@ -46,6 +47,9 @@ public class Board extends JPanel {
     private static Board theInstance = new Board();
 
     private Solution theAnswer;
+    
+    private Player currentPlayer;
+    private int currPlayerIndex;
 
     // constructor
     private Board() {
@@ -448,7 +452,7 @@ public class Board extends JPanel {
 
     // handles when a suggestion is raised, if there are no cards that can dispute
     // the suggestion it returns null
-    public Card handleSuggestionn(Solution suggestion, Player suggester) {
+    public Card handleSuggestion(Solution suggestion, Player suggester) {
         Card dispute;
         for (Player player : players) {
             if (player.disproveSuggestion(suggestion) != null && suggester != player) {
@@ -458,6 +462,47 @@ public class Board extends JPanel {
         }
         return null;
     }
+    
+	public void nextClicked() {
+		
+		Player humanPlayer = getHumanPlayer();
+		
+		int humanIndex = getHumanPlayerIndex();
+		
+		if (currPlayerIndex == humanIndex) {
+			if (humanPlayer.hasMoved()) {
+				currPlayerIndex++;
+				if (currPlayerIndex == players.size()) {
+					currPlayerIndex = 0;
+				}
+				int rollResult = rollDice();
+			} else {
+				
+				JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error", JOptionPane.INFORMATION_MESSAGE);
+			}
+		} else {
+			
+		}
+		
+
+	}
+	
+	public int rollDice() {
+		Random random = new Random();
+		int roll = random.nextInt(12) + 1;
+		return roll;
+	}
+	
+	public int getHumanPlayerIndex() {
+		int humanPlayerIndex = 0;
+		for (int i = 0; i < players.size(); i++) {
+			if (players.get(i).isAHuman()) {
+				humanPlayerIndex = i;
+			}
+		}
+		
+		return humanPlayerIndex;
+	}
 
     // sets file
     public void setConfigFiles(String board, String symbols) {

@@ -67,7 +67,7 @@ public class GameControlPanel extends JPanel {
         nextPlayer.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		ClueGame.nextClicked();
+        		board.nextClicked();
         	}
         });
 

@@ -118,5 +118,9 @@ public abstract class Player {
 	public boolean hasMoved() {
 		return hasMoved;
 	}
+	
+	public void setMovedStatus(boolean hasMoved) {
+		this.hasMoved = hasMoved;
+	}
 
 }

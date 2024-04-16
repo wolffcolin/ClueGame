@@ -165,15 +165,15 @@ public class GameSolutionTest {
         Solution onlyHuman = new Solution(solutionCards[0], hand0.get(1), solutionCards[2]);
 
         // testing that if no one has the cards it is returned null
-        assertNull(board.handleSuggestionn(noDisprove, player0));
+        assertNull(board.handleSuggestion(noDisprove, player0));
         // testing that if only the suggester has the card it is returned null
-        assertNull(board.handleSuggestionn(onlySuggestingPlayer, player0));
+        assertNull(board.handleSuggestion(onlySuggestingPlayer, player0));
         // testing that player 1 will return the correct card
-        assertEquals(hand1.get(2), board.handleSuggestionn(onlyPlayer1, player0));
+        assertEquals(hand1.get(2), board.handleSuggestion(onlyPlayer1, player0));
         // testing that the human can return the correct card
-        assertEquals(hand0.get(1), board.handleSuggestionn(onlyHuman, player1));
+        assertEquals(hand0.get(1), board.handleSuggestion(onlyHuman, player1));
         // testing that if two players can dispute, only the first player will return
         // the card
-        assertEquals(hand1.get(2), board.handleSuggestionn(player1And2, player0));
+        assertEquals(hand1.get(2), board.handleSuggestion(player1And2, player0));
     }
 }
