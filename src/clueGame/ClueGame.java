@@ -22,6 +22,8 @@ public class ClueGame extends JFrame {
 	private static Graphics g;
 
 	private Player currentPlayer;
+	private static GameControlPanel controls;
+	private static KnownCardPanel cards;
 
 	// constructor
 	public ClueGame() {
@@ -42,8 +44,8 @@ public class ClueGame extends JFrame {
 		Player humanPlayer = board.getHumanPlayer();
 
 		// make instance of panels for controls and known cards
-		GameControlPanel controls = new GameControlPanel();
-		KnownCardPanel cards = new KnownCardPanel(humanPlayer);
+		controls = new GameControlPanel();
+		cards = new KnownCardPanel(humanPlayer);
 
 		String humanPlayerName = humanPlayer.getName();
 
@@ -63,6 +65,11 @@ public class ClueGame extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setTitle("Clue Game Board");
 		frame.setVisible(true); // make it visible
+	}
+	
+	public static void setNameAndRoll(Player player, int roll) {
+		controls.setTurnName(player);
+		controls.setRoll(String.valueOf(roll));
 	}
 	
 
