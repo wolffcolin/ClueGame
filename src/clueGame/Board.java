@@ -275,7 +275,7 @@ public class Board extends JPanel {
                     } else {
                         player = new ComputerPlayer(playerName, color);
                     }
-                    player.teleport(yPos, xPos);
+                    player.teleport(xPos, yPos);
                     players.add(player);
 
                     Card playerCard = new Card(playerName, CardType.PERSON); // create person card
