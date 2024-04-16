@@ -18,6 +18,8 @@ import javax.swing.border.TitledBorder;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GameControlPanel extends JPanel {
     private JTextField turnName;
@@ -36,6 +38,9 @@ public class GameControlPanel extends JPanel {
     // creates the text fields for the name of whose turn it is, their roll, and two
     // buttons for making an accusation and passing on the turn to the next player
     private JPanel createTurnAndRollPanel() {
+    	
+    	Board board = Board.getInstance();
+    	
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 4));
 
@@ -58,6 +63,13 @@ public class GameControlPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(makeAccusation);
         buttonPanel.add(nextPlayer);
+        
+        nextPlayer.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		ClueGame.nextClicked();
+        	}
+        });
 
         panel.add(turnPanel);
         panel.add(rollPanel);

@@ -62,5 +62,9 @@ public class ClueGame extends JFrame {
 		frame.setTitle("Clue Game Board");
 		frame.setVisible(true); // make it visible
 	}
+	
+	public static void nextClicked() {
+		
+	}
 
 }

@@ -24,6 +24,8 @@ public abstract class Player {
 	private int row;
 	private int column;
 	private boolean isHuman;
+	
+	private boolean hasMoved;
 
 	// stores the player's hand
 	private ArrayList<Card> hand = new ArrayList<>();
@@ -34,6 +36,7 @@ public abstract class Player {
 		this.name = name;
 		this.color = color;
 		this.isHuman = isHuman;
+		this.hasMoved = false;
 	}
 
 	// adds card to hand
@@ -110,6 +113,10 @@ public abstract class Player {
 
 	public String getName() {
 		return name;
+	}
+	
+	public boolean hasMoved() {
+		return hasMoved;
 	}
 
 }
