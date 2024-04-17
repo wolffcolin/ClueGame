@@ -1,3 +1,12 @@
+/*
+ 
+Class: KnownCardPanel
+Description: Displays known cards 
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 package clueGame;
 
 import java.awt.GridLayout;
@@ -18,6 +27,7 @@ public class KnownCardPanel extends JPanel {
 
 	public KnownCardPanel(Player player) {
 		
+		//arraylist of cards divided by type
 		ArrayList<Card> seen = new ArrayList<>(player.getSeen());
 		ArrayList<Card> hand = player.getHand();
 		
@@ -28,6 +38,7 @@ public class KnownCardPanel extends JPanel {
 		ArrayList<Card> weaponSeen = new ArrayList<>();
 		ArrayList<Card> weaponHand = new ArrayList<>();
 		
+		//divided by type
 		for (int i = 0; i < hand.size(); i++) {
 			if (hand.get(i).getCardType() == CardType.PERSON) {
 				peopleHand.add(hand.get(i));
@@ -38,6 +49,7 @@ public class KnownCardPanel extends JPanel {
 			}
 		}
 		
+		//
 		for (int i = 0; i < seen.size(); i++) {
 			if (seen.get(i).getCardType() == CardType.PERSON) {
 				peopleSeen.add(seen.get(i));
@@ -47,10 +59,6 @@ public class KnownCardPanel extends JPanel {
 				roomSeen.add(seen.get(i));
 			}
 		}
-		
-		System.out.println("Weapon Hand:" + weaponHand.toString());
-		System.out.println("People Hand: " + peopleHand.toString());
-		System.out.println("Room Hand: " + roomHand.toString());
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(createSectionPanel("People", peopleSeen, peopleHand));
