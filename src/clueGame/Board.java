@@ -542,6 +542,9 @@ public class Board extends JPanel {
     		Player currPlayer = potentialNext;
     		int rollResult = rollDice();
     		ClueGame.setNameAndRoll(currPlayer, rollResult);
+    		
+    		BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
+    		calcTargets(startCell, rollResult);
     	}
     }
 
