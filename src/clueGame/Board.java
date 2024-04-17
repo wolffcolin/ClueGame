@@ -506,6 +506,8 @@ public class Board extends JPanel {
         Player humanPlayer = getHumanPlayer();
 
         int humanIndex = getHumanPlayerIndex();
+        
+    	currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
 
         if (currPlayerIndex == humanIndex) {
             if (humanPlayer.hasMoved()) {
@@ -525,7 +527,6 @@ public class Board extends JPanel {
     }
     
     public void moveNextPlayer() {
-    	currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
     	Player potentialNext = players.get(currPlayerIndex);
     	
     	if (!potentialNext.isAHuman()) {
