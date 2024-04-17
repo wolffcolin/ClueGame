@@ -476,7 +476,7 @@ public class Board extends JPanel {
                 int rollResult = rollDice();
                 ClueGame.setNameAndRoll(currPlayer, rollResult);
 
-                BoardCell startCell = grid[currPlayer.getCol()][currPlayer.getRow()];
+                BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
                 calcTargets(startCell, rollResult);
                 Graphics g = ClueGame.getClueGraphics();
                 for (BoardCell cell : targets) {
@@ -487,9 +487,25 @@ public class Board extends JPanel {
                         JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
+        	ComputerPlayer currBot = (ComputerPlayer) players.get(currPlayerIndex);
+        	BoardCell startCell = grid[currBot.getRow()][currBot.getCol()];
+        	int rollResult = rollDice();
+        	calcTargets(startCell, rollResult);
+        	ArrayList targetsList = new ArrayList<>(targets);
+        	BoardCell chosenTarget = currBot.selectTarget(targetsList);
+        	currBot.teleport(chosenTarget.getCol(), chosenTarget.getRow());
+        	
+        	currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
+        	
+        	Player nextPlayer = players.get(currPlayerIndex);
 
+        	ClueGame.setNameAndRoll(nextPlayer, rollResult);
         }
 
+    }
+    
+    public void nextClicked2() {
+    	
     }
 
     public int rollDice() {
