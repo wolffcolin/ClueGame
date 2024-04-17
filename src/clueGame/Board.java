@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.*;
 
 public class Board extends JPanel {
     private Set<BoardCell> targets;
@@ -46,6 +47,7 @@ public class Board extends JPanel {
 
     private static Board theInstance = new Board();
 
+    private int cellSize;
     private Solution theAnswer;
 
     private Player currentPlayer;
@@ -65,6 +67,32 @@ public class Board extends JPanel {
             }
         }
         setLayout(new GridLayout(grid.length, grid[0].length));
+        
+        this.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		if (currPlayerIndex == getHumanPlayerIndex()) {
+        			handleMouseClick(e);
+        		}
+        		
+        	}
+        });
+    } 
+    
+    private void handleMouseClick(MouseEvent e) {
+    	int x = e.getX();
+    	int y = e.getY();
+    	
+    	int col = x / cellSize;
+    	int row = y / cellSize;
+    	
+    	BoardCell targetCell = getCell(row, col);
+    	
+    	if (row < numRows && col < numColumns && targets.contains(targetCell)) {
+    		BoardCell focusCell = grid[row][col];
+    		focusCell.cellClicked();
+    		repaint();
+    	}
     }
 
     // draws the components of board
@@ -77,7 +105,7 @@ public class Board extends JPanel {
         int cellHeight = getHeight() / 15;
 
         // pick the smaller of the two to ensure squareness
-        int cellSize = Math.min(cellWidth, cellHeight);
+        cellSize = Math.min(cellWidth, cellHeight);
 
         // draw each cell
         for (int i = 0; i < grid.length; i++) {
@@ -118,6 +146,14 @@ public class Board extends JPanel {
         }
         makeAdjLists();
         dealCards();
+    }
+    
+    public void initializePlayer() {
+    	Player human = getHumanPlayer();
+    	BoardCell startCell = grid[human.getRow()][human.getCol()];
+    	int diceRoll = rollDice();
+    	calcTargets(startCell, diceRoll);
+    	ClueGame.setNameAndRoll(human, diceRoll);
     }
 
     // finds adjacency for every cell on the grid
@@ -470,7 +506,7 @@ public class Board extends JPanel {
         int humanIndex = getHumanPlayerIndex();
 
         if (currPlayerIndex == humanIndex) {
-            if (!humanPlayer.hasMoved()) {
+            if (humanPlayer.hasMoved()) {
                 currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
                 Player currPlayer = players.get(currPlayerIndex);
                 int rollResult = rollDice();
@@ -502,10 +538,6 @@ public class Board extends JPanel {
         	ClueGame.setNameAndRoll(nextPlayer, rollResult);
         }
 
-    }
-    
-    public void nextClicked2() {
-    	
     }
 
     public int rollDice() {

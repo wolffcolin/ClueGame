@@ -50,6 +50,7 @@ public class BoardCell {
         this.roomLabel = false;
         this.roomCenter = false;
         this.doorDirection = DoorDirection.NONE;
+        
     }
 
     // constructor when there is a second character

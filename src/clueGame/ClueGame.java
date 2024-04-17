@@ -46,6 +46,8 @@ public class ClueGame extends JFrame {
 		// make instance of panels for controls and known cards
 		controls = new GameControlPanel();
 		cards = new KnownCardPanel(humanPlayer);
+		
+		board.initializePlayer();
 
 		String humanPlayerName = humanPlayer.getName();
 
