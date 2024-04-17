@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,6 +39,7 @@ public class BoardCell {
     private int x;
     private int y;
     private int sizeOfCell;
+    private boolean target;
 
     private boolean occupied;
 
@@ -50,7 +53,7 @@ public class BoardCell {
         this.roomLabel = false;
         this.roomCenter = false;
         this.doorDirection = DoorDirection.NONE;
-        
+
     }
 
     // constructor when there is a second character
@@ -92,38 +95,19 @@ public class BoardCell {
 
         this.setColor();
 
-        g.setColor(this.color);
-        g.fillRect(x, y, size, size);
+        if (target) {
+            g.setColor(Color.GREEN);
+            g.fillRect(x, y, size, size);
+        } else {
+            g.setColor(this.color);
+            g.fillRect(x, y, size, size);
+        }
 
         // if and only if they are walways then they get borders drawn in black
         if (this.initial == 'X' || this.initial == 'W') {
-            g.setColor(color.BLACK);
+            g.setColor(Color.BLACK);
             g.drawRect(x, y, size, size);
         }
-
-        JPanel cellPanel = new JPanel();
-        cellPanel.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cellClicked();
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-        });
     }
 
     public void drawTarget(Graphics g) {
@@ -175,18 +159,9 @@ public class BoardCell {
         }
     }
 
-    public void cellClicked() {
-        Board board = Board.getInstance();
-        Player humanPlayer = board.getHumanPlayer();
-        int humanIndex = board.getHumanPlayerIndex();
-        int currIndex = board.getCurrentPlayerIndex();
-
-        if (currIndex == humanIndex) {
-            humanPlayer.teleport(row, col);
-        } else {
-            JOptionPane.showMessageDialog(null, "You cannot move as it is not your turn", "Error",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
+    public boolean containsClick(int x, int y, int cellSize) {
+        Rectangle rect = new Rectangle(col * cellSize, row * cellSize, cellSize, cellSize);
+        return rect.contains(new Point(x, y));
     }
 
     // adds cell to adjacency list
@@ -249,6 +224,14 @@ public class BoardCell {
 
     public void setOccupied(boolean b) {
         this.occupied = b;
+    }
+
+    public void setTarget(boolean b) {
+        this.target = b;
+    }
+
+    public boolean getTarget() {
+        return target;
     }
 
     public boolean equals(BoardCell otherCell) {
