@@ -509,13 +509,7 @@ public class Board extends JPanel {
 
         if (currPlayerIndex == humanIndex) {
             if (humanPlayer.hasMoved()) {
-                currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
-                Player currPlayer = players.get(currPlayerIndex);
-                int rollResult = rollDice();
-                ClueGame.setNameAndRoll(currPlayer, rollResult);
-
-                BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
-                calcTargets(startCell, rollResult);
+            	moveNextPlayer();
                 Graphics g = getGraphics();
                 for (BoardCell cell : targets) {
                     cell.drawTarget(g);
@@ -525,21 +519,30 @@ public class Board extends JPanel {
                         JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-        	ComputerPlayer currBot = (ComputerPlayer) players.get(currPlayerIndex);
-        	BoardCell startCell = grid[currBot.getRow()][currBot.getCol()];
-        	int rollResult = rollDice();
-        	calcTargets(startCell, rollResult);
-        	ArrayList targetsList = new ArrayList<>(targets);
-        	BoardCell chosenTarget = currBot.selectTarget(targetsList);
-        	currBot.teleport(chosenTarget.getCol(), chosenTarget.getRow());
-        	
-        	currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
-        	
-        	Player nextPlayer = players.get(currPlayerIndex);
-
-        	ClueGame.setNameAndRoll(nextPlayer, rollResult);
+        	moveNextPlayer();
         }
 
+    }
+    
+    public void moveNextPlayer() {
+    	currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
+    	Player potentialNext = players.get(currPlayerIndex);
+    	
+    	if (!potentialNext.isAHuman()) {
+    		ComputerPlayer currPlayer = (ComputerPlayer)players.get(currPlayerIndex);
+        	int rollResult = rollDice();
+            ClueGame.setNameAndRoll(currPlayer, rollResult);
+            
+            BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
+            calcTargets(startCell, rollResult);
+            ArrayList targetsList = new ArrayList<>(targets);
+            BoardCell chosenTarget = currPlayer.selectTarget(targetsList);
+            currPlayer.teleport(chosenTarget.getRow(), chosenTarget.getCol());
+    	} else {
+    		Player currPlayer = potentialNext;
+    		int rollResult = rollDice();
+    		ClueGame.setNameAndRoll(currPlayer, rollResult);
+    	}
     }
 
     public int rollDice() {
