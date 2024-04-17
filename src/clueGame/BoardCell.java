@@ -36,6 +36,7 @@ public class BoardCell {
 
     private int x;
     private int y;
+    private int sizeOfCell;
 
     private boolean occupied;
 
@@ -122,7 +123,16 @@ public class BoardCell {
             public void mouseEntered(MouseEvent e) {
             }
         });
+    }
 
+    public void drawTarget(Graphics g) {
+        int y = row * sizeOfCell;
+        int x = col * sizeOfCell;
+
+        this.setColor();
+
+        g.setColor(Color.GREEN);
+        g.fillRect(x, y, sizeOfCell, sizeOfCell);
     }
 
     // draws the room name labels on the label cell
