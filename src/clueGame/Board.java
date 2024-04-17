@@ -51,6 +51,7 @@ public class Board extends JPanel {
     private Solution theAnswer;
 
     private Player currentPlayer;
+    private boolean isTurnEnd;
     private int currPlayerIndex;
 
     // constructor
@@ -67,34 +68,45 @@ public class Board extends JPanel {
             }
         }
         setLayout(new GridLayout(grid.length, grid[0].length));
-        
+
         this.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		if (currPlayerIndex == getHumanPlayerIndex()) {
-        			handleMouseClick(e);
-        		}
-        		
-        	}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                handleMouseClick(e);
+
+            }
         });
-    } 
-    
+    }
+
     private void handleMouseClick(MouseEvent e) {
-    	int x = e.getX();
-    	int y = e.getY();
-    	
-    	int col = x / cellSize;
-    	int row = y / cellSize;
-    	
-    	BoardCell targetCell = getCell(row, col);
-    	
-    	if (row < numRows && col < numColumns && targets.contains(targetCell)) {
-    		BoardCell focusCell = grid[row][col];
-    		focusCell.cellClicked();
-    		repaint();
-    	}
-    	
-    	getHumanPlayer().setMovedStatus(true);
+        if (currentPlayer.isAHuman() && !isTurnEnd) {
+            if (targets.isEmpty()) {
+                endTurn();
+                return;
+            }
+
+            BoardCell targetCell = getClickCell(e);
+
+            if (targetCell.getTarget()) {
+                movePlayer(targetCell);
+                endTurn();
+                repaint();
+            } else {
+                JOptionPane.showMessageDialog(null, "Not a valid target", "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    public BoardCell getClickCell(MouseEvent e) {
+        for (BoardCell[] row : grid) {
+            for (BoardCell cell : row) {
+                if (cell.containsClick(e.getX(), e.getY(), cellSize)) {
+                    return cell;
+                }
+            }
+        }
+        return null;
     }
 
     // draws the components of board
@@ -128,7 +140,6 @@ public class Board extends JPanel {
         for (int i = 0; i < players.size(); i++) {
             players.get(i).draw(g, cellSize);
         }
-
     }
 
     // returns the instance of board
@@ -149,13 +160,14 @@ public class Board extends JPanel {
         makeAdjLists();
         dealCards();
     }
-    
+
     public void initializePlayer() {
-    	Player human = getHumanPlayer();
-    	BoardCell startCell = grid[human.getRow()][human.getCol()];
-    	int diceRoll = rollDice();
-    	calcTargets(startCell, diceRoll);
-    	ClueGame.setNameAndRoll(human, diceRoll);
+        currentPlayer = getHumanPlayer();
+        int roll = rollDice();
+        ClueGame.setNameAndRoll(currentPlayer, roll);
+
+        BoardCell startCell = grid[currentPlayer.getRow()][currentPlayer.getCol()];
+        calcTargets(startCell, roll);
     }
 
     // finds adjacency for every cell on the grid
@@ -501,53 +513,82 @@ public class Board extends JPanel {
         return null;
     }
 
-    public void nextClicked() {
+    public void endTurn() {
+        isTurnEnd = true;
 
-        Player humanPlayer = getHumanPlayer();
-
-        int humanIndex = getHumanPlayerIndex();
-        
-    	currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
-
-        if (currPlayerIndex == humanIndex) {
-            if (humanPlayer.hasMoved()) {
-            	moveNextPlayer();
-                Graphics g = getGraphics();
-                for (BoardCell cell : targets) {
-                    cell.drawTarget(g);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        } else {
-        	moveNextPlayer();
+        for (BoardCell cell : targets) {
+            cell.setTarget(false);
         }
 
+        repaint();
     }
-    
-    public void moveNextPlayer() {
-    	Player potentialNext = players.get(currPlayerIndex);
-    	
-    	if (!potentialNext.isAHuman()) {
-    		ComputerPlayer currPlayer = (ComputerPlayer)players.get(currPlayerIndex);
-        	int rollResult = rollDice();
-            ClueGame.setNameAndRoll(currPlayer, rollResult);
-            
-            BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
-            calcTargets(startCell, rollResult);
-            ArrayList targetsList = new ArrayList<>(targets);
-            BoardCell chosenTarget = currPlayer.selectTarget(targetsList);
-            currPlayer.teleport(chosenTarget.getRow(), chosenTarget.getCol());
-    	} else {
-    		Player currPlayer = potentialNext;
-    		int rollResult = rollDice();
-    		ClueGame.setNameAndRoll(currPlayer, rollResult);
-    		
-    		BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
-    		calcTargets(startCell, rollResult);
-    	}
+
+    public void movePlayer(BoardCell target) {
+        int row = target.getRow();
+        int col = target.getCol();
+
+        currentPlayer.teleport(row, col);
     }
+
+    public void computerPlayerMove() {
+        ComputerPlayer compPlayer = (ComputerPlayer) currentPlayer;
+        ArrayList<BoardCell> targetList = new ArrayList<>(targets);
+        BoardCell compTargetCell = compPlayer.selectTarget(targetList);
+
+        movePlayer(compTargetCell);
+        endTurn();
+        repaint();
+    }
+
+    public void nextClicked() {
+        if (isTurnEnd) {
+            isTurnEnd = false;
+
+            currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
+            currentPlayer = players.get(currPlayerIndex);
+            int rollResult = rollDice();
+            ClueGame.setNameAndRoll(currentPlayer, rollResult);
+
+            BoardCell currentCell = getCell(currentPlayer.getRow(), currentPlayer.getCol());
+            calcTargets(currentCell, rollResult);
+
+            if (targets.isEmpty()) {
+                endTurn();
+                return;
+            }
+
+            if (!currentPlayer.isAHuman()) {
+                computerPlayerMove();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    // public void moveNextPlayer() {
+    // Player potentialNext = players.get(currPlayerIndex);
+
+    // if (!potentialNext.isAHuman()) {
+    // ComputerPlayer currPlayer = (ComputerPlayer) players.get(currPlayerIndex);
+    // int rollResult = rollDice();
+    // ClueGame.setNameAndRoll(currPlayer, rollResult);
+
+    // BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
+    // calcTargets(startCell, rollResult);
+    // ArrayList targetsList = new ArrayList<>(targets);
+    // BoardCell chosenTarget = currPlayer.selectTarget(targetsList);
+    // currPlayer.teleport(chosenTarget.getRow(), chosenTarget.getCol());
+    // } else {
+    // Player currPlayer = potentialNext;
+    // int rollResult = rollDice();
+    // ClueGame.setNameAndRoll(currPlayer, rollResult);
+
+    // BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
+    // calcTargets(startCell, rollResult);
+    // getHumanPlayer().setMovedStatus(false);
+    // }
+    // }
 
     public int rollDice() {
         Random random = new Random();
@@ -562,7 +603,6 @@ public class Board extends JPanel {
                 humanPlayerIndex = i;
             }
         }
-
         return humanPlayerIndex;
     }
 
@@ -590,6 +630,11 @@ public class Board extends JPanel {
         // base case
         if (pathLength == 0 || (cell.isRoomCenter() && !startingCell)) {
             targets.add(cell);
+
+            if (currentPlayer.isAHuman()) {
+                cell.setTarget(true);
+            }
+            repaint();
             visited.remove(cell);
             return;
         }
