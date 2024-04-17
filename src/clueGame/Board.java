@@ -93,6 +93,8 @@ public class Board extends JPanel {
     		focusCell.cellClicked();
     		repaint();
     	}
+    	
+    	getHumanPlayer().setMovedStatus(true);
     }
 
     // draws the components of board
