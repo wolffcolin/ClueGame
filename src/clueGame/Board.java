@@ -478,6 +478,10 @@ public class Board extends JPanel {
 				int rollResult = rollDice();
 				Player currPlayer = players.get(currPlayerIndex);
 				ClueGame.setNameAndRoll(currPlayer, rollResult);
+				
+				BoardCell startCell = grid[currPlayer.getCol()][currPlayer.getRow()];
+				calcTargets(startCell, rollResult);
+				
 			} else {
 				
 				JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error", JOptionPane.INFORMATION_MESSAGE);
