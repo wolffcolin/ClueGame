@@ -484,7 +484,7 @@ public class Board extends JPanel {
 				
 			} else {
 				
-				JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error", 				JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else {
 			
