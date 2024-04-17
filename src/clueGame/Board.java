@@ -95,6 +95,7 @@ public class Board extends JPanel {
     	}
     	
     	getHumanPlayer().setMovedStatus(true);
+    	
     }
 
     // draws the components of board
@@ -511,6 +512,7 @@ public class Board extends JPanel {
 
         if (currPlayerIndex == humanIndex) {
             if (humanPlayer.hasMoved()) {
+            	humanPlayer.setMovedStatus(false);
             	moveNextPlayer();
                 Graphics g = getGraphics();
                 for (BoardCell cell : targets) {
