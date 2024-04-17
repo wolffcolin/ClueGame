@@ -462,33 +462,33 @@ public class Board extends JPanel {
         }
         return null;
     }
-    
-	public void nextClicked() {
-		
-		Player humanPlayer = getHumanPlayer();
-		
-		int humanIndex = getHumanPlayerIndex();
-		
-		if (currPlayerIndex == humanIndex) {
-			if (humanPlayer.hasMoved()) {
-				currPlayerIndex++;
-				if (currPlayerIndex == players.size()) {
-					currPlayerIndex = 0;
-				}
-				int rollResult = rollDice();
-				Player currPlayer = players.get(currPlayerIndex);
-				ClueGame.setNameAndRoll(currPlayer, rollResult);
-				
-				BoardCell startCell = grid[currPlayer.getCol()][currPlayer.getRow()];
-				calcTargets(startCell, rollResult);
-				
-			} else {
-				
-				JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error", JOptionPane.INFORMATION_MESSAGE);
-			}
-		} else {
-			
-		}
+
+    public void nextClicked() {
+
+        Player humanPlayer = getHumanPlayer();
+
+        int humanIndex = getHumanPlayerIndex();
+
+        if (currPlayerIndex == humanIndex) {
+            if (!humanPlayer.hasMoved()) {
+                currPlayerIndex = (currPlayerIndex + 1) % players.size(); // step to next player on list
+                Player currPlayer = players.get(currPlayerIndex);
+                int rollResult = rollDice();
+                ClueGame.setNameAndRoll(currPlayer, rollResult);
+
+                BoardCell startCell = grid[currPlayer.getCol()][currPlayer.getRow()];
+                calcTargets(startCell, rollResult);
+                Graphics g = ClueGame.getClueGraphics();
+                for (BoardCell cell : targets) {
+                    cell.drawTarget(g);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "You must make a move before ending turn", "Error",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+
+        }
 
     }
 

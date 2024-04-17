@@ -66,12 +66,14 @@ public class ClueGame extends JFrame {
 		frame.setTitle("Clue Game Board");
 		frame.setVisible(true); // make it visible
 	}
-	
+
 	public static void setNameAndRoll(Player player, int roll) {
 		controls.setTurnName(player);
 		controls.setRoll(String.valueOf(roll));
 	}
-	
 
+	public static Graphics getClueGraphics() {
+		return g;
+	}
 
 }
