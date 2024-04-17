@@ -514,7 +514,7 @@ public class Board extends JPanel {
 
                 BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
                 calcTargets(startCell, rollResult);
-                Graphics g = ClueGame.getClueGraphics();
+                Graphics g = getGraphics();
                 for (BoardCell cell : targets) {
                     cell.drawTarget(g);
                 }
