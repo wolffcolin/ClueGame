@@ -21,7 +21,6 @@ public class ClueGame extends JFrame {
 	private static Board board = Board.getInstance();
 	private static Graphics g;
 
-	private Player currentPlayer;
 	private static GameControlPanel controls;
 	private static KnownCardPanel cards;
 
