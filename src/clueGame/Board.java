@@ -176,7 +176,7 @@ public class Board extends JPanel {
     }
 
     // finds adjacency for every cell on the grid
-    public void makeAdjLists() {
+    private void makeAdjLists() {
         // calculate adjacency for each cell
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
@@ -519,7 +519,7 @@ public class Board extends JPanel {
     }
 
     // ends turn and updates panel
-    public void endTurn() {
+    private void endTurn() {
         isTurnEnd = true;
 
         for (BoardCell cell : targets) {
@@ -530,7 +530,7 @@ public class Board extends JPanel {
     }
 
     // moves player to target
-    public void movePlayer(BoardCell target) {
+    private void movePlayer(BoardCell target) {
         int row = target.getRow();
         int col = target.getCol();
 
@@ -538,7 +538,7 @@ public class Board extends JPanel {
     }
 
     // moves computer player and updates display
-    public void computerPlayerMove() {
+    private void computerPlayerMove() {
         ComputerPlayer compPlayer = (ComputerPlayer) currentPlayer;
         ArrayList<BoardCell> targetList = new ArrayList<>(targets);
         BoardCell compTargetCell = compPlayer.selectTarget(targetList);
@@ -576,25 +576,10 @@ public class Board extends JPanel {
     }
 
     // random int 1-12
-    public int rollDice() {
+    private int rollDice() {
         Random random = new Random();
         int roll = random.nextInt(12) + 1;
         return roll;
-    }
-
-    // return index of human player
-    public int getHumanPlayerIndex() {
-        int humanPlayerIndex = 0;
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).isAHuman()) {
-                humanPlayerIndex = i;
-            }
-        }
-        return humanPlayerIndex;
-    }
-
-    public int getCurrentPlayerIndex() {
-        return currPlayerIndex;
     }
 
     // sets file
@@ -621,8 +606,8 @@ public class Board extends JPanel {
             // mark targets so they can be displayed for the human player
             if (currentPlayer.isAHuman()) {
                 cell.setTarget(true);
+                repaint();
             }
-            repaint();
             visited.remove(cell);
             return;
         }
