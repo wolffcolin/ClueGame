@@ -60,15 +60,15 @@ public class Board extends JPanel {
         this.targets = new HashSet<>();
         this.visited = new HashSet<>();
 
+        // initializing grid for some tests
         this.grid = new BoardCell[1][1];
-
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numColumns; j++) {
                 grid[i][j] = new BoardCell(i, j, '~');
             }
         }
-        setLayout(new GridLayout(grid.length, grid[0].length));
 
+        setLayout(new GridLayout(grid.length, grid[0].length));
         // tracks mouse to see if click occurs
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -81,7 +81,6 @@ public class Board extends JPanel {
 
     // handles event of mouse clicking on cell
     private void handleMouseClick(MouseEvent e) {
-
         // moves player to cell if valid
         if (currentPlayer.isAHuman() && !isTurnEnd) {
             if (targets.isEmpty()) {
