@@ -35,8 +35,7 @@ public class BoardCell {
     private boolean roomLabel;
     private boolean roomCenter;
     private char secretPassage;
-
-    private int y;
+    
     private int sizeOfCell;
     private boolean target;
 
