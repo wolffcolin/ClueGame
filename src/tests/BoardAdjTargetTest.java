@@ -35,6 +35,7 @@ class BoardAdjTargetTest {
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		// Initialize will load config files
 		board.initialize();
+		board.setIsTest(true);
 	}
 
 	// Ensure that player does not move around within room

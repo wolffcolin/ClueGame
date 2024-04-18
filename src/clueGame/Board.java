@@ -54,6 +54,8 @@ public class Board extends JPanel {
     private boolean isTurnEnd;
     private int currPlayerIndex;
 
+    private boolean isTest;
+
     // constructor
     private Board() {
         super();
@@ -604,7 +606,7 @@ public class Board extends JPanel {
             targets.add(cell);
 
             // mark targets so they can be displayed for the human player
-            if (currentPlayer.isAHuman()) {
+            if (!isTest && currentPlayer.isAHuman()) {
                 cell.setTarget(true);
                 repaint();
             }
@@ -732,6 +734,10 @@ public class Board extends JPanel {
             }
         }
         return null;
+    }
+
+    public void setIsTest(boolean b) {
+        isTest = b;
     }
 
     public Color getColorString(String col) {
