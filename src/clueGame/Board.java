@@ -120,8 +120,8 @@ public class Board extends JPanel {
         super.paintComponent(g);
 
         // calculate the height and width of the cell
-        int cellWidth = getWidth() / 15;
-        int cellHeight = getHeight() / 15;
+        int cellWidth = getWidth() / numColumns;
+        int cellHeight = getHeight() / numRows;
 
         // pick the smaller of the two to ensure squareness
         cellSize = Math.min(cellWidth, cellHeight);
@@ -619,6 +619,7 @@ public class Board extends JPanel {
         if (pathLength == 0 || (cell.isRoomCenter() && !startingCell)) {
             targets.add(cell);
 
+            // mark targets so they can be displayed for the human player
             if (currentPlayer.isAHuman()) {
                 cell.setTarget(true);
             }
