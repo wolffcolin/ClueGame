@@ -80,9 +80,12 @@ public class GameControlPanel extends JPanel {
     // creates two text fields where the guess and the response for the guess are
     // displayed
     private JPanel createGuessPanel() {
+    	
+    	//initialize and set layout to guess panel
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 2));
 
+        //initialize and set layout to guess panel
         JPanel guessPanel = new JPanel();
         guessPanel.setLayout(new GridLayout(1, 0));
         guess = new JTextField(20);
@@ -90,6 +93,7 @@ public class GameControlPanel extends JPanel {
         guessPanel.add(guess);
         guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 
+        //initialize and set layout to guess result panel
         JPanel guessResultPanel = new JPanel();
         guessResultPanel.setLayout(new GridLayout(1, 0));
         guessResult = new JTextField(20);
