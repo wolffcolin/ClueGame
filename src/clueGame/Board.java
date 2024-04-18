@@ -69,7 +69,7 @@ public class Board extends JPanel {
         }
         setLayout(new GridLayout(grid.length, grid[0].length));
 
-        //tracks mouse to see if click occurs
+        // tracks mouse to see if click occurs
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -79,10 +79,10 @@ public class Board extends JPanel {
         });
     }
 
-    //handles event of mouse clicking on cell
+    // handles event of mouse clicking on cell
     private void handleMouseClick(MouseEvent e) {
-    	
-    	//moves player to cell if valid
+
+        // moves player to cell if valid
         if (currentPlayer.isAHuman() && !isTurnEnd) {
             if (targets.isEmpty()) {
                 endTurn();
@@ -102,7 +102,7 @@ public class Board extends JPanel {
         }
     }
 
-    //returns cell if clickable
+    // returns cell if clickable
     public BoardCell getClickCell(MouseEvent e) {
         for (BoardCell[] row : grid) {
             for (BoardCell cell : row) {
@@ -166,7 +166,7 @@ public class Board extends JPanel {
         dealCards();
     }
 
-    //sets up player with intial targets
+    // sets up player with intial targets
     public void initializePlayer() {
         currentPlayer = getHumanPlayer();
         int roll = rollDice();
@@ -519,7 +519,7 @@ public class Board extends JPanel {
         return null;
     }
 
-    //ends turn and updates panel
+    // ends turn and updates panel
     public void endTurn() {
         isTurnEnd = true;
 
@@ -530,7 +530,7 @@ public class Board extends JPanel {
         repaint();
     }
 
-    //moves player to target
+    // moves player to target
     public void movePlayer(BoardCell target) {
         int row = target.getRow();
         int col = target.getCol();
@@ -538,7 +538,7 @@ public class Board extends JPanel {
         currentPlayer.teleport(row, col);
     }
 
-    //moves computer player and updates display
+    // moves computer player and updates display
     public void computerPlayerMove() {
         ComputerPlayer compPlayer = (ComputerPlayer) currentPlayer;
         ArrayList<BoardCell> targetList = new ArrayList<>(targets);
@@ -549,7 +549,7 @@ public class Board extends JPanel {
         repaint();
     }
 
-    //when next buttonn is clicked
+    // when next buttonn is clicked
     public void nextClicked() {
         if (isTurnEnd) {
             isTurnEnd = false;
@@ -576,38 +576,14 @@ public class Board extends JPanel {
         }
     }
 
-    // public void moveNextPlayer() {
-    // Player potentialNext = players.get(currPlayerIndex);
-
-    // if (!potentialNext.isAHuman()) {
-    // ComputerPlayer currPlayer = (ComputerPlayer) players.get(currPlayerIndex);
-    // int rollResult = rollDice();
-    // ClueGame.setNameAndRoll(currPlayer, rollResult);
-
-    // BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
-    // calcTargets(startCell, rollResult);
-    // ArrayList targetsList = new ArrayList<>(targets);
-    // BoardCell chosenTarget = currPlayer.selectTarget(targetsList);
-    // currPlayer.teleport(chosenTarget.getRow(), chosenTarget.getCol());
-    // } else {
-    // Player currPlayer = potentialNext;
-    // int rollResult = rollDice();
-    // ClueGame.setNameAndRoll(currPlayer, rollResult);
-
-    // BoardCell startCell = grid[currPlayer.getRow()][currPlayer.getCol()];
-    // calcTargets(startCell, rollResult);
-    // getHumanPlayer().setMovedStatus(false);
-    // }
-    // }
-
-    //random int 1-12
+    // random int 1-12
     public int rollDice() {
         Random random = new Random();
         int roll = random.nextInt(12) + 1;
         return roll;
     }
 
-    //return index of human player
+    // return index of human player
     public int getHumanPlayerIndex() {
         int humanPlayerIndex = 0;
         for (int i = 0; i < players.size(); i++) {
