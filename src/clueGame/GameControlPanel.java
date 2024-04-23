@@ -19,6 +19,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class GameControlPanel extends JPanel {
@@ -26,6 +27,8 @@ public class GameControlPanel extends JPanel {
     private JTextField roll;
     private JTextField guess;
     private JTextField guessResult;
+    
+    private JFrame frame;
 
     public GameControlPanel() {
         setLayout(new GridLayout(2, 0));
@@ -63,6 +66,21 @@ public class GameControlPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(makeAccusation);
         buttonPanel.add(nextPlayer);
+        
+        makeAccusation.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		ArrayList<String> people = board.allCardStringsOfType(CardType.PERSON);
+        		ArrayList<String> rooms = board.allCardStringsOfType(CardType.ROOM);
+        		ArrayList<String> weapons = board.allCardStringsOfType(CardType.WEAPON);
+        		
+        		AccusationDialog accuse = new AccusationDialog(frame, people, rooms, weapons);
+        		
+        		accuse.pack();
+        		accuse.setLocationRelativeTo(frame);
+        		accuse.setVisible(true);
+        	}
+        });
         
         nextPlayer.addActionListener(new ActionListener() {
         	@Override
@@ -137,5 +155,9 @@ public class GameControlPanel extends JPanel {
 
     public void setGuessResult(String guessResultText) {
         guessResult.setText(guessResultText);
+    }
+    
+    public void getFrame(JFrame frame) {
+    	this.frame = frame;
     }
 }

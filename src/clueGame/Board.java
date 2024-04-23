@@ -506,6 +506,15 @@ public class Board extends JPanel {
         } else
             return false;
     }
+    
+    public void handleAccusation(Solution potentialSolution) {
+    	if (theAnswer.equals(potentialSolution)) {
+    		
+    	} else {
+    		
+    	}
+    		
+    }
 
     // handles when a suggestion is raised, if there are no cards that can dispute
     // the suggestion it returns null
@@ -721,6 +730,17 @@ public class Board extends JPanel {
         for (int i = 0; i < cards.size(); i++) {
             if (cards.get(i).getCardType().equals(type)) {
                 cardsOfType.add(cards.get(i));
+            }
+        }
+
+        return cardsOfType;
+    }
+    
+    public ArrayList<String> allCardStringsOfType(CardType type) {
+        ArrayList<String> cardsOfType = new ArrayList<>();
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getCardType().equals(type)) {
+                cardsOfType.add(cards.get(i).toString());
             }
         }
 
