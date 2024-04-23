@@ -53,6 +53,8 @@ public class Board extends JPanel {
     private Player currentPlayer;
     private boolean isTurnEnd;
     private int currPlayerIndex;
+    private boolean noDisprove;
+    private Solution suggestion;
 
     private boolean isTest;
 
@@ -541,11 +543,48 @@ public class Board extends JPanel {
 
     // moves computer player and updates display
     private void computerPlayerMove() {
+        if (noDisprove) {
+            noDisprove = false;
+            checkAccusation(suggestion);
+        }
         ComputerPlayer compPlayer = (ComputerPlayer) currentPlayer;
         ArrayList<BoardCell> targetList = new ArrayList<>(targets);
         BoardCell compTargetCell = compPlayer.selectTarget(targetList);
 
         movePlayer(compTargetCell);
+
+        if (compTargetCell.isRoomCenter()) {
+            suggestion = compPlayer.createSuggestion();
+            Card dispute = handleSuggestion(suggestion, compPlayer);
+            // teleport player in the suggestion to the room
+            for (Player player : players) {
+                if (player.getName() == suggestion.getPerson().toString()) {
+                    player.teleport(compTargetCell.getRow(), compTargetCell.getCol());
+                }
+            }
+            // if there is a dispute
+            Player disputePlayer = null;
+            if (dispute != null) {
+                for (Player player : players) {
+                    for (Card card : player.getHand()) {
+                        if (card == dispute) {
+                            disputePlayer = player;
+                        }
+                    }
+                }
+                ClueGame.setGuessAndResult(suggestion, dispute, disputePlayer);
+            }
+            // if there is no dispute and the room card is not in the compPlayer's hand
+            else if (dispute == null && !compPlayer.matchingRoomCard(suggestion.getRoom())) {
+                ClueGame.setGuessAndResult(suggestion, dispute, disputePlayer);
+                noDisprove = true;
+            }
+            // if there is no dispute and the room card is in the compPlayer's hand
+            else if (dispute == null && compPlayer.matchingRoomCard(suggestion.getRoom())) {
+                ClueGame.setGuessAndResult(suggestion, dispute, disputePlayer);
+            }
+        }
+
         endTurn();
         repaint();
     }

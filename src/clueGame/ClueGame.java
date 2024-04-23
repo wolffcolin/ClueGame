@@ -45,7 +45,7 @@ public class ClueGame extends JFrame {
 		// make instance of panels for controls and known cards
 		controls = new GameControlPanel();
 		cards = new KnownCardPanel(humanPlayer);
-		
+
 		board.initializePlayer();
 
 		String humanPlayerName = humanPlayer.getName();
@@ -71,6 +71,17 @@ public class ClueGame extends JFrame {
 	public static void setNameAndRoll(Player player, int roll) {
 		controls.setTurnName(player);
 		controls.setRoll(String.valueOf(roll));
+	}
+
+	public static void setGuessAndResult(Solution guess, Card dispute, Player disputPlayer) {
+		String result;
+		if (dispute == null) {
+			result = "No one can disprove the suggestion";
+		} else {
+			result = "Disproved by " + disputPlayer.toString();
+		}
+		controls.setGuess(guess.toString());
+		controls.setGuessResult(result);
 	}
 
 	public static Graphics getClueGraphics() {

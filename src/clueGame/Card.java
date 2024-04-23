@@ -1,4 +1,5 @@
 package clueGame;
+
 import java.awt.Color;
 
 /*
@@ -28,12 +29,12 @@ public class Card {
     public String toString() {
         return cardName;
     }
-    
+
     public void setColor(Color color) {
-    	this.ownerColor = color;
+        this.ownerColor = color;
     }
-    
+
     public Color getColor() {
-    	return ownerColor;
+        return ownerColor;
     }
 }
