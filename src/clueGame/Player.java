@@ -90,6 +90,15 @@ public abstract class Player {
 		return hand;
 	}
 
+	public boolean matchingRoomCard(Card target) {
+		for (Card card : hand) {
+			if (card == target) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// only to be used in testing
 	public void setHand(ArrayList<Card> newHand) {
 		hand = newHand;
@@ -123,13 +132,7 @@ public abstract class Player {
 		this.hasMoved = hasMoved;
 	}
 
-	public boolean matchingRoomCard(Card target) {
-		for (Card card : hand) {
-			if (card == target) {
-				return true;
-			}
-		}
-		return false;
+	public String toString() {
+		return name;
 	}
-
 }
