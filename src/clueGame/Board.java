@@ -511,9 +511,9 @@ public class Board extends JPanel {
     
     public void handleAccusation(Solution potentialSolution) {
     	if (theAnswer.equals(potentialSolution)) {
-    		
+    		ClueGame.endGameWin();
     	} else {
-    		
+    		ClueGame.endGameLoss();
     	}
     		
     }

@@ -23,6 +23,8 @@ public class ClueGame extends JFrame {
 
 	private static GameControlPanel controls;
 	private static KnownCardPanel cards;
+	
+	private static JFrame holderFrame;
 
 	// constructor
 	public ClueGame() {
@@ -36,6 +38,7 @@ public class ClueGame extends JFrame {
 	public static void main(String[] args) {
 		// make new frame and get graphics + paint components
 		ClueGame frame = new ClueGame(); // create the panel
+		holderFrame = frame;
 		g = board.getGraphics();
 		board.paintComponents(g);
 
@@ -87,6 +90,16 @@ public class ClueGame extends JFrame {
 
 	public static Graphics getClueGraphics() {
 		return g;
+	}
+
+	public static void endGameWin() {
+		JOptionPane.showMessageDialog(holderFrame, "You've won!");
+        System.exit(0);
+	}
+
+	public static void endGameLoss() {
+		JOptionPane.showMessageDialog(holderFrame, "You've lost.");
+        System.exit(0);
 	}
 
 }
