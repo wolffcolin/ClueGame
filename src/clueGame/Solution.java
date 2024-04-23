@@ -36,4 +36,16 @@ public class Solution {
 		Card[] answer = { room, player, weapon };
 		return answer;
 	}
+
+	public Card getPerson() {
+		return player;
+	}
+
+	public Card getRoom() {
+		return room;
+	}
+
+	public String toString() {
+		return room.toString() + player.toString() + weapon.toString();
+	}
 }

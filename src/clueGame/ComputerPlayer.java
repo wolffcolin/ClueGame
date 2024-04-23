@@ -33,7 +33,7 @@ public class ComputerPlayer extends Player {
 		// get all of the cards separated by type
 		ArrayList<Card> allWeapons = board.allCardsOfType(CardType.WEAPON);
 		ArrayList<Card> allPlayers = board.allCardsOfType(CardType.PERSON);
-		ArrayList<Card> allRooms = board.allCardsOfType(CardType.ROOM);
+		// ArrayList<Card> allRooms = board.allCardsOfType(CardType.ROOM);
 
 		// loads all cards that havent been seen yet into list
 		ArrayList<Card> weaponsNotSeen = new ArrayList<>();

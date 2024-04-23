@@ -24,7 +24,7 @@ public abstract class Player {
 	private int row;
 	private int column;
 	private boolean isHuman;
-	
+
 	private boolean hasMoved;
 
 	// stores the player's hand
@@ -114,13 +114,22 @@ public abstract class Player {
 	public String getName() {
 		return name;
 	}
-	
+
 	public boolean hasMoved() {
 		return hasMoved;
 	}
-	
+
 	public void setMovedStatus(boolean hasMoved) {
 		this.hasMoved = hasMoved;
+	}
+
+	public boolean matchingRoomCard(Card target) {
+		for (Card card : hand) {
+			if (card == target) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
