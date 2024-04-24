@@ -207,6 +207,8 @@ public class ClueGame extends JFrame {
 					}
 				}
 			}
+			board.getHumanPlayer().updateSeen(dispute);
+			cards.rebuild(board.getHumanPlayer());
 		}
 		setGuessAndResult(suggestion, dispute, disputePlayer);
 	}

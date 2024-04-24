@@ -133,5 +133,52 @@ public class KnownCardPanel extends JPanel {
 		frame.setTitle("Control Panel");
 		frame.setVisible(true); // make it visible
 	}
+	
+	public void rebuild(Player player) {
+
+		removeAll();
+		
+		// arraylist of cards divided by type
+		ArrayList<Card> seen = new ArrayList<>(player.getSeen());
+		ArrayList<Card> hand = player.getHand();
+
+		ArrayList<Card> peopleSeen = new ArrayList<>();
+		ArrayList<Card> peopleHand = new ArrayList<>();
+		ArrayList<Card> roomSeen = new ArrayList<>();
+		ArrayList<Card> roomHand = new ArrayList<>();
+		ArrayList<Card> weaponSeen = new ArrayList<>();
+		ArrayList<Card> weaponHand = new ArrayList<>();
+
+		// divided by type
+		for (int i = 0; i < hand.size(); i++) {
+			if (hand.get(i).getCardType() == CardType.PERSON) {
+				peopleHand.add(hand.get(i));
+			} else if (hand.get(i).getCardType() == CardType.WEAPON) {
+				weaponHand.add(hand.get(i));
+			} else if (hand.get(i).getCardType() == CardType.ROOM) {
+				roomHand.add(hand.get(i));
+			}
+		}
+
+		//
+		for (int i = 0; i < seen.size(); i++) {
+			if (seen.get(i).getCardType() == CardType.PERSON) {
+				peopleSeen.add(seen.get(i));
+			} else if (seen.get(i).getCardType() == CardType.WEAPON) {
+				weaponSeen.add(seen.get(i));
+			} else if (seen.get(i).getCardType() == CardType.ROOM) {
+				roomSeen.add(seen.get(i));
+			}
+		}
+
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		add(createSectionPanel("People", peopleSeen, peopleHand));
+		add(createSectionPanel("Rooms", roomSeen, roomHand));
+		add(createSectionPanel("Weapons", weaponSeen, weaponHand));
+		
+		revalidate();
+		repaint();
+
+	}
 
 }
