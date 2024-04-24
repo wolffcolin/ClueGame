@@ -563,7 +563,7 @@ public class Board extends JPanel {
         }
     }
 
-    private void movePlayer(BoardCell target, Player player) {
+    public void movePlayer(BoardCell target, Player player) {
         int row = target.getRow();
         int col = target.getCol();
 
@@ -830,6 +830,10 @@ public class Board extends JPanel {
 
     public void setIsTest(boolean b) {
         isTest = b;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     public Color getColorString(String col) {
