@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 
 public class SuggestionDialog extends JDialog {
 	private Board board = Board.getInstance();
-	private Solution chosenSuggestion;
+	private static Solution chosenSuggestion;
 
 	public SuggestionDialog(JFrame frame, String currentRoom, String[] people, String[] weapons) {
 		super(frame, "Make a Suggestion", true);
@@ -35,7 +35,6 @@ public class SuggestionDialog extends JDialog {
 				Card weaponCard = new Card((String) weapon.getSelectedItem(), CardType.WEAPON);
 
 				chosenSuggestion = new Solution(roomCard, playerCard, weaponCard);
-				board.handleSuggestion(chosenSuggestion, board.getHumanPlayer());
 
 				dispose();
 				dispose();
@@ -51,7 +50,7 @@ public class SuggestionDialog extends JDialog {
 		});
 	}
 
-	public Solution getSuggestion() {
+	public static Solution getSuggestion() {
 		return chosenSuggestion;
 	}
 }

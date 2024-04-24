@@ -31,7 +31,7 @@ public class ClueGame extends JFrame {
 	private static KnownCardPanel cards;
 
 	private static JFrame holderFrame;
-	
+
 	private static boolean keepScore;
 
 	// constructor
@@ -62,15 +62,13 @@ public class ClueGame extends JFrame {
 
 		String humanPlayerName = humanPlayer.getName();
 
-        String message = "<html><body><div style='text-align: center;'>"
+		String message = "<html><body><div style='text-align: center;'>"
 				+ "You are " + humanPlayerName + ".<br>"
 				+ "Can you find the solution<br>before the Computer players?"
 				+ "</div></body></html>";
 
-        
 		StartGameDialog startDialog = new StartGameDialog(frame, message);
 		startDialog.setVisible(true);
-		
 
 		// add all panels to frame and set close behavior
 		frame.add(board, BorderLayout.CENTER);
@@ -94,7 +92,7 @@ public class ClueGame extends JFrame {
 			result = "No one can disprove the suggestion";
 		}
 		if (board.getCurrentPlayer().isAHuman() && dispute != null) {
-			result = "Disproved by " + disputPlayer.toString() + " with " + dispute;
+			result = "Disproved by " + disputPlayer.toString() + " with " + dispute.toString();
 		} else if (dispute != null) {
 			result = "Disproved by " + disputPlayer.toString();
 		}
@@ -108,78 +106,80 @@ public class ClueGame extends JFrame {
 
 	public static void endGameWin() {
 		String filePath = "score.txt";
-		
+
 		int wins = 0;
 		int losses = 0;
-		
+
 		if (keepScore) {
 			if (Files.exists(Paths.get(filePath)) && Files.isReadable(Paths.get(filePath))) {
 				try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-	                String line = reader.readLine();
-	                if (line != null) {
-	                    wins = Integer.parseInt(line); 
-	                    line = reader.readLine();
-	                    if (line != null) {
-	                        losses = Integer.parseInt(line);
-	                    }
-	                }
+					String line = reader.readLine();
+					if (line != null) {
+						wins = Integer.parseInt(line);
+						line = reader.readLine();
+						if (line != null) {
+							losses = Integer.parseInt(line);
+						}
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 			wins++;
-			
+
 			try (FileWriter writer = new FileWriter(filePath, false)) {
 				writer.write(String.valueOf(wins) + "\n");
 				writer.write(String.valueOf(losses) + "\n");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(holderFrame, "You've won! Your record is: " + wins + " wins, and " + losses + " losses!");
-	        System.exit(0);
+			JOptionPane.showMessageDialog(holderFrame,
+					"You've won! Your record is: " + wins + " wins, and " + losses + " losses!");
+			System.exit(0);
 		} else {
 			JOptionPane.showMessageDialog(holderFrame, "You've won!");
-	        System.exit(0);
+			System.exit(0);
 		}
-		
+
 	}
 
 	public static void endGameLoss() {
 		String filePath = "score.txt";
-		
+
 		int wins = 0;
 		int losses = 0;
-		
+
 		if (keepScore) {
 			if (Files.exists(Paths.get(filePath)) && Files.isReadable(Paths.get(filePath))) {
 				try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-	                String line = reader.readLine();
-	                if (line != null) {
-	                    wins = Integer.parseInt(line); 
-	                    line = reader.readLine();
-	                    if (line != null) {
-	                        losses = Integer.parseInt(line);
-	                    }
-	                }
+					String line = reader.readLine();
+					if (line != null) {
+						wins = Integer.parseInt(line);
+						line = reader.readLine();
+						if (line != null) {
+							losses = Integer.parseInt(line);
+						}
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			
+
 			losses++;
-			
+
 			try (FileWriter writer = new FileWriter(filePath, false)) {
 				writer.write(String.valueOf(wins) + "\n");
 				writer.write(String.valueOf(losses) + "\n");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			JOptionPane.showMessageDialog(holderFrame, "You've lost. Your record is: " + wins + " wins, and " + losses + " losses!");
-	        System.exit(0);
+			JOptionPane.showMessageDialog(holderFrame,
+					"You've lost. Your record is: " + wins + " wins, and " + losses + " losses!");
+			System.exit(0);
 		} else {
 			JOptionPane.showMessageDialog(holderFrame, "You've lost.");
-	        System.exit(0);
+			System.exit(0);
 		}
 
 	}
@@ -187,10 +187,11 @@ public class ClueGame extends JFrame {
 	public static void manageSuggestion(String roomName, String[] people, String[] weapons) {
 		SuggestionDialog suggest = new SuggestionDialog(holderFrame, roomName, people, weapons);
 		suggest.setVisible(true);
-		Card dispute = board.handleSuggestion(suggest.getSuggestion(), board.getHumanPlayer());
+		Solution suggestion = suggest.getSuggestion();
+		Card dispute = board.handleSuggestion(suggestion, board.getHumanPlayer());
 		// teleport player in the suggestion to the room
 		for (Player player : board.getPlayers()) {
-			if (player.getName() == suggest.getSuggestion().getPerson().toString()) {
+			if (player.getName() == suggestion.getPerson().toString()) {
 				board.movePlayer(board.getCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getCol()),
 						player);
 			}
@@ -206,9 +207,9 @@ public class ClueGame extends JFrame {
 				}
 			}
 		}
-		setGuessAndResult(suggest.getSuggestion(), dispute, disputePlayer);
+		setGuessAndResult(suggestion, dispute, disputePlayer);
 	}
-	
+
 	public static void setKeepScore(boolean toKeep) {
 		keepScore = toKeep;
 	}
