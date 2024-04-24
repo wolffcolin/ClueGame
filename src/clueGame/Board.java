@@ -517,6 +517,14 @@ public class Board extends JPanel {
         }
 
     }
+    
+    public void handleAccusationComputer(Solution potentialSolution, String playerName) {
+        if (theAnswer.equals(potentialSolution)) {
+            ClueGame.endGameWinComputer(playerName, potentialSolution);
+        } else {
+
+        }
+    }
 
     // handles when a suggestion is raised, if there are no cards that can dispute
     // the suggestion it returns null
@@ -578,11 +586,12 @@ public class Board extends JPanel {
 
     // moves computer player and updates display
     private void computerPlayerMove() {
+    	ComputerPlayer compPlayer = (ComputerPlayer) currentPlayer;
         if (noDisprove) {
             noDisprove = false;
-            checkAccusation(suggestion);
+            handleAccusationComputer(suggestion, compPlayer.getName());
         }
-        ComputerPlayer compPlayer = (ComputerPlayer) currentPlayer;
+
         ArrayList<BoardCell> targetList = new ArrayList<>(targets);
         BoardCell compTargetCell = compPlayer.selectTarget(targetList);
 

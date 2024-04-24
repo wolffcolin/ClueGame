@@ -212,5 +212,11 @@ public class ClueGame extends JFrame {
 	public static void setKeepScore(boolean toKeep) {
 		keepScore = toKeep;
 	}
+	
+	public static void endGameWinComputer(String computerPlayerName, Solution solution) {
+		JOptionPane.showMessageDialog(holderFrame, "Computer Player " + computerPlayerName + 
+				" has made a correct accusation of " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString() + " The game is over.");
+        System.exit(0);
+	}
 
 }

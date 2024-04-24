@@ -48,4 +48,8 @@ public class Solution {
 	public String toString() {
 		return room.toString() + ", " + player.toString() + ", and " + weapon.toString();
 	}
+
+	public Card getWeapon() {
+		return weapon;
+	}
 }
