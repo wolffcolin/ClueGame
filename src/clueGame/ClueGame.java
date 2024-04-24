@@ -33,7 +33,6 @@ public class ClueGame extends JFrame {
 	private static JFrame holderFrame;
 
 	private static boolean keepScore;
-	
 
 	// constructor
 	public ClueGame() {
@@ -105,6 +104,7 @@ public class ClueGame extends JFrame {
 		return g;
 	}
 
+	// handles and outputs file for game end human player win
 	public static void endGameWin(Solution solution) {
 		String filePath = "score.txt";
 
@@ -136,15 +136,19 @@ public class ClueGame extends JFrame {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(holderFrame,
-					"You've won! Your guess was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString() + " Your record is: " + wins + " wins, and " + losses + " losses!");
+					"You've won! Your guess was: " + solution.getPerson().toString() + " in the "
+							+ solution.getRoom().toString() + " with the " + solution.getWeapon().toString()
+							+ " Your record is: " + wins + " wins, and " + losses + " losses!");
 			System.exit(0);
 		} else {
-			JOptionPane.showMessageDialog(holderFrame, "You've won! Your guess was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString());
+			JOptionPane.showMessageDialog(holderFrame, "You've won! Your guess was: " + solution.getPerson().toString()
+					+ " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString());
 			System.exit(0);
 		}
 
 	}
 
+	// handles and outputs file for game end human player loss
 	public static void endGameLoss(Solution solution) {
 		String filePath = "score.txt";
 
@@ -176,15 +180,20 @@ public class ClueGame extends JFrame {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(holderFrame,
-					"You've lost. The correct answer was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString() + " Your record is: " + wins + " wins, and " + losses + " losses!");
+					"You've lost. The correct answer was: " + solution.getPerson().toString() + " in the "
+							+ solution.getRoom().toString() + " with the " + solution.getWeapon().toString()
+							+ " Your record is: " + wins + " wins, and " + losses + " losses!");
 			System.exit(0);
 		} else {
-			JOptionPane.showMessageDialog(holderFrame, "You've lost. The correct answer was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString());
+			JOptionPane.showMessageDialog(holderFrame,
+					"You've lost. The correct answer was: " + solution.getPerson().toString() + " in the "
+							+ solution.getRoom().toString() + " with the " + solution.getWeapon().toString());
 			System.exit(0);
 		}
 
 	}
 
+	// gets the human players suggestion and handels the disputes/updates gui
 	public static void manageSuggestion(String roomName, String[] people, String[] weapons) {
 		SuggestionDialog suggest = new SuggestionDialog(holderFrame, roomName, people, weapons);
 		suggest.setVisible(true);
@@ -216,11 +225,14 @@ public class ClueGame extends JFrame {
 	public static void setKeepScore(boolean toKeep) {
 		keepScore = toKeep;
 	}
-	
+
+	// handels game end when the computer wins
 	public static void endGameWinComputer(String computerPlayerName, Solution solution) {
-		JOptionPane.showMessageDialog(holderFrame, "Computer Player " + computerPlayerName + 
-				" has made a correct accusation of " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString() + " The game is over.");
-        System.exit(0);
+		JOptionPane.showMessageDialog(holderFrame, "Computer Player " + computerPlayerName +
+				" has made a correct accusation of " + solution.getPerson().toString() + " in the "
+				+ solution.getRoom().toString() + " with the " + solution.getWeapon().toString()
+				+ " The game is over.");
+		System.exit(0);
 	}
 
 }
