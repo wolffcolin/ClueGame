@@ -37,6 +37,11 @@ public class Solution {
 		return answer;
 	}
 
+	// toString for when printing to gui
+	public String toString() {
+		return room.toString() + ", " + player.toString() + ", and " + weapon.toString();
+	}
+
 	public Card getPerson() {
 		return player;
 	}
@@ -45,11 +50,8 @@ public class Solution {
 		return room;
 	}
 
-	public String toString() {
-		return room.toString() + ", " + player.toString() + ", and " + weapon.toString();
-	}
-
 	public Card getWeapon() {
 		return weapon;
 	}
+
 }
