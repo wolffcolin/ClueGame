@@ -57,7 +57,7 @@ public abstract class Player {
 		ArrayList<Card> matchingCards = new ArrayList<>();
 		for (Card card : hand) {
 			for (int i = 0; i < 3; i++) {
-				if (card == suggestionCards[i]) {
+				if (card.equals(suggestionCards[i])) {
 					matchingCards.add(card);
 				}
 			}

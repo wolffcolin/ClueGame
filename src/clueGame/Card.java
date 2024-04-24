@@ -37,4 +37,11 @@ public class Card {
     public Color getColor() {
         return ownerColor;
     }
+
+    public boolean equals(Card target) {
+        if (this.cardName == target.cardName && this.type == target.type) {
+            return true;
+        } else
+            return false;
+    }
 }
