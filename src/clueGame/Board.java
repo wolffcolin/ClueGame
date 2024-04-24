@@ -668,6 +668,13 @@ public class Board extends JPanel {
     public void calcTargets(BoardCell startCell, int pathLength) {
         visited.clear();
         targets.clear();
+        if (startCell.isRoomCenter()) {
+            targets.add(startCell);
+            if (!isTest && currentPlayer.isAHuman()) {
+                startCell.setTarget(true);
+                repaint();
+            }
+        }
         findTargets(startCell, pathLength, true);
     }
 
