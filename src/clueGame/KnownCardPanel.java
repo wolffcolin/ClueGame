@@ -46,7 +46,7 @@ public class KnownCardPanel extends JPanel {
 			}
 		}
 
-		//
+		// divided by types
 		for (int i = 0; i < seen.size(); i++) {
 			if (seen.get(i).getCardType() == CardType.PERSON) {
 				peopleSeen.add(seen.get(i));
@@ -57,6 +57,7 @@ public class KnownCardPanel extends JPanel {
 			}
 		}
 
+		//set layout
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(createSectionPanel("People", peopleSeen, peopleHand));
 		add(createSectionPanel("Rooms", roomSeen, roomHand));
@@ -64,13 +65,16 @@ public class KnownCardPanel extends JPanel {
 
 	}
 
+	//helper to create section panels
 	private JPanel createSectionPanel(String title, ArrayList<Card> seen, ArrayList<Card> hand) {
 		JPanel sectionPanel = new JPanel(new BorderLayout());
 
+		//set borders and padding
 		Border titleBorder = BorderFactory.createTitledBorder(title);
 		Border paddingBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 		sectionPanel.setBorder(BorderFactory.createCompoundBorder(paddingBorder, titleBorder));
 
+		//panels for in hand and seen
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 		innerPanel.add(createFieldPanel("In Hand", hand, false));
@@ -83,12 +87,15 @@ public class KnownCardPanel extends JPanel {
 
 	}
 
+	//helper to create field panels
 	private JPanel createFieldPanel(String fieldName, ArrayList<Card> cards, boolean isSeen) {
 
+		//panel for field
 		JPanel fieldPanel = new JPanel();
 		fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.Y_AXIS));
 		fieldPanel.add(new JLabel(fieldName + ":"));
 
+		//display each card in the cards list
 		for (Card card : cards) {
 			JTextField textField = new JTextField(card.toString(), 20);
 			textField.setEditable(false);
@@ -134,6 +141,7 @@ public class KnownCardPanel extends JPanel {
 		frame.setVisible(true); // make it visible
 	}
 	
+	//helper to rebuild panel when changes to seen occur
 	public void rebuild(Player player) {
 
 		removeAll();
@@ -160,7 +168,7 @@ public class KnownCardPanel extends JPanel {
 			}
 		}
 
-		//
+		// divided by type
 		for (int i = 0; i < seen.size(); i++) {
 			if (seen.get(i).getCardType() == CardType.PERSON) {
 				peopleSeen.add(seen.get(i));
@@ -171,11 +179,13 @@ public class KnownCardPanel extends JPanel {
 			}
 		}
 
+		//add components
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(createSectionPanel("People", peopleSeen, peopleHand));
 		add(createSectionPanel("Rooms", roomSeen, roomHand));
 		add(createSectionPanel("Weapons", weaponSeen, weaponHand));
 		
+		//refresh
 		revalidate();
 		repaint();
 
