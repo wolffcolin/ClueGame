@@ -18,8 +18,6 @@ public class Room {
 	private boolean passageExist;
 	private Room passageRoom;
 
-	public int occupancy;
-
 	// constructor for when we only know the name and symbol
 	public Room(String setName, Character setSymbol) {
 		this.name = setName;

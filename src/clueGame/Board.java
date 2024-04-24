@@ -547,18 +547,6 @@ public class Board extends JPanel {
         int row = target.getRow();
         int col = target.getCol();
 
-        // increase target room occupancy
-        Room targetRoom = roomMap.get(target.getInitial());
-        if (target.isRoomCenter()) {
-            targetRoom.occupancy++;
-        }
-        // decrease origin room occupancy
-        BoardCell currCell = getCell(currentPlayer.getRow(), currentPlayer.getCol());
-        Room currRoom = roomMap.get(currCell.getInitial());
-        if (currCell.isRoomCenter()) {
-            currRoom.occupancy--;
-        }
-
         if (target.isRoomCenter()) {
             currentPlayer.setIsInRoom(true);
         } else if (!target.isRoomCenter()) {
@@ -578,18 +566,6 @@ public class Board extends JPanel {
     private void movePlayer(BoardCell target, Player player) {
         int row = target.getRow();
         int col = target.getCol();
-
-        // increase target room occupancy
-        Room targetRoom = roomMap.get(target.getInitial());
-        if (target.isRoomCenter()) {
-            targetRoom.occupancy++;
-        }
-        // decrease origin room occupancy
-        BoardCell currCell = getCell(player.getRow(), player.getCol());
-        Room currRoom = roomMap.get(currCell.getInitial());
-        if (currCell.isRoomCenter()) {
-            currRoom.occupancy--;
-        }
 
         if (target.isRoomCenter()) {
             player.setIsInRoom(true);
