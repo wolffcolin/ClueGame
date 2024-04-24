@@ -50,7 +50,7 @@ public class SuggestionDialog extends JDialog {
 		});
 	}
 
-	public static Solution getSuggestion() {
+	public Solution getSuggestion() {
 		return chosenSuggestion;
 	}
 }

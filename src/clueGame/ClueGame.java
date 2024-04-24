@@ -33,6 +33,7 @@ public class ClueGame extends JFrame {
 	private static JFrame holderFrame;
 
 	private static boolean keepScore;
+	
 
 	// constructor
 	public ClueGame() {
@@ -191,7 +192,7 @@ public class ClueGame extends JFrame {
 		Card dispute = board.handleSuggestion(suggestion, board.getHumanPlayer());
 		// teleport player in the suggestion to the room
 		for (Player player : board.getPlayers()) {
-			if (player.getName() == suggestion.getPerson().toString()) {
+			if (player.getName().equals(suggestion.getPerson().toString())) {
 				board.movePlayer(board.getCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getCol()),
 						player);
 			}
