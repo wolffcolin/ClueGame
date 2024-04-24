@@ -29,7 +29,7 @@ public class ClueGame extends JFrame {
 
 	private static GameControlPanel controls;
 	private static KnownCardPanel cards;
-	
+
 	private static JFrame holderFrame;
 	
 	private static boolean keepScore;
@@ -89,10 +89,13 @@ public class ClueGame extends JFrame {
 	}
 
 	public static void setGuessAndResult(Solution guess, Card dispute, Player disputPlayer) {
-		String result;
+		String result = null;
 		if (dispute == null) {
 			result = "No one can disprove the suggestion";
-		} else {
+		}
+		if (board.getCurrentPlayer().isAHuman() && dispute != null) {
+			result = "Disproved by " + disputPlayer.toString() + " with " + dispute;
+		} else if (dispute != null) {
 			result = "Disproved by " + disputPlayer.toString();
 		}
 		controls.setGuess(guess.toString());
@@ -184,6 +187,26 @@ public class ClueGame extends JFrame {
 	public static void manageSuggestion(String roomName, String[] people, String[] weapons) {
 		SuggestionDialog suggest = new SuggestionDialog(holderFrame, roomName, people, weapons);
 		suggest.setVisible(true);
+		Card dispute = board.handleSuggestion(suggest.getSuggestion(), board.getHumanPlayer());
+		// teleport player in the suggestion to the room
+		for (Player player : board.getPlayers()) {
+			if (player.getName() == suggest.getSuggestion().getPerson().toString()) {
+				board.movePlayer(board.getCell(board.getHumanPlayer().getRow(), board.getHumanPlayer().getCol()),
+						player);
+			}
+		}
+		// if there is a dispute
+		Player disputePlayer = null;
+		if (dispute != null) {
+			for (Player player : board.getPlayers()) {
+				for (Card card : player.getHand()) {
+					if (card == dispute) {
+						disputePlayer = player;
+					}
+				}
+			}
+		}
+		setGuessAndResult(suggest.getSuggestion(), dispute, disputePlayer);
 	}
 	
 	public static void setKeepScore(boolean toKeep) {

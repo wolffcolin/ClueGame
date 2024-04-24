@@ -11,6 +11,7 @@ Authors: Colin Wolff and Eoghan Cowley
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -27,7 +28,7 @@ public class GameControlPanel extends JPanel {
     private JTextField roll;
     private JTextField guess;
     private JTextField guessResult;
-    
+
     private JFrame frame;
 
     public GameControlPanel() {
@@ -41,9 +42,9 @@ public class GameControlPanel extends JPanel {
     // creates the text fields for the name of whose turn it is, their roll, and two
     // buttons for making an accusation and passing on the turn to the next player
     private JPanel createTurnAndRollPanel() {
-    	
-    	Board board = Board.getInstance();
-    	
+
+        Board board = Board.getInstance();
+
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(1, 4));
 
@@ -66,27 +67,32 @@ public class GameControlPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(makeAccusation);
         buttonPanel.add(nextPlayer);
-        
+
         makeAccusation.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		ArrayList<String> people = board.allCardStringsOfType(CardType.PERSON);
-        		ArrayList<String> rooms = board.allCardStringsOfType(CardType.ROOM);
-        		ArrayList<String> weapons = board.allCardStringsOfType(CardType.WEAPON);
-        		
-        		AccusationDialog accuse = new AccusationDialog(frame, people, rooms, weapons);
-        		
-        		accuse.pack();
-        		accuse.setLocationRelativeTo(frame);
-        		accuse.setVisible(true);
-        	}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (board.getCurrentPlayer().isAHuman()) {
+                    ArrayList<String> people = board.allCardStringsOfType(CardType.PERSON);
+                    ArrayList<String> rooms = board.allCardStringsOfType(CardType.ROOM);
+                    ArrayList<String> weapons = board.allCardStringsOfType(CardType.WEAPON);
+
+                    AccusationDialog accuse = new AccusationDialog(frame, people, rooms, weapons);
+
+                    accuse.pack();
+                    accuse.setLocationRelativeTo(frame);
+                    accuse.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not your turn", "Error",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         });
-        
+
         nextPlayer.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		board.nextClicked();
-        	}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.nextClicked();
+            }
         });
 
         panel.add(turnPanel);
@@ -98,12 +104,12 @@ public class GameControlPanel extends JPanel {
     // creates two text fields where the guess and the response for the guess are
     // displayed
     private JPanel createGuessPanel() {
-    	
-    	//initialize and set layout to guess panel
+
+        // initialize and set layout to guess panel
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 2));
 
-        //initialize and set layout to guess panel
+        // initialize and set layout to guess panel
         JPanel guessPanel = new JPanel();
         guessPanel.setLayout(new GridLayout(1, 0));
         guess = new JTextField(20);
@@ -111,7 +117,7 @@ public class GameControlPanel extends JPanel {
         guessPanel.add(guess);
         guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 
-        //initialize and set layout to guess result panel
+        // initialize and set layout to guess result panel
         JPanel guessResultPanel = new JPanel();
         guessResultPanel.setLayout(new GridLayout(1, 0));
         guessResult = new JTextField(20);
@@ -156,8 +162,8 @@ public class GameControlPanel extends JPanel {
     public void setGuessResult(String guessResultText) {
         guessResult.setText(guessResultText);
     }
-    
+
     public void getFrame(JFrame frame) {
-    	this.frame = frame;
+        this.frame = frame;
     }
 }
