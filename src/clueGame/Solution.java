@@ -46,6 +46,6 @@ public class Solution {
 	}
 
 	public String toString() {
-		return room.toString() + player.toString() + weapon.toString();
+		return room.toString() + ", " + player.toString() + ", and " + weapon.toString();
 	}
 }
