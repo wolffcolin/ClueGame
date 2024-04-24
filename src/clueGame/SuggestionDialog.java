@@ -1,3 +1,12 @@
+/*
+ 
+Class: SuggestionDialog
+Description: Dialog for when suggestion needs to be made
+Collaborators: N/A
+Sources: N/A
+Authors: Colin Wolff and Eoghan Cowley
+*/
+
 package clueGame;
 
 import javax.swing.*;
@@ -9,24 +18,29 @@ public class SuggestionDialog extends JDialog {
 	private Board board = Board.getInstance();
 	private static Solution chosenSuggestion;
 
+	//constructor
 	public SuggestionDialog(JFrame frame, String currentRoom, String[] people, String[] weapons) {
 		super(frame, "Make a Suggestion", true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(300, 200);
 		setLayout(new GridLayout(4, 2, 10, 10));
 
+		//label for current room + combo box
 		add(new JLabel("Current Room:"));
 		JLabel room = new JLabel(currentRoom);
 		add(room);
 
+		//label for person + combo box
 		add(new JLabel("Person:"));
 		JComboBox<String> person = new JComboBox<>(people);
 		add(person);
 
+		//label for weapon + combo box
 		add(new JLabel("Weapon:"));
 		JComboBox<String> weapon = new JComboBox<>(weapons);
 		add(weapon);
 
+		//submit button sets chosen suggestion to what was selected
 		JButton submit = new JButton("Submit");
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -42,6 +56,7 @@ public class SuggestionDialog extends JDialog {
 		});
 		add(submit);
 
+		//cancels suggestion
 		JButton cancel = new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
