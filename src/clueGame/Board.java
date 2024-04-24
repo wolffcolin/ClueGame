@@ -548,6 +548,15 @@ public class Board extends JPanel {
         int col = target.getCol();
 
         currentPlayer.teleport(row, col);
+        
+        String roomName = new String();
+        if (roomCard(row, col) != null && currentPlayer.isAHuman()) {
+        	roomName = roomCard(row, col).toString();
+        	ClueGame.manageSuggestion(roomName, allCardStringsOfType(CardType.PERSON).toArray(new String[0]), allCardStringsOfType(CardType.WEAPON).toArray(new String[0]));
+        }
+        
+        
+        
     }
 
     // moves computer player and updates display

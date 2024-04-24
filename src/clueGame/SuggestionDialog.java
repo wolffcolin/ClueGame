@@ -7,14 +7,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class SuggestionDialog extends JDialog {
-	public SuggestionDialog(JFrame frame, String[] people, String[] weapons) {
+	private Board board = Board.getInstance();
+	private Player human = board.getHumanPlayer();
+	
+	public SuggestionDialog(JFrame frame, String currentRoom, String[] people, String[] weapons) {
 		super(frame, "Make a Suggestion", true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(300,200);
 		setLayout(new GridLayout(4,2,10,10));
 		
 		add(new JLabel("Current Room:"));
-		JLabel room = new JLabel("Lounge");
+		JLabel room = new JLabel(currentRoom);
 		add(room);
 		
 		add(new JLabel("Person:"));
@@ -28,7 +31,14 @@ public class SuggestionDialog extends JDialog {
 		JButton submit = new JButton("Submit");
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Card roomCard = new Card((String)room.getText(), CardType.ROOM);
+				Card playerCard = new Card((String)person.getSelectedItem(), CardType.PERSON);
+				Card weaponCard = new Card((String)weapon.getSelectedItem(), CardType.WEAPON);
 				
+				Solution suggestion = new Solution(roomCard, playerCard, weaponCard);
+				board.handleSuggestion(suggestion, board.getHumanPlayer());
+				
+				dispose();
 				dispose();
 			}
 		});

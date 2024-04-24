@@ -102,4 +102,9 @@ public class ClueGame extends JFrame {
         System.exit(0);
 	}
 
+	public static void manageSuggestion(String roomName, String[] people, String[] weapons) {
+		SuggestionDialog suggest = new SuggestionDialog(holderFrame, roomName, people, weapons);
+		suggest.setVisible(true);
+	}
+
 }
