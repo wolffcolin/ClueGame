@@ -146,7 +146,7 @@ public class Board extends JPanel {
 
         // draw players
         for (int i = 0; i < players.size(); i++) {
-            players.get(i).draw(g, cellSize);
+            players.get(i).draw(g, cellSize, i);
         }
     }
 
@@ -508,14 +508,14 @@ public class Board extends JPanel {
         } else
             return false;
     }
-    
+
     public void handleAccusation(Solution potentialSolution) {
-    	if (theAnswer.equals(potentialSolution)) {
-    		ClueGame.endGameWin();
-    	} else {
-    		ClueGame.endGameLoss();
-    	}
-    		
+        if (theAnswer.equals(potentialSolution)) {
+            ClueGame.endGameWin();
+        } else {
+            ClueGame.endGameLoss();
+        }
+
     }
 
     // handles when a suggestion is raised, if there are no cards that can dispute
@@ -547,16 +547,57 @@ public class Board extends JPanel {
         int row = target.getRow();
         int col = target.getCol();
 
+        // increase target room occupancy
+        Room targetRoom = roomMap.get(target.getInitial());
+        if (target.isRoomCenter()) {
+            targetRoom.occupancy++;
+        }
+        // decrease origin room occupancy
+        BoardCell currCell = getCell(currentPlayer.getRow(), currentPlayer.getCol());
+        Room currRoom = roomMap.get(currCell.getInitial());
+        if (currCell.isRoomCenter()) {
+            currRoom.occupancy--;
+        }
+
+        if (target.isRoomCenter()) {
+            currentPlayer.setIsInRoom(true);
+        } else if (!target.isRoomCenter()) {
+            currentPlayer.setIsInRoom(false);
+        }
+
         currentPlayer.teleport(row, col);
-        
+
         String roomName = new String();
         if (roomCard(row, col) != null && currentPlayer.isAHuman()) {
-        	roomName = roomCard(row, col).toString();
-        	ClueGame.manageSuggestion(roomName, allCardStringsOfType(CardType.PERSON).toArray(new String[0]), allCardStringsOfType(CardType.WEAPON).toArray(new String[0]));
+            roomName = roomCard(row, col).toString();
+            ClueGame.manageSuggestion(roomName, allCardStringsOfType(CardType.PERSON).toArray(new String[0]),
+                    allCardStringsOfType(CardType.WEAPON).toArray(new String[0]));
         }
-        
-        
-        
+    }
+
+    private void movePlayer(BoardCell target, Player player) {
+        int row = target.getRow();
+        int col = target.getCol();
+
+        // increase target room occupancy
+        Room targetRoom = roomMap.get(target.getInitial());
+        if (target.isRoomCenter()) {
+            targetRoom.occupancy++;
+        }
+        // decrease origin room occupancy
+        BoardCell currCell = getCell(player.getRow(), player.getCol());
+        Room currRoom = roomMap.get(currCell.getInitial());
+        if (currCell.isRoomCenter()) {
+            currRoom.occupancy--;
+        }
+
+        if (target.isRoomCenter()) {
+            player.setIsInRoom(true);
+        } else if (!target.isRoomCenter()) {
+            player.setIsInRoom(false);
+        }
+
+        player.teleport(row, col);
     }
 
     // moves computer player and updates display
@@ -577,7 +618,7 @@ public class Board extends JPanel {
             // teleport player in the suggestion to the room
             for (Player player : players) {
                 if (player.getName() == suggestion.getPerson().toString()) {
-                    player.teleport(compTargetCell.getRow(), compTargetCell.getCol());
+                    movePlayer(getCell(compTargetCell.getRow(), compTargetCell.getCol()), player);
                 }
             }
             // if there is a dispute
@@ -783,7 +824,7 @@ public class Board extends JPanel {
 
         return cardsOfType;
     }
-    
+
     public ArrayList<String> allCardStringsOfType(CardType type) {
         ArrayList<String> cardsOfType = new ArrayList<>();
         for (int i = 0; i < cards.size(); i++) {

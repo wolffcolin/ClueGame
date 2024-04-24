@@ -26,6 +26,7 @@ public abstract class Player {
 	private boolean isHuman;
 
 	private boolean hasMoved;
+	private boolean isInRoom;
 
 	// stores the player's hand
 	private ArrayList<Card> hand = new ArrayList<>();
@@ -70,11 +71,39 @@ public abstract class Player {
 		}
 	}
 
-	// draws the player as a circle in the cetner on their position cell
-	public void draw(Graphics g, int size) {
+	// draws the player as a circle in the center on their position cell
+	public void draw(Graphics g, int size, int i) {
 		int radius = size / 2;
 		int x = column * size;
 		int y = row * size;
+
+		if (isInRoom) {
+			switch (i) {
+				case 1:
+					y += 10;
+					break;
+				case 2:
+					x -= 10;
+					break;
+				case 3:
+					y -= 10;
+					break;
+				case 4:
+					y += 10;
+					x += 10;
+					break;
+				case 5:
+					x -= 10;
+					y -= 10;
+					break;
+				case 6:
+					x += 10;
+					y -= 10;
+					break;
+				default:
+					break;
+			}
+		}
 
 		g.setColor(color);
 		g.fillOval(x, y, 2 * radius, 2 * radius);
@@ -130,6 +159,10 @@ public abstract class Player {
 
 	public void setMovedStatus(boolean hasMoved) {
 		this.hasMoved = hasMoved;
+	}
+
+	public void setIsInRoom(boolean b) {
+		isInRoom = b;
 	}
 
 	public String toString() {
