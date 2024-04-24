@@ -57,7 +57,7 @@ public abstract class Player {
 		ArrayList<Card> matchingCards = new ArrayList<>();
 		for (Card card : hand) {
 			for (int i = 0; i < 3; i++) {
-				if (card.equals(suggestionCards[i])) {
+				if (card.equals(suggestionCards[i])) { // needs to be a .equals not ==
 					matchingCards.add(card);
 				}
 			}
@@ -71,13 +71,15 @@ public abstract class Player {
 		}
 	}
 
-	// draws the player as a circle in the center on their position cell
+	// draws the player as a circle in the center on their position cell, i is the
+	// position in the list of players
 	public void draw(Graphics g, int size, int i) {
 		int radius = size / 2;
 		int x = column * size;
 		int y = row * size;
 
 		if (isInRoom) {
+			// no case 0 as they will be in the center of the cell
 			switch (i) {
 				case 1:
 					y += 10;
