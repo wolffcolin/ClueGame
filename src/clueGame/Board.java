@@ -555,8 +555,6 @@ public class Board extends JPanel {
         	ClueGame.manageSuggestion(roomName, allCardStringsOfType(CardType.PERSON).toArray(new String[0]), allCardStringsOfType(CardType.WEAPON).toArray(new String[0]));
         }
         
-        
-        
     }
 
     // moves computer player and updates display

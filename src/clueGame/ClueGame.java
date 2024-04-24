@@ -13,6 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.awt.Graphics;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.awt.BorderLayout;
 
 public class ClueGame extends JFrame {
@@ -25,6 +31,8 @@ public class ClueGame extends JFrame {
 	private static KnownCardPanel cards;
 	
 	private static JFrame holderFrame;
+	
+	private static boolean keepScore;
 
 	// constructor
 	public ClueGame() {
@@ -54,12 +62,15 @@ public class ClueGame extends JFrame {
 
 		String humanPlayerName = humanPlayer.getName();
 
-		String message = "<html><body><div style='text-align: center;'>"
+        String message = "<html><body><div style='text-align: center;'>"
 				+ "You are " + humanPlayerName + ".<br>"
 				+ "Can you find the solution<br>before the Computer players?"
 				+ "</div></body></html>";
 
-		JOptionPane.showMessageDialog(null, message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+        
+		StartGameDialog startDialog = new StartGameDialog(frame, message);
+		startDialog.setVisible(true);
+		
 
 		// add all panels to frame and set close behavior
 		frame.add(board, BorderLayout.CENTER);
@@ -93,18 +104,90 @@ public class ClueGame extends JFrame {
 	}
 
 	public static void endGameWin() {
-		JOptionPane.showMessageDialog(holderFrame, "You've won!");
-        System.exit(0);
+		String filePath = "score.txt";
+		
+		int wins = 0;
+		int losses = 0;
+		
+		if (keepScore) {
+			if (Files.exists(Paths.get(filePath)) && Files.isReadable(Paths.get(filePath))) {
+				try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+	                String line = reader.readLine();
+	                if (line != null) {
+	                    wins = Integer.parseInt(line); 
+	                    line = reader.readLine();
+	                    if (line != null) {
+	                        losses = Integer.parseInt(line);
+	                    }
+	                }
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			wins++;
+			
+			try (FileWriter writer = new FileWriter(filePath, false)) {
+				writer.write(String.valueOf(wins) + "\n");
+				writer.write(String.valueOf(losses) + "\n");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(holderFrame, "You've won! Your record is: " + wins + " wins, and " + losses + " losses!");
+	        System.exit(0);
+		} else {
+			JOptionPane.showMessageDialog(holderFrame, "You've won!");
+	        System.exit(0);
+		}
+		
 	}
 
 	public static void endGameLoss() {
-		JOptionPane.showMessageDialog(holderFrame, "You've lost.");
-        System.exit(0);
+		String filePath = "score.txt";
+		
+		int wins = 0;
+		int losses = 0;
+		
+		if (keepScore) {
+			if (Files.exists(Paths.get(filePath)) && Files.isReadable(Paths.get(filePath))) {
+				try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+	                String line = reader.readLine();
+	                if (line != null) {
+	                    wins = Integer.parseInt(line); 
+	                    line = reader.readLine();
+	                    if (line != null) {
+	                        losses = Integer.parseInt(line);
+	                    }
+	                }
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			losses++;
+			
+			try (FileWriter writer = new FileWriter(filePath, false)) {
+				writer.write(String.valueOf(wins) + "\n");
+				writer.write(String.valueOf(losses) + "\n");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(holderFrame, "You've lost. Your record is: " + wins + " wins, and " + losses + " losses!");
+	        System.exit(0);
+		} else {
+			JOptionPane.showMessageDialog(holderFrame, "You've lost.");
+	        System.exit(0);
+		}
+
 	}
 
 	public static void manageSuggestion(String roomName, String[] people, String[] weapons) {
 		SuggestionDialog suggest = new SuggestionDialog(holderFrame, roomName, people, weapons);
 		suggest.setVisible(true);
+	}
+	
+	public static void setKeepScore(boolean toKeep) {
+		keepScore = toKeep;
 	}
 
 }
