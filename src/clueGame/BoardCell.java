@@ -12,15 +12,9 @@ package clueGame;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -35,7 +29,7 @@ public class BoardCell {
     private boolean roomLabel;
     private boolean roomCenter;
     private char secretPassage;
-    
+
     private int sizeOfCell;
     private boolean target;
 
