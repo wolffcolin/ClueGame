@@ -105,7 +105,7 @@ public class ClueGame extends JFrame {
 		return g;
 	}
 
-	public static void endGameWin() {
+	public static void endGameWin(Solution solution) {
 		String filePath = "score.txt";
 
 		int wins = 0;
@@ -136,16 +136,16 @@ public class ClueGame extends JFrame {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(holderFrame,
-					"You've won! Your record is: " + wins + " wins, and " + losses + " losses!");
+					"You've won! Your guess was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString() + " Your record is: " + wins + " wins, and " + losses + " losses!");
 			System.exit(0);
 		} else {
-			JOptionPane.showMessageDialog(holderFrame, "You've won!");
+			JOptionPane.showMessageDialog(holderFrame, "You've won! Your guess was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString());
 			System.exit(0);
 		}
 
 	}
 
-	public static void endGameLoss() {
+	public static void endGameLoss(Solution solution) {
 		String filePath = "score.txt";
 
 		int wins = 0;
@@ -176,10 +176,10 @@ public class ClueGame extends JFrame {
 				e.printStackTrace();
 			}
 			JOptionPane.showMessageDialog(holderFrame,
-					"You've lost. Your record is: " + wins + " wins, and " + losses + " losses!");
+					"You've lost. The correct answer was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString() + " Your record is: " + wins + " wins, and " + losses + " losses!");
 			System.exit(0);
 		} else {
-			JOptionPane.showMessageDialog(holderFrame, "You've lost.");
+			JOptionPane.showMessageDialog(holderFrame, "You've lost. The correct answer was: " + solution.getPerson().toString() + " in the " + solution.getRoom().toString() + " with the " + solution.getWeapon().toString());
 			System.exit(0);
 		}
 
